@@ -1,0 +1,19 @@
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 107px;
+    background-color: white;
+    >div:first-child{
+        margin-left: 50px;
+    }
+    >div:last-child{
+        margin-right: 50px;
+    }
+
+    a.active{
+        text-decoration: underline;
+        text-decoration-color: $secondaryColor;
+    }
+}
