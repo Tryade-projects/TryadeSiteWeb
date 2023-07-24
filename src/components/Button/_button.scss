@@ -1,0 +1,33 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 25px;
+  border: 2px solid;
+  color: $primaryColor;
+}
+
+.primaryColorBorder {
+  border-color: $primaryColor;
+  &:hover {
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    border-color: $secondaryColor;
+  }
+}
+
+.secondaryColorBorder {
+  border-color: $secondaryColor;
+  &:hover {
+    background-color: $secondaryColor;
+    color: $primaryColor;
+    border-color: $primaryColor;
+  }
+}
+
+.buttonTitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 64.5%; /* 11.61px */
+  letter-spacing: 0.9px;
+}
