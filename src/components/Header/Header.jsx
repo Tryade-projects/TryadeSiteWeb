@@ -1,10 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 
 export default function Header() {
+  const location = useLocation();
+  console.log(location);
   return (
-    <header>
+    <header
+      className={
+        location.pathname !== '/' ? 'header headerBackground' : 'header'
+      }>
       <div>LOGO</div>
       <nav>
         <NavLink to='/'>Accueil</NavLink>

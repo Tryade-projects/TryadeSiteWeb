@@ -1,10 +1,9 @@
-header {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 107px;
-  background-color: black; // provisoire
 
   a.active {
     text-decoration: underline;
@@ -18,4 +17,15 @@ header {
     align-items: center;
     gap: 48px;
   }
+}
+
+.headerBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-image: url('../../images/headerBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
