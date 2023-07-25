@@ -1,0 +1,46 @@
+.arguments {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 337px;
+  height: 60px;
+  background-color: $tertiaryColor;
+  border-radius: 7px;
+  .argumentsIcon {
+    width: 22px;
+    height: 17px;
+  }
+  .argumentsTextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    h2 {
+      font-size: 16px;
+    }
+    p {
+      display: none;
+    }
+  }
+}
+
+@include medium {
+  .arguments {
+    width: 531px;
+    height: 120px;
+    border-radius: 15px;
+    .argumentsIcon {
+      width: 34px;
+      height: 25px;
+    }
+    .argumentsTextContainer {
+      gap: 0.5rem;
+      max-width: 75%;
+      p {
+        display: block;
+        font-size: 15px;
+        color: $quaternaryColor;
+      }
+    }
+  }
+}
