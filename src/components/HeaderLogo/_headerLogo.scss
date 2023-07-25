@@ -1,0 +1,10 @@
+.headerLogo {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  .headerLogoTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
