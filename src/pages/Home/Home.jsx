@@ -1,12 +1,16 @@
 import React from 'react';
 import Arguments from '../../components/Arguments/Arguments';
+import Title from '../../components/Title/Title';
 
 export default function Home() {
   return (
     <>
       <div className='homeBackground' />
       <main className='home'>
-        <h1>Home</h1>
+        <Title
+          mainTitle="Qu’attends-tu pour nous rejoindre ?"
+          shadowTitle="DISCORD"
+        />
         <Arguments
           iconPath='./assets/argumentStats.svg'
           iconAlt='Stats icon'

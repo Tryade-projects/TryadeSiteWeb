@@ -1,0 +1,57 @@
+.title{
+    position: relative;
+    margin-left: 100px;
+    h1{
+        font-weight: bold;
+        font-size: 22px;
+        color: $primaryColor;
+        width: 50%;
+        min-width:300px;
+        max-width: 340px;
+        letter-spacing: 3px;
+    }
+    div.shadowTitle{
+        position: absolute;
+        top: -17px;
+        left: -12px;
+        background-color: lightblue;
+        h2,img{
+            position: absolute;
+        }
+        h2{
+            font-size: 40px;
+            font-weight: bold;
+            opacity: 7.5%;
+        }
+        img{
+            width: 90px;
+            left: -14px;
+            top: -6px;
+            opacity: 23%;
+        }
+    }
+    @include medium{
+        h1{
+            font-size: 40px;
+            max-width: 500px;
+
+        }
+        div.shadowTitle{
+            h2,img{
+                position: absolute;
+            }
+            h2{
+                font-size: 105px;
+                top: -12px;
+                left: -20px;
+            }
+            img{
+                width: 118px;
+                left: -30px;
+                top: -4px;
+                opacity: 23%;
+            }
+        }
+
+    }
+}
