@@ -16,13 +16,17 @@ const breakpoints = {
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [ifMobile, setIfMobile] = useState(
+    window.innerWidth < breakpoints.large
+  );
+  console.log(ifMobile);
   // if the screen width is more than 992px, the modal is closed
   useEffect(() => {
     const screenWidthThreshold = breakpoints.large;
     const cleanupResizeEvent = handleResize(
       screenWidthThreshold,
-      setModalIsOpen
+      setModalIsOpen,
+      setIfMobile
     );
     // Clean up the event listener when the component unmounts
     return () => {
@@ -74,7 +78,7 @@ function App() {
         />
       </Routes>
       {/* If the modal is open, the footer is display in the modal  */}
-      {!modalIsOpen && <Footer />}
+      {!modalIsOpen && <Footer ifMobile={ifMobile} />}
     </BrowserRouter>
   );
 }
