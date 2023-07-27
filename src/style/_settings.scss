@@ -1,3 +1,6 @@
+
+@import './mixins';
+
 //CSS reset
 * {
   margin: 0;
@@ -18,7 +21,7 @@ body {
   width: 100%;
   height: 100%;
   color: $primaryColor;
-  
+
 }
 
 ul {
@@ -37,11 +40,29 @@ button {
 }
 
 //Main CSS
-section{
+section {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 0 10.514svw;
   height: calc(100svh - 123px);
 
+}
+
+* {
+  letter-spacing: 1.2px;
+}
+
+hr {
+  background-color: $secondaryColor;
+  border-color: $secondaryColor;
+  height: 4px;
+  border-radius: 10px;
+  width: 60px;
+
+  @include large{
+    hr {
+      width: 75px;
+    }
+  }
 }
