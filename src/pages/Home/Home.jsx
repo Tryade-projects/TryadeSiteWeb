@@ -5,17 +5,20 @@ import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo'
 
 
+
+
 export default function Home() {
   return (
     <>
       <div className='homeBackground' />
       <main className='home'>
-        <section>
-          <article>
+        <section className='homeSection'>
+          <article className='titleArticle'>
             <Title
               mainTitle="Qu’attends-tu pour nous rejoindre ?"
               shadowTitle="DISCORD"
             />
+            <hr />
             <p>Rejoins notre discord afin de bénéficier de toutes les informations importantes et commence ton aventure dès maintenant !</p>
             <Button
               width="193"
@@ -25,29 +28,33 @@ export default function Home() {
               src={'./assets/discord.svg'} />
 
           </article>
-          <article>
+          <article className='argumentsArticle'>
             <Title
               mainTitle='Pourquoi nous?'
               shadowTitle='TRYADE'
             />
-            <Arguments
-              iconPath='./assets/argumentStats.svg'
-              iconAlt='Stats icon'
-              title='Performances optimisées'
-              description='Nous avons optimisé au maximum nos ressources pour les plus petites configurations.'
-            />
-            <Arguments
-              iconPath='./assets/argumentTask.svg'
-              iconAlt='Task icon'
-              title='Mises à jour régulières'
-              description='Nous réalisons des mises à jour fréquemment en tenant compte des envies de la communauté'
-            />
-            <Arguments
-              iconPath='./assets/argumentCreativity.svg'
-              iconAlt='Creativity icon'
-              title='Déployez toute votre créativité'
-              description='Le serveur à été conçu de manière à permettre totalement l’épanouissement de votre créativité.'
-            />
+            <hr />
+            <div className='argumentContainer'>
+              <Arguments
+                iconPath='./assets/argumentStats.svg'
+                iconAlt='Stats icon'
+                title='Performances optimisées'
+                description='Nous avons optimisé au maximum nos ressources pour les plus petites configurations.'
+              />
+              <Arguments
+                iconPath='./assets/argumentTask.svg'
+                iconAlt='Task icon'
+                title='Mises à jour régulières'
+                description='Nous réalisons des mises à jour fréquemment en tenant compte des envies de la communauté'
+              />
+              <Arguments
+                iconPath='./assets/argumentCreativity.svg'
+                iconAlt='Creativity icon'
+                title='Déployez toute votre créativité'
+                description='Le serveur à été conçu de manière à permettre totalement l’épanouissement de votre créativité.'
+              />
+            </div>
+            <p>Comment jouer ?</p>
           </article>
         </section>
 
@@ -95,9 +102,9 @@ export default function Home() {
               backgroundColorClass='backgroundColorClassSecondaryColor'
               alt='Twitter'
             />
-            <div className='informationsArticle'>
+            <div>
               <h3>Twitter</h3>
-              <h4>@TryadeRP</h4>
+              <h3>@TryadeRP</h3>
               <Button
                 width="130"
                 height="40"

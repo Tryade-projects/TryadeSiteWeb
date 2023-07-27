@@ -1,3 +1,4 @@
+//The background image of the front page
 .homeBackground {
   position: absolute;
   top: 0;
@@ -11,6 +12,8 @@
   z-index: -1;
 }
 
+
+//Main CSS of the page
 .home {
   height: 100%;
   display: flex;
@@ -33,6 +36,57 @@
   }
 }
 
+
+//The first section, main Title and three arguements
+section.homeSection {
+  display: flex;
+  flex-direction: column;
+  @include large{
+    flex-direction: row;
+    align-items: center;
+  }
+  .titleArticle{
+    height: 35%;
+    @include large{
+      height: 50%;
+    }
+  }
+  .argumentsArticle{
+    height: 50%;
+    @include large{
+      height: 80%;
+    }
+    .argumentContainer{
+      height: 62%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      @include large{
+        height: 72%;
+      }
+    }
+  }
+
+  p {
+    font-size: 16px;
+    max-width: 500px;
+    @include large {
+      font-size: 20px;
+    }
+  }
+  button{
+    width: 193px;
+    height: 45px;
+    @include large{
+      width: 239px;
+      height: 60px;
+      border-radius: 40px;
+    }
+  }
+}
+
+
+//The network section
 section.networkSection {
   article {
     height: 126px;
@@ -40,11 +94,12 @@ section.networkSection {
     display: flex;
     flex-direction: row;
     align-items: center;
-    .informationsArticle{
+
+    .informationsArticle {
       letter-spacing: 1px;
       font-size: 16px;
       width: 60%;
-      
+
     }
   }
 }
