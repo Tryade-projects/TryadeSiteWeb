@@ -1,0 +1,15 @@
+.footer {
+  background-color: $senaryColor;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 90px;
+  width: 100%;
+  :first-child {
+    font-weight: 700;
+    letter-spacing: 3.68px;
+  }
+  :last-child {
+    letter-spacing: 0.48px;
+  }
+}
