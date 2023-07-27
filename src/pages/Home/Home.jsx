@@ -5,8 +5,6 @@ import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo'
 
 
-
-
 export default function Home() {
   return (
     <>

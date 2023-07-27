@@ -1,0 +1,10 @@
+.modal {
+  width: 100vw;
+  height: calc(100vh - $headerHeightMobile);
+  background-color: $tertiaryColor;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

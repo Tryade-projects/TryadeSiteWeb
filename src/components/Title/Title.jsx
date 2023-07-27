@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 
 /**
- * 
+ *
  * @param {object} props
  * @param {string} props.mainTitle - The main title of the page
  * @param {string} props.shadowTitle - The decoration title behind the main title
@@ -21,4 +21,4 @@ const Title = ({ mainTitle, shadowTitle }) => {
     )
 }
 
-export default Title
+export default Title;
