@@ -1,0 +1,90 @@
+.navigation {
+  display: none;
+}
+
+.navigationMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $quinaryColor;
+  padding-top: 38px;
+  gap: 20px;
+  a {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    width: 82vw;
+    gap: 1rem;
+    padding-left: 1rem;
+    background-color: $senaryColor;
+    border-radius: 10px;
+    font-size: 15px;
+    .line {
+      width: 2px;
+      height: 30px;
+      background-color: $quinaryColor;
+    }
+    .logoLink {
+      width: 20px;
+      background-repeat: no-repeat;
+    }
+    .homeIcon {
+      background-image: url('/assets/home.svg');
+      height: 17px;
+    }
+    .rulesIcon {
+      background-image: url('/assets/rules.svg');
+      height: 22px;
+    }
+    .wikiIcon {
+      background-image: url('/assets/wiki.svg');
+      height: 18px;
+    }
+    .storeIcon {
+      background-image: url('/assets/store.svg');
+      height: 17px;
+    }
+    .discordIcon {
+      background-image: url('/assets/discordMobileModal.svg');
+      height: 15px;
+    }
+  }
+
+  a.active {
+    color: $primaryColor;
+    .line {
+      background-color: $secondaryColor;
+    }
+    .homeIcon {
+      background-image: url('/assets/homeActive.svg');
+    }
+    .rulesIcon {
+      background-image: url('/assets/rulesActive.svg');
+    }
+    .wikiIcon {
+      background-image: url('/assets/wikiActive.svg');
+    }
+    .storeIcon {
+      background-image: url('/assets/storeActive.svg');
+    }
+    .discordIcon {
+      background-image: url('/assets/discordMobileModalActive.svg');
+    }
+  }
+}
+
+@include large {
+  .navigation {
+    display: flex;
+    gap: 3.1vw;
+    letter-spacing: 0.8px;
+    a {
+      display: flex;
+      align-items: center;
+      height: 25px;
+    }
+    a.active {
+      border-bottom: 2px solid $secondaryColor;
+    }
+  }
+}

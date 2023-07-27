@@ -3,34 +3,34 @@ import React from 'react';
 /**
  *
  * @param {object} props
- * @param {boolean} props.isBurgerOpen - state of the burger
- * @param {function} props.setIsBurgerOpen - function to set the state of the burger
+ * @param {boolean} props.modalIsOpen - state of the burger
+ * @param {function} props.setModalIsOpen - function to set the state of the burger
  * @returns {JSX.Element}
  */
-const HeaderBurger = ({ isBurgerOpen, setIsBurgerOpen }) => {
+const HeaderBurger = ({ modalIsOpen, setModalIsOpen }) => {
   return (
     <button
       className='headerBurger'
       onClick={() => {
-        setIsBurgerOpen(!isBurgerOpen);
+        setModalIsOpen(!modalIsOpen);
       }}>
       <div
         className={
-          isBurgerOpen
+          modalIsOpen
             ? 'headerBurgerLine headerBurgerLineOpenOne'
             : 'headerBurgerLine'
         }
       />
       <div
         className={
-          isBurgerOpen
+          modalIsOpen
             ? 'headerBurgerLine headerBurgerLineOpenTwo'
             : 'headerBurgerLine'
         }
       />
       <div
         className={
-          isBurgerOpen
+          modalIsOpen
             ? 'headerBurgerLine headerBurgerLineOpenThree'
             : 'headerBurgerLine'
         }
