@@ -1,10 +1,13 @@
 .button {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   border-radius: 25px;
   border: 2px solid;
   color: $primaryColor;
+  height: 51px;
+  gap: 0.8vw;
+  padding: 0 1.5vw;
 }
 
 .primaryColorBorder {
@@ -28,6 +31,6 @@
 .buttonTitle {
   font-size: 18px;
   font-weight: 500;
-  line-height: 64.5%; /* 11.61px */
+
   letter-spacing: 0.9px;
 }
