@@ -15,7 +15,7 @@ const ModalNav = ({ setModalIsOpen }) => {
         setModalIsOpen={setModalIsOpen}
         mobile
       />
-      <Footer />
+      <Footer ifMobile />
     </div>
   );
 };
