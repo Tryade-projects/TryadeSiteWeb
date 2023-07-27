@@ -4,18 +4,27 @@ import { NavLink } from 'react-router-dom';
 /**
  *
  * @param {object} props
+ * @param {function=} props.setModalIsOpen - function to set the modal state - optional
  * @param {boolean=} props.mobile - if true, the component will be displayed in mobile mode - optional
  * @returns {JSX.Element}
  */
-const Navigation = ({ mobile }) => {
+const Navigation = ({ setModalIsOpen, mobile }) => {
   return mobile ? (
     <nav className='navigationMobile'>
-      <NavLink to='/'>
+      <NavLink
+        to='/'
+        onClick={() => {
+          setModalIsOpen?.(false);
+        }}>
         <div className='line'></div>
         <div className='logoLink homeIcon'></div>
         Accueil
       </NavLink>
-      <NavLink to='/rules'>
+      <NavLink
+        to='/rules'
+        onClick={() => {
+          setModalIsOpen?.(false);
+        }}>
         <div className='line'></div>
         <div className='logoLink rulesIcon'></div>
         Règlement

@@ -1,10 +1,21 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
+import Footer from '../Footer/Footer';
 
-const ModalNav = () => {
+/**
+ *
+ * @param {object} props
+ * @param {function} props.setModalIsOpen - function to set the modal state
+ * @returns {JSX.Element}
+ */
+const ModalNav = ({ setModalIsOpen }) => {
   return (
     <div className='modal'>
-      <Navigation mobile />
+      <Navigation
+        setModalIsOpen={setModalIsOpen}
+        mobile
+      />
+      <Footer />
     </div>
   );
 };

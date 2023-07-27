@@ -16,13 +16,14 @@ const breakpoints = {
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // if the screen width is more than 992px, the modal is closed
   useEffect(() => {
     const screenWidthThreshold = breakpoints.large;
     const cleanupResizeEvent = handleResize(
       screenWidthThreshold,
       setModalIsOpen
     );
-
     // Clean up the event listener when the component unmounts
     return () => {
       cleanupResizeEvent();
@@ -34,16 +35,12 @@ function App() {
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
       />
-
       <Routes>
         <Route
           path='/'
           element={
             modalIsOpen ? (
-              <ModalNav
-                modalIsOpen={modalIsOpen}
-                setModalIsOpen={setModalIsOpen}
-              />
+              <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
               <Home />
             )
@@ -53,10 +50,7 @@ function App() {
           path='/rules'
           element={
             modalIsOpen ? (
-              <ModalNav
-                modalIsOpen={modalIsOpen}
-                setModalIsOpen={setModalIsOpen}
-              />
+              <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
               <Rules />
             )
@@ -79,8 +73,8 @@ function App() {
           element={<h1>404</h1>}
         />
       </Routes>
-
-      <Footer />
+      {/* If the modal is open, the footer is display in the modal  */}
+      {!modalIsOpen && <Footer />}
     </BrowserRouter>
   );
 }

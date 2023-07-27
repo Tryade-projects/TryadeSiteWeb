@@ -2,12 +2,9 @@
   width: 100vw;
   height: calc(100vh - $headerHeightMobile);
   background-color: $tertiaryColor;
-  position: fixed;
+  position: absolute;
   bottom: 0;
-}
-
-@include large {
-  .modal {
-    display: none;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
