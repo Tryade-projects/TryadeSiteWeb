@@ -2,9 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 337px;
-  max-width: 95vw;
-  max-height: 120px;
+  width: 100%;
+  max-width: 500px;
   height: 60px;
   background-color: $tertiaryColor;
   border-radius: 7px;
@@ -19,6 +18,7 @@
     width: 75%;
     h2 {
       font-size: 16px;
+      letter-spacing: 0.72px;
     }
     p {
       display: none;
@@ -28,7 +28,8 @@
 
 @include large {
   .arguments {
-    width: 531px;
+    width: 27.6vw;
+    min-width: 350px;
     height: 120px;
     border-radius: 15px;
     .argumentsIcon {
@@ -38,10 +39,12 @@
     .argumentsTextContainer {
       gap: 0.5rem;
       max-width: 75%;
+
       p {
         display: block;
         font-size: 15px;
         color: $quaternaryColor;
+        letter-spacing: 0.6px;
       }
     }
   }

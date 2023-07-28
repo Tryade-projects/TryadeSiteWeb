@@ -62,12 +62,12 @@
       height: 80%;
     }
     .argumentContainer {
-      height: 62%;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      gap: 1.6vh;
       @include large {
-        height: 72%;
+        gap: 2vh;
       }
     }
   }
