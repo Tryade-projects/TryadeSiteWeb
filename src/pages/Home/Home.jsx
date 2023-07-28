@@ -21,7 +21,7 @@ export default function Home({ ifMobile }) {
   const handleButtonClick = () => {
     if (nextSectionRef.current) {
       const nextSectionRect = nextSectionRef.current.getBoundingClientRect();
-      const offset = nextSectionRect.top - headerHeight;
+      const offset = nextSectionRect.top + window.scrollY - headerHeight;
       window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   };
