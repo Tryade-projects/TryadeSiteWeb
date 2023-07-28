@@ -17,7 +17,7 @@ export default function Home() {
               big
             />
 
-            <p>
+            <p className='discordText'>
               Rejoins notre discord afin de bénéficier de toutes les
               informations importantes et commence ton aventure dès maintenant !
             </p>

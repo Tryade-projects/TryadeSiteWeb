@@ -35,7 +35,7 @@
 }
 
 //The first section, main Title and three arguements
-section.homeSection {
+.homeSection {
   display: flex;
   flex-direction: column;
   @include large {
@@ -45,7 +45,14 @@ section.homeSection {
   }
   .titleArticle {
     height: 35%;
+    .discordText {
+      text-align: justify;
+      letter-spacing: 0.4px;
+    }
     @include large {
+      .discordText {
+        letter-spacing: 1.2px;
+      }
       height: 50%;
     }
   }
@@ -66,7 +73,6 @@ section.homeSection {
   }
 
   p {
-    font-size: 16px;
     max-width: 500px;
     @include large {
       font-size: 20px;
