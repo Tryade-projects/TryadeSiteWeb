@@ -26,6 +26,7 @@ export default function Header({ modalIsOpen, setModalIsOpen }) {
             title='Jouer'
             borderColorClass='secondaryColorBorder'
             src='./assets/controller.svg'
+            alt='Controller'
           />
         </div>
         <HeaderBurger

@@ -12,7 +12,6 @@
   z-index: -1;
 }
 
-
 //Main CSS of the page
 .home {
   height: 100%;
@@ -32,36 +31,34 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
   }
 }
-
 
 //The first section, main Title and three arguements
 section.homeSection {
   display: flex;
   flex-direction: column;
-  @include large{
+  @include large {
     flex-direction: row;
     align-items: center;
   }
-  .titleArticle{
+  .titleArticle {
     height: 35%;
-    @include large{
+    @include large {
       height: 50%;
     }
   }
-  .argumentsArticle{
+  .argumentsArticle {
     height: 50%;
-    @include large{
+    @include large {
       height: 80%;
     }
-    .argumentContainer{
+    .argumentContainer {
       height: 62%;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      @include large{
+      @include large {
         height: 72%;
       }
     }
@@ -74,17 +71,35 @@ section.homeSection {
       font-size: 20px;
     }
   }
-  button{
+  button {
     width: 193px;
     height: 45px;
-    @include large{
+    gap: 3.9vw;
+    border-radius: 30px;
+    img {
+      width: 27px;
+      height: 20px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1.44px;
+    }
+    font-size: 20px;
+    @include large {
       width: 239px;
       height: 60px;
-      border-radius: 40px;
+      gap: 1.4vw;
+      img {
+        width: 34px;
+        height: 25px;
+      }
+      p {
+        font-size: 24px;
+      }
     }
   }
 }
-
 
 //The network section
 section.networkSection {
@@ -99,7 +114,6 @@ section.networkSection {
       letter-spacing: 1px;
       font-size: 16px;
       width: 60%;
-
     }
   }
 }

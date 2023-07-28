@@ -2,10 +2,7 @@ import React from 'react';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
-import RoundLogo from '../../components/RoundLogo/RoundLogo'
-
-
-
+import RoundLogo from '../../components/RoundLogo/RoundLogo';
 
 export default function Home() {
   return (
@@ -15,18 +12,20 @@ export default function Home() {
         <section className='homeSection'>
           <article className='titleArticle'>
             <Title
-              mainTitle="Qu’attends-tu pour nous rejoindre ?"
-              shadowTitle="DISCORD"
+              mainTitle='Qu’attends-tu pour nous rejoindre ?'
+              shadowTitle='DISCORD'
             />
             <hr />
-            <p>Rejoins notre discord afin de bénéficier de toutes les informations importantes et commence ton aventure dès maintenant !</p>
+            <p>
+              Rejoins notre discord afin de bénéficier de toutes les
+              informations importantes et commence ton aventure dès maintenant !
+            </p>
             <Button
-              width="193"
-              height="45"
               title='DISCORD'
               borderColorClass='secondaryColorBorder'
-              src={'./assets/discord.svg'} />
-
+              src={'./assets/discord.svg'}
+              alt='Discord'
+            />
           </article>
           <article className='argumentsArticle'>
             <Title
@@ -64,8 +63,6 @@ export default function Home() {
             shadowTitle='NETWORK'
           />
           <Button
-            width="256"
-            height="44"
             title='Voir tous nos streamers'
             borderColorClass='primaryColorBorder'
           />
@@ -77,8 +74,6 @@ export default function Home() {
             shadowTitle='DEVBLOG'
           />
           <Button
-            width="400"
-            height="44"
             title='Voir toutes nos mises à jour'
             borderColorClass='primaryColorBorder'
           />
@@ -106,9 +101,8 @@ export default function Home() {
               <h3>Twitter</h3>
               <h3>@TryadeRP</h3>
               <Button
-                width="130"
-                height="40"
                 title='Visiter'
+                borderColorClass='primaryColorBorder'
               />
             </div>
           </article>
