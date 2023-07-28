@@ -1,4 +1,3 @@
-
 @import './mixins';
 
 //CSS reset
@@ -21,7 +20,6 @@ body {
   width: 100%;
   height: 100%;
   color: $primaryColor;
-
 }
 
 ul {
@@ -46,21 +44,13 @@ section {
   justify-content: space-around;
   padding: 0 10.514svw;
   height: calc(100svh - 123px);
-
-}
-
-* {
-  letter-spacing: 1.2px;
 }
 
 hr {
   background-color: $secondaryColor;
   border-color: $secondaryColor;
-  height: 4px;
-  border-radius: 10px;
-  width: 60px;
 
-  @include large{
+  @include large {
     hr {
       width: 75px;
     }

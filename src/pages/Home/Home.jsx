@@ -14,8 +14,9 @@ export default function Home() {
             <Title
               mainTitle='Qu’attends-tu pour nous rejoindre ?'
               shadowTitle='DISCORD'
+              big
             />
-            <hr />
+
             <p>
               Rejoins notre discord afin de bénéficier de toutes les
               informations importantes et commence ton aventure dès maintenant !
@@ -32,7 +33,7 @@ export default function Home() {
               mainTitle='Pourquoi nous?'
               shadowTitle='TRYADE'
             />
-            <hr />
+
             <div className='argumentContainer'>
               <Arguments
                 iconPath='./assets/argumentStats.svg'
@@ -82,7 +83,7 @@ export default function Home() {
         <section className='gameplaySection'>
           <Title
             mainTitle='Comment jouer ?'
-            shadowTitle='GAMEPLaY'
+            shadowTitle='GAMEPLAY'
           />
         </section>
 

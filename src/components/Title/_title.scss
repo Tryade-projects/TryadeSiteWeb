@@ -6,13 +6,15 @@
     font-weight: bold;
     font-size: 22px;
     color: $primaryColor;
-    width: 50%;
-    min-width: 300px;
-    max-width: 340px;
-    min-height: 50px;
+    letter-spacing: 2.21px;
+    // width: 61vw;
+    // width: 50%;
+    // min-width: 300px;
+    // max-width: 340px;
+    // min-height: 50px;
   }
 
-  div.shadowTitle {
+  .shadowTitle {
     position: absolute;
     top: -10px;
     left: -12px;
@@ -25,7 +27,8 @@
     h2 {
       font-size: 40px;
       font-weight: bold;
-      opacity: 7.5%;
+      color: rgba(255, 255, 255, 0.08);
+      letter-spacing: 4.2px;
     }
 
     img {
@@ -35,19 +38,47 @@
       opacity: 23%;
     }
   }
-
-
-
+  hr {
+    margin-top: 10px;
+    height: 3px;
+    border-radius: 2px;
+    width: 60px;
+  }
   @include large {
+    h1 {
+      font-size: 26px;
+      letter-spacing: 2.73px;
+    }
+    .shadowTitle {
+      position: absolute;
+      top: -21px;
+      left: -10px;
+      h2 {
+        font-size: 70px;
+        letter-spacing: 7.35px;
+      }
+    }
+    hr {
+      margin-top: 36px;
+      height: 4px;
+      width: 60px;
+    }
+  }
+}
+
+@include large {
+  .titleBig {
     h1 {
       font-size: 40px;
       max-width: 650px;
-      width: 100%;
-
+      width: 26.45vw;
+      letter-spacing: 4.2px;
     }
 
-    div.shadowTitle {
-
+    .shadowTitle {
+      position: absolute;
+      top: -10px;
+      left: -12px;
       h2,
       img {
         position: absolute;
@@ -57,6 +88,7 @@
         font-size: 105px;
         top: -22px;
         left: -20px;
+        letter-spacing: 11px;
       }
 
       img {
@@ -66,7 +98,10 @@
         opacity: 23%;
       }
     }
-
+    hr {
+      margin-top: 28px;
+      height: 5px;
+      width: 75px;
+    }
   }
-
 }
