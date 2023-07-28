@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
 
-export default function Home() {
+/**
+ * @typedef {React.RefObject<HTMLDivElement>} RefType
+ */
+
+/**
+ * @typedef {object} Props
+ * @property {boolean} ifMobile - If the screen is mobile or not
+ * @returns {JSX.Element} - Home page
+ */
+export default function Home({ ifMobile }) {
+  const headerHeight = ifMobile ? 123 : 107;
+  /** @type {RefType} */
+  const nextSectionRef = useRef(null);
+
+  const handleButtonClick = () => {
+    if (nextSectionRef.current) {
+      const nextSectionRect = nextSectionRef.current.getBoundingClientRect();
+      const offset = nextSectionRect.top - headerHeight;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  };
   return (
     <>
       <div className='homeBackground' />
@@ -56,9 +76,20 @@ export default function Home() {
             </div>
             <p>Comment jouer ?</p>
           </article>
+          <button
+            className='goToTheNextSectionButton'
+            onClick={handleButtonClick}>
+            <img
+              src='./assets/crossBottom.svg'
+              alt='cross bottom'
+            />
+            Faites défiler
+          </button>
         </section>
 
-        <section className='streamerSection'>
+        <section
+          ref={nextSectionRef}
+          className='streamerSection'>
           <Title
             mainTitle='Nos Streamers'
             shadowTitle='NETWORK'

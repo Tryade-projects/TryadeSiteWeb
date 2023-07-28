@@ -46,7 +46,7 @@ function App() {
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
-              <Home />
+              <Home ifMobile={ifMobile} />
             )
           }
         />

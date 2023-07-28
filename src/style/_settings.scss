@@ -42,8 +42,11 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0 10.514svw;
-  height: calc(100svh - 123px);
+  padding: 0 10svw;
+  height: calc(100svh - $headerHeightMobile);
+  @include large {
+    height: calc(100svh - $headerHeightMedium);
+  }
 }
 
 hr {
