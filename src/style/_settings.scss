@@ -38,14 +38,26 @@ button {
 }
 
 //Main CSS
-section {
+.sectionWrap {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-around;
-  padding: 0 13.1svw;
+  gap: 29px;
+  background-color: $tertiaryColor;
+}
+
+.screenHeightWithoutHeader {
   height: calc(100svh - $headerHeightMobile);
   @include large {
     height: calc(100svh - $headerHeightMedium);
+  }
+}
+
+.page {
+  padding: 66px 10.1svw;
+  background-color: $tertiaryColor;
+  @include large {
+    padding: 0 13.1svw;
   }
 }
 
