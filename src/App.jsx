@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import StreamersPage from './pages/StreamersPage/StreamersPage';
+import UpdatesPage from './pages/UpdatesPage/UpdatesPage';
 import Rules from './pages/Rules/Rules';
 import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
@@ -62,6 +63,16 @@ function App() {
               <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
               <StreamersPage />
+            )
+          }
+        />
+        <Route
+          path='/home/updates'
+          element={
+            modalIsOpen ? (
+              <ModalNav setModalIsOpen={setModalIsOpen} />
+            ) : (
+              <UpdatesPage />
             )
           }
         />

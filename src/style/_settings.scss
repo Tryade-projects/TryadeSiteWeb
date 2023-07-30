@@ -74,6 +74,17 @@ button {
   }
 }
 
+.titleButtonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  @include large {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
 hr {
   background-color: $secondaryColor;
   border-color: $secondaryColor;

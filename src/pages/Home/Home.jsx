@@ -109,10 +109,12 @@ export default function Home({ ifMobile }) {
             mainTitle='Mises à jour'
             shadowTitle='DEVBLOG'
           />
-          <Button
-            title='Voir toutes nos mises à jour'
-            borderColorClass='primaryColorBorder'
-          />
+          <Link to='/home/updates'>
+            <Button
+              title='Voir toutes nos mises à jour'
+              borderColorClass='primaryColorBorder'
+            />
+          </Link>
           <Update />
         </section>
 
