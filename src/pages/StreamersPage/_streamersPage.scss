@@ -1,0 +1,13 @@
+.streamersPage {
+  .titleButtonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    @include large {
+      flex-direction: row;
+      justify-content: space-between;
+
+      gap: 0;
+    }
+  }
+}

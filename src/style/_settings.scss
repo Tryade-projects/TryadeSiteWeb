@@ -22,6 +22,10 @@ body {
   color: $primaryColor;
 }
 
+#root {
+  min-height: 100svh;
+}
+
 ul {
   list-style: none;
 }
@@ -37,15 +41,36 @@ button {
   cursor: pointer;
 }
 
-//Main CSS
-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 0 13.1svw;
+.screenHeightWithoutHeader {
   height: calc(100svh - $headerHeightMobile);
   @include large {
     height: calc(100svh - $headerHeightMedium);
+  }
+}
+
+.page {
+  padding: 66px 10.1svw;
+  background-color: $tertiaryColor;
+  min-height: calc(100svh - $headerHeightMobile - $footerHeight);
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+  @include large {
+    padding: 93px 9.8svw;
+    min-height: calc(100svh - $headerHeightMedium - $footerHeight);
+    gap: 48px;
+  }
+}
+
+//Main CSS
+.sectionWrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 29px;
+  background-color: $tertiaryColor;
+  @include large {
+    gap: 48px;
   }
 }
 

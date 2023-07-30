@@ -31,7 +31,7 @@ export default function Home({ ifMobile }) {
     <>
       <div className='homeBackground' />
       <main className='home'>
-        <section className='homeSection'>
+        <section className='homeSection screenHeightWithoutHeader page'>
           <article className='titleArticle'>
             <Title
               mainTitle='Qu’attends-tu pour nous rejoindre ?'
@@ -91,7 +91,7 @@ export default function Home({ ifMobile }) {
 
         <section
           ref={nextSectionRef}
-          className='streamerSection'>
+          className='streamerSection screenHeightWithoutHeader sectionWrap'>
           <Title
             mainTitle='Nos Streamers'
             shadowTitle='NETWORK'
