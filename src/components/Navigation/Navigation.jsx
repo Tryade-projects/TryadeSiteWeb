@@ -12,7 +12,7 @@ const Navigation = ({ setModalIsOpen, mobile }) => {
   return mobile ? (
     <nav className='navigationMobile'>
       <NavLink
-        to='/'
+        to='/home'
         onClick={() => {
           setModalIsOpen?.(false);
         }}>
@@ -47,7 +47,7 @@ const Navigation = ({ setModalIsOpen, mobile }) => {
     </nav>
   ) : (
     <nav className='navigation'>
-      <NavLink to='/'>Accueil</NavLink>
+      <NavLink to='/home'>Accueil</NavLink>
       <NavLink to='/rules'>Règlement</NavLink>
       <NavLink to='/wiki'>Wiki</NavLink>
       <NavLink to='/shop'>Boutique</NavLink>
