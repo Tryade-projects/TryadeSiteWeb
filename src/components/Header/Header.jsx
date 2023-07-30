@@ -1,27 +1,34 @@
 import React from 'react';
+import useServerInfo from '../../utils/useServerInfo';
 import Button from '../Button/Button';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import HeaderBurger from '../HeaderBurger/HeaderBurger';
 import Navigation from '../Navigation/Navigation';
 
 /**
- *
  * @param {object} props
  * @param {boolean} props.modalIsOpen - state of the burger
  * @param {function} props.setModalIsOpen - function to set the state of the burger
  * @returns {JSX.Element}
  */
 export default function Header({ modalIsOpen, setModalIsOpen }) {
+  const serverInfo = useServerInfo();
+  console.log({ serverInfo });
+
   return (
     <div className='headerContainer'>
       <header className='header'>
         <HeaderLogo />
         <Navigation />
         <div className='headerButtonsContainer'>
-          <Button
-            title='En ligne : 400/300'
-            borderColorClass='primaryColorBorder'
-          />
+          {serverInfo ? (
+            <div className='button primaryColorBorder'>
+              <p className='buttonTitle'>{serverInfo.players.length}</p>
+            </div>
+          ) : (
+            <p>Loading server info...</p>
+          )}
+
           <Button
             title='Jouer'
             borderColorClass='secondaryColorBorder'
