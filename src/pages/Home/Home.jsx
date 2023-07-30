@@ -3,6 +3,7 @@ import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
+import { Link } from 'react-router-dom';
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -94,10 +95,12 @@ export default function Home({ ifMobile }) {
             mainTitle='Nos Streamers'
             shadowTitle='NETWORK'
           />
-          <Button
-            title='Voir tous nos streamers'
-            borderColorClass='primaryColorBorder'
-          />
+          <Link to='/home/streamers'>
+            <Button
+              title='Voir tous nos streamers'
+              borderColorClass='primaryColorBorder'
+            />
+          </Link>
         </section>
 
         <section className='updateSection'>

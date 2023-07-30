@@ -42,7 +42,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0 10svw;
+  padding: 0 13.1svw;
   height: calc(100svh - $headerHeightMobile);
   @include large {
     height: calc(100svh - $headerHeightMedium);
