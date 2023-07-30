@@ -3,6 +3,7 @@ import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
+import Update from '../../components/Update/Update';
 import { Link } from 'react-router-dom';
 
 /**
@@ -112,6 +113,7 @@ export default function Home({ ifMobile }) {
             title='Voir toutes nos mises à jour'
             borderColorClass='primaryColorBorder'
           />
+          <Update />
         </section>
 
         <section className='gameplaySection'>

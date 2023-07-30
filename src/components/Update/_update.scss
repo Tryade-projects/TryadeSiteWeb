@@ -1,0 +1,57 @@
+div.update {
+    position: relative;
+    height: 256px;
+    width: 337px;
+    background-color: #1E2026;
+    border-radius: 20px;
+
+    div.updateImg {
+        height: 189px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    div.updateUInfos {
+        height: calc(100% - 189px);
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h3.updateTitle {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        h4.updateVersion {
+            color: $updateVersionColor;
+            font-size: 16px;
+        }
+        p.updateText{
+            display: none;
+        }
+    }
+
+    button {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        height: auto;
+
+        padding: 6px 12px;
+        border-radius: 18px;
+
+        p.buttonTitle {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1.68px;
+        }
+
+    }
+
+
+}
