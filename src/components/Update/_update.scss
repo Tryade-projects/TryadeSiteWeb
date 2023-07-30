@@ -1,12 +1,20 @@
 div.update {
     position: relative;
-    height: 256px;
+    // height: 256px;
     width: 337px;
     background-color: #1E2026;
     border-radius: 20px;
 
+    @include large {
+        width: 460px;
+    }
+
     div.updateImg {
         height: 189px;
+
+        @include large {
+            height: 259px;
+        }
 
         img {
             width: 100%;
@@ -14,25 +22,45 @@ div.update {
         }
     }
 
-    div.updateUInfos {
+    div.updateInfos {
         height: calc(100% - 189px);
         padding: 24px;
         display: flex;
+        flex-direction: column;
+        gap: 37px;
         align-items: center;
-        justify-content: space-between;
-
-        h3.updateTitle {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+        
+        @include large {
+            height: calc(100% - 259px);
         }
 
-        h4.updateVersion {
-            color: $updateVersionColor;
-            font-size: 16px;
+        div.titleUpdateContainer {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            h3.updateTitle {
+                font-size: 20px;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+            }
+
+            h4.updateVersion {
+                color: $updateVersionColor;
+                font-size: 16px;
+            }
         }
-        p.updateText{
+
+        p.updateText {
             display: none;
+            font-style: 16px;
+            letter-spacing: 0.64px;
+            color: $updateVersionColor;
+            text-align: justify;
+            font-weight: 500;
+            @include large {
+                display: block;
+            }
         }
     }
 
@@ -41,13 +69,13 @@ div.update {
         top: 25px;
         right: 25px;
         height: auto;
+        width: 90px;
 
         padding: 6px 12px;
         border-radius: 18px;
 
         p.buttonTitle {
             font-size: 16px;
-            font-weight: 600;
             letter-spacing: 1.68px;
         }
 
