@@ -22,6 +22,15 @@ const StreamersPage = () => {
         <Streamer />
         <Streamer />
         <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
+        <Streamer />
       </section>
     </div>
   );
