@@ -16,7 +16,7 @@ const Title = ({ mainTitle, shadowTitle, big }) => {
       <div className='shadowTitle'>
         <h2>{shadowTitle}</h2>
         <img
-          src={'./assets/multiplePoints.svg'}
+          src={'/assets/multiplePoints.svg'}
           alt='Points de décoration'
         />
       </div>

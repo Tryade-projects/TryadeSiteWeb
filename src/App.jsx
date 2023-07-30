@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
-import Streamers from './pages/Streamers/Streamers';
+import StreamersPage from './pages/StreamersPage/StreamersPage';
 import Rules from './pages/Rules/Rules';
 import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
@@ -61,7 +61,7 @@ function App() {
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
-              <Streamers />
+              <StreamersPage />
             )
           }
         />

@@ -25,7 +25,7 @@ export default function Header({ modalIsOpen, setModalIsOpen }) {
           <Button
             title='Jouer'
             borderColorClass='secondaryColorBorder'
-            src='./assets/controller.svg'
+            src='/assets/controller.svg'
             alt='Controller'
           />
         </div>
