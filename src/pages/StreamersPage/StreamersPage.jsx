@@ -5,14 +5,14 @@ import Button from '../../components/Button/Button';
 
 const StreamersPage = () => {
   return (
-    <div className='streamersPage page'>
+    <main className='page'>
       <div className='titleButtonContainer'>
         <Title
           mainTitle='Nos Streamers'
           shadowTitle='NETWORK'
         />
         <Button
-          title='Voir tous nos streamers'
+          title='Devenir Streamer ?'
           borderColorClass='primaryColorBorder'
         />
       </div>
@@ -32,7 +32,7 @@ const StreamersPage = () => {
         <Streamer />
         <Streamer />
       </section>
-    </div>
+    </main>
   );
 };
 

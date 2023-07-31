@@ -5,7 +5,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import StreamersPage from './pages/StreamersPage/StreamersPage';
 import UpdatesPage from './pages/UpdatesPage/UpdatesPage';
-import Rules from './pages/Rules/Rules';
+import RulesPage from './pages/RulesPage/RulesPage';
 import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
 
@@ -82,7 +82,7 @@ function App() {
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
             ) : (
-              <Rules />
+              <RulesPage />
             )
           }
         />
