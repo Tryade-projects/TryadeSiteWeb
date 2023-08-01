@@ -5,16 +5,13 @@ import Update from '../../components/Update/Update';
 
 const UpdatesPage = () => {
   return (
-    <div className='page'>
+    <main className='page'>
       <div className='titleButtonContainer'>
         <Title
           mainTitle='Mises à jour'
           shadowTitle='DEVBLOG'
         />
-        <Button
-          title='Voir tous nos mise à jour'
-          borderColorClass='primaryColorBorder'
-        />
+        <Button title='Voir tous nos mise à jour' />
       </div>
       <section
         id='updates'
@@ -27,7 +24,7 @@ const UpdatesPage = () => {
         <Update />
         <Update />
       </section>
-    </div>
+    </main>
   );
 };
 

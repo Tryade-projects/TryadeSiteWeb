@@ -18,13 +18,9 @@ export default function Header({ modalIsOpen, setModalIsOpen }) {
         <HeaderLogo />
         <Navigation />
         <div className='headerButtonsContainer'>
-          <Button
-            title='En ligne : 400/300'
-            borderColorClass='primaryColorBorder'
-          />
+          <Button title='En ligne : 400/300' />
           <Button
             title='Jouer'
-            borderColorClass='secondaryColorBorder'
             src='/assets/controller.svg'
             alt='Controller'
           />

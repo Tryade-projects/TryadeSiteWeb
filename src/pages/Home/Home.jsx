@@ -46,7 +46,6 @@ export default function Home({ ifMobile }) {
             </p>
             <Button
               title='DISCORD'
-              borderColorClass='secondaryColorBorder'
               src={'./assets/discord.svg'}
               alt='Discord'
             />
@@ -105,10 +104,7 @@ export default function Home({ ifMobile }) {
             shadowTitle='NETWORK'
           />
           <Link to='/home/streamers'>
-            <Button
-              title='Voir tous nos streamers'
-              borderColorClass='primaryColorBorder'
-            />
+            <Button title='Voir tous nos streamers' />
           </Link>
         </section>
 
@@ -118,10 +114,7 @@ export default function Home({ ifMobile }) {
             shadowTitle='DEVBLOG'
           />
           <Link to='/home/updates'>
-            <Button
-              title='Voir toutes nos mises à jour'
-              borderColorClass='primaryColorBorder'
-            />
+            <Button title='Voir toutes nos mises à jour' />
           </Link>
           <Update
             updateTitle='Brothers & Hood'
@@ -156,10 +149,7 @@ export default function Home({ ifMobile }) {
             <div>
               <h3>Twitter</h3>
               <h3>@TryadeRP</h3>
-              <Button
-                title='Visiter'
-                borderColorClass='primaryColorBorder'
-              />
+              <Button title='Visiter' />
             </div>
           </article>
           <article></article>

@@ -1,0 +1,11 @@
+.sectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+@include large {
+  .sectionContent {
+    gap: 53px;
+  }
+}

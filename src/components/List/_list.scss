@@ -1,0 +1,27 @@
+.list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $senaryColor;
+  border-radius: 10px;
+  padding: 16px 17px;
+  gap: 9px;
+
+  &Text {
+    text-align: justify;
+    color: $quaternaryColor;
+    letter-spacing: 0.3px;
+    font-size: 15px;
+  }
+}
+
+@include large {
+  .list {
+    padding: 42px 40px;
+    gap: 31px;
+    &Text {
+      font-size: 18px;
+      letter-spacing: 1.08px;
+    }
+  }
+}
