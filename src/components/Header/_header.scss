@@ -16,6 +16,9 @@
     background-image: url('/assets/headerBackgroundMobile.svg');
     background-size: cover;
     background-position: center;
+    .secondaryColorBorder{
+      width: 160px;
+    }
     .headerButtonsContainer {
       display: none;
     }
