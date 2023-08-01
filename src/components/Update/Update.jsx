@@ -18,7 +18,7 @@ const Update = ({ updateTitle, updateVersion, updateText, updateThumbnail }) => 
         <div className='update'>
             <div
                 className='updateImg'
-                style={{ backgroundImage: `url(/images/${updateThumbnail})` }}
+                style={{ backgroundImage: `url(${updateThumbnail})` }}
             >
             </div>
             <div className='updateInfos'>
