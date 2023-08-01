@@ -19,11 +19,12 @@ export default function Home({ ifMobile }) {
   const headerHeight = ifMobile ? 123 : 107;
   /** @type {RefType} */
   const nextSectionRef = useRef(null);
+  const howToPlaySectionRef = useRef(null);
 
-  const handleButtonClick = () => {
-    if (nextSectionRef.current) {
-      const nextSectionRect = nextSectionRef.current.getBoundingClientRect();
-      const offset = nextSectionRect.top + window.scrollY - headerHeight;
+  const handleButtonClick = (goTo) => {
+    if (goTo.current) {
+      const goToRect = goTo.current.getBoundingClientRect();
+      const offset = goToRect.top + window.scrollY - headerHeight;
       window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   };
@@ -75,11 +76,18 @@ export default function Home({ ifMobile }) {
                 description='Le serveur à été conçu de manière à permettre totalement l’épanouissement de votre créativité.'
               />
             </div>
-            <p>Comment jouer ?</p>
+
+            <button
+              className='howToPlayButton'
+              onClick={() => handleButtonClick(howToPlaySectionRef)}
+            >
+              Comment jouer ?
+            </button>
+
           </article>
           <button
             className='goToTheNextSectionButton'
-            onClick={handleButtonClick}>
+            onClick={() => handleButtonClick(nextSectionRef)}>
             <img
               src='./assets/crossBottom.svg'
               alt='cross bottom'
@@ -108,10 +116,19 @@ export default function Home({ ifMobile }) {
           <Link to='/home/updates'>
             <Button title='Voir toutes nos mises à jour' />
           </Link>
-          <Update />
+          <Update
+            updateTitle='Brothers & Hood'
+            updateVersion='1.12.15'
+            updateText='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a quam sem. Praesent lorem mauris, auctor sed leo quis, dictum interdum odio. Donec porta lorem ut vestibulum mattis. Donec aliquam nunc ut lorem pretium, consectetur eros blandit.'
+            updateThumbnail='updateBanner.png'
+          />
         </section>
 
-        <section className='gameplaySection'>
+        <section
+          ref={howToPlaySectionRef}
+          className='gameplaySection'>
+
+
           <Title
             mainTitle='Comment jouer ?'
             shadowTitle='GAMEPLAY'

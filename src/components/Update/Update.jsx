@@ -1,25 +1,33 @@
 import React from 'react';
 import Button from '../Button/Button';
 
-const Update = () => {
+/**
+ * @param {object} props
+ * @param {string} props.updateTitle - The title of the update
+ * @param {number} props.updateVersion - The version of the update
+ * @param {string} props.updateText - The presentation text of the update
+ * @param {string} props.updateThumbnail - The name of the png image of the update
+ * @returns {JSX Element} - Update
+ */
+
+const Update = ({ updateTitle, updateVersion, updateText, updateThumbnail }) => {
+
+    const isMobile = window.innerWidth < 992;
+
     return (
         <div className='update'>
-            <div className='updateImg'>
-                <img
-                    src='/images/updateThumbnail.png'
-                    alt=''
-                />
+            <div
+                className='updateImg'
+                style={{ backgroundImage: `url(/images/${updateThumbnail})` }}
+            >
             </div>
             <div className='updateInfos'>
                 <div className='titleUpdateContainer'>
-                    <h3 className='updateTitle'>Brothers & Hood</h3>
-                    <h4 className='updateVersion'>V 1.6.15</h4>
+                    <h3 className='updateTitle'>{updateTitle}</h3>
+                    <h4 className='updateVersion'>{isMobile ? `V ${updateVersion}` : `Version ${updateVersion}`}</h4>
                 </div>
                 <p className='updateText'>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam,
-                    dignissimos. Officiis tenetur aspernatur repellendus perspiciatis iure
-                    aliquam quaerat sunt provident repudiandae, laboriosam beatae velit
-                    consequatur asperiores numquam veritatis quis saepe.
+                    {updateText}
                 </p>
             </div>
             <Button title='LIRE' />
