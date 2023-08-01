@@ -119,7 +119,7 @@ export default function Home({ ifMobile }) {
             updateTitle='Brothers & Hood'
             updateVersion='1.12.15'
             updateText='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a quam sem. Praesent lorem mauris, auctor sed leo quis, dictum interdum odio. Donec porta lorem ut vestibulum mattis. Donec aliquam nunc ut lorem pretium, consectetur eros blandit.'
-            updateThumbnail='updateThumbnail.png'
+            updateThumbnail='updateBanner.png'
           />
         </section>
 
