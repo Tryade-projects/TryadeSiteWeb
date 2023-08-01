@@ -10,19 +10,21 @@ import Button from '../Button/Button';
  * @returns {JSX Element} - Update
  */
 
-const Update = ({updateTitle, updateVersion, updateText, updateThumbnail}) => {
+const Update = ({ updateTitle, updateVersion, updateText, updateThumbnail }) => {
+
+    const isMobile = window.innerWidth < 992;
+
     return (
         <div className='update'>
-            <div className='updateImg'>
-                <img
-                    src={`/images/${updateThumbnail}`}
-                    alt={`${updateVersion} thumbnail image`}
-                />
+            <div
+                className='updateImg'
+                style={{ backgroundImage: `url(/images/${updateThumbnail})` }}
+            >
             </div>
             <div className='updateInfos'>
                 <div className='titleUpdateContainer'>
                     <h3 className='updateTitle'>{updateTitle}</h3>
-                    <h4 className='updateVersion'>{`Version ${updateVersion}`}</h4>
+                    <h4 className='updateVersion'>{isMobile ? `V ${updateVersion}` : `Version ${updateVersion}`}</h4>
                 </div>
                 <p className='updateText'>
                     {updateText}
