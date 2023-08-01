@@ -11,10 +11,7 @@ const UpdatesPage = () => {
           mainTitle='Mises à jour'
           shadowTitle='DEVBLOG'
         />
-        <Button
-          title='Voir tous nos mise à jour'
-          borderColorClass='primaryColorBorder'
-        />
+        <Button title='Voir tous nos mise à jour' />
       </div>
       <section
         id='updates'

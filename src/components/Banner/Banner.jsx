@@ -1,9 +1,13 @@
 import React from 'react';
 
-const Banner = () => {
+const Banner = ({ url }) => {
   return (
-    <div>
-      Banner
+    <div className='banner'>
+      <div
+        className='imageBackground'
+        style={{
+          backgroundImage: `url(${url})`,
+        }}></div>
     </div>
   );
 };

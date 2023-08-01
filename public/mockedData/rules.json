@@ -1,0 +1,98 @@
+[
+  {
+    "sectionTitle": "réglement discord",
+    "urlBanner": "/images/bannerDiscordRules.png",
+    "rules": [
+      {
+        "id": "1",
+        "textBackground": "01",
+        "title": "Régle - R.01",
+        "text": "Be respectful to everyone. No harassment, hate speech, racism, sexism, homophobia, transphobia, or any other form of discrimination will be tolerated.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "2",
+        "textBackground": "02",
+        "title": "rule 2",
+        "text": "No NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "3",
+        "textBackground": "03",
+        "title": "rule 3",
+        "text": "No spamming, advertising, or self-promotion.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "4",
+        "textBackground": "04",
+        "title": "rule 4",
+        "text": "No posting of personal information.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "5",
+        "textBackground": "05",
+        "title": "rule 5",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "6",
+        "textBackground": "06",
+        "title": "rule 6",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "7",
+        "textBackground": "07",
+        "title": "rule 7",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "8",
+        "textBackground": "08",
+        "title": "rule 8",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "9",
+        "textBackground": "09",
+        "title": "rule 9",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      },
+      {
+        "id": "10",
+        "textBackground": "10",
+        "title": "rule 10",
+        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#6badea"
+      }
+    ]
+  },
+  {
+    "sectionTitle": "lexique roleplay",
+    "urlBanner": "/images/bannerLexique.png",
+    "rules": [
+      {
+        "id": "1",
+        "textBackground": "01",
+        "title": "rule 1",
+        "text": "Be respectful to everyone. No harassment, hate speech, racism, sexism, homophobia, transphobia, or any other form of discrimination will be tolerated.",
+        "colorLine": "#ff0000"
+      },
+      {
+        "id": "2",
+        "textBackground": "02",
+        "title": "rule 2",
+        "text": "No NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
+        "colorLine": "#ff0000"
+      }
+    ]
+  }
+]

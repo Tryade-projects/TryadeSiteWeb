@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
-import Banner from '../../components/Banner/Banner';
+import SectionContent from '../../components/SectionContent/SectionContent';
+
+const fetchRulesSections = async ({ pageParam = 0 }) => {
+  // Simulez la récupération des données depuis votre API ou fichier JSON
+  const response = await fetch('/mockedData/rules.json');
+  const data = await response.json();
+  return data.slice(pageParam, pageParam + 1); // Renvoie une section à la fois
+};
 
 export default function RulesPage() {
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ['sectionsDeRegles'],
+    queryFn: fetchRulesSections,
+    getNextPageParam: (lastPage, pages) => {
+      // Si la dernière page est vide, il n'y a plus de pages à récupérer
+      if (lastPage.length === 0) {
+        return false;
+      }
+      // Sinon, renvoie le numéro de la prochaine page à récupérer
+      return pages.length;
+    },
+  });
+
+  // Utilisez le hook useInView pour détecter lorsque l'élément est dans la vue (visible)
+  const { ref, inView } = useInView({
+    threshold: 0, // 0 signifie que l'élément est considéré comme visible dès qu'une partie apparaît dans la vue
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   return (
     <main className='page'>
       <div className='titleButtonContainer'>
@@ -11,24 +51,30 @@ export default function RulesPage() {
           mainTitle='Règlement'
           shadowTitle='GAMEPLAY'
         />
-        <Button
-          title='Rejoindre l’équipe de modération'
-          borderColorClass='primaryColorBorder'
-        />
+        <Button title='Rejoindre l’équipe de modération' />
       </div>
-      <section
-        id='rules'
-        className='sectionWrap'>
-        <Banner imgBackground='/images/bannerDiscordRulesMobile.png' />
-        <div className='sectionContent'>
-          <h2 className='sectionTitle'>Règles du serveur</h2>
-          <p className='sectionText'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            euismod, nisl quis ultricies aliquet, nunc ipsum aliquam nunc, vitae
-            aliquam nunc nisl quis nunc. Sed euismod,
-          </p>
-        </div>
-      </section>
+      {status === 'loading' ? (
+        <p>Chargement en cours...</p>
+      ) : status === 'error' ? (
+        <p>Erreur : Impossible de récupérer les données.</p>
+      ) : (
+        <>
+          {data.pages.map((page, index) => (
+            <React.Fragment key={index}>
+              {page.map((section, sectionIndex) => (
+                <SectionContent
+                  key={`${index}-${sectionIndex}`}
+                  sectionData={section}
+                />
+              ))}
+            </React.Fragment>
+          ))}
+          <div ref={ref}></div> {/* L'élément de chargement */}
+          <div>
+            {isFetching && !isFetchingNextPage ? 'Chargement...' : null}
+          </div>
+        </>
+      )}
     </main>
   );
 }

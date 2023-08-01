@@ -15,11 +15,13 @@ const transformToCamelCase = (str) => {
 
 // Function to get the initial content of the JSX file
 const getInitialJSXContent = (componentName) => {
+  const className = transformToCamelCase(componentName);
+
   return `import React from 'react';
 
 const ${componentName} = () => {
   return (
-    <div>
+    <div className="${className}">
       ${componentName}
     </div>
   );

@@ -11,10 +11,7 @@ const StreamersPage = () => {
           mainTitle='Nos Streamers'
           shadowTitle='NETWORK'
         />
-        <Button
-          title='Devenir Streamer ?'
-          borderColorClass='primaryColorBorder'
-        />
+        <Button title='Devenir Streamer ?' />
       </div>
       <section
         id='streamers'

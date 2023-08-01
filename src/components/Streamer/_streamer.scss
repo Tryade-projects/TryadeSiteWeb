@@ -14,11 +14,7 @@
     ),
     lightgray 50% / cover no-repeat;
   .streamerImageBackground {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: lightgray 50% / cover no-repeat;
-    z-index: 0;
+    background: lightgray 50%;
   }
   .streamerInfo {
     display: flex;

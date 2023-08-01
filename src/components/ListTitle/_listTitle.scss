@@ -1,0 +1,25 @@
+.listTitle {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  &TextBackground {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 3.78px;
+    line-height: 114%; /* 41.04px */
+
+    position: absolute;
+    left: 39px;
+  }
+  &Line {
+    width: 3px;
+    height: 29px;
+    background-color: $octonaryColor;
+  }
+  &Text {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+  }
+}

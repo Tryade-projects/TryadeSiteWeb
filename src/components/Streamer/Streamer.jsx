@@ -4,7 +4,7 @@ const Streamer = () => {
   return (
     <article className='streamer'>
       <div
-        className='streamerImageBackground'
+        className='imageBackground streamerImageBackground'
         style={{ backgroundImage: `url(/images/streamer.jpg)` }}></div>
       <div className='streamerInfo'>
         <img
