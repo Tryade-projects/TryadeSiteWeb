@@ -1,97 +1,129 @@
 [
   {
+    "id": "1",
     "sectionTitle": "réglement discord",
     "urlBanner": "/images/bannerDiscordRules.png",
+    "colorLine": "#6badea",
     "rules": [
       {
         "id": "1",
         "textBackground": "01",
         "title": "Régle - R.01",
-        "text": "Be respectful to everyone. No harassment, hate speech, racism, sexism, homophobia, transphobia, or any other form of discrimination will be tolerated.",
-        "colorLine": "#6badea"
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       },
       {
         "id": "2",
         "textBackground": "02",
-        "title": "rule 2",
-        "text": "No NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
+        "title": "Régle - R.02",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       },
       {
         "id": "3",
         "textBackground": "03",
-        "title": "rule 3",
-        "text": "No spamming, advertising, or self-promotion.",
-        "colorLine": "#6badea"
+        "title": "Régle - R.03",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       },
       {
         "id": "4",
         "textBackground": "04",
-        "title": "rule 4",
-        "text": "No posting of personal information.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "5",
-        "textBackground": "05",
-        "title": "rule 5",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "6",
-        "textBackground": "06",
-        "title": "rule 6",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "7",
-        "textBackground": "07",
-        "title": "rule 7",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "8",
-        "textBackground": "08",
-        "title": "rule 8",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "9",
-        "textBackground": "09",
-        "title": "rule 9",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
-      },
-      {
-        "id": "10",
-        "textBackground": "10",
-        "title": "rule 10",
-        "text": "No posting of NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#6badea"
+        "title": "Régle - R.04",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       }
     ]
   },
   {
+    "id": "2",
     "sectionTitle": "lexique roleplay",
-    "urlBanner": "/images/bannerLexique.png",
+    "urlBanner": "/images/bannerLexiqueRules.png",
+    "colorLine": "#E9C24B",
     "rules": [
       {
         "id": "1",
         "textBackground": "01",
-        "title": "rule 1",
-        "text": "Be respectful to everyone. No harassment, hate speech, racism, sexism, homophobia, transphobia, or any other form of discrimination will be tolerated.",
-        "colorLine": "#ff0000"
+        "title": "Régle - R.01",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       },
       {
         "id": "2",
         "textBackground": "02",
-        "title": "rule 2",
-        "text": "No NSFW content. This includes, but is not limited to, nudity, gore, and sexual content.",
-        "colorLine": "#ff0000"
+        "title": "Régle - R.02",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "3",
+        "textBackground": "03",
+        "title": "Régle - R.03",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "4",
+        "textBackground": "04",
+        "title": "Régle - R.04",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "sectionTitle": "réglement général",
+    "urlBanner": "/images/bannerGeneralRules.png",
+    "colorLine": "#35E8BC",
+    "rules": [
+      {
+        "id": "1",
+        "textBackground": "01",
+        "title": "Régle - R.01",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "2",
+        "textBackground": "02",
+        "title": "Régle - R.02",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "3",
+        "textBackground": "03",
+        "title": "Régle - R.03",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "4",
+        "textBackground": "04",
+        "title": "Régle - R.04",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "sectionTitle": "réglement illégal",
+    "urlBanner": "/images/bannerIllegalRules.png",
+    "colorLine": "#EB5656",
+    "rules": [
+      {
+        "id": "1",
+        "textBackground": "01",
+        "title": "Régle - R.01",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "2",
+        "textBackground": "02",
+        "title": "Régle - R.02",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "3",
+        "textBackground": "03",
+        "title": "Régle - R.03",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
+      },
+      {
+        "id": "4",
+        "textBackground": "04",
+        "title": "Régle - R.04",
+        "text": "Proin consectetur eleifend mauris, eu venenatis nulla porttitor quis. Sed vel ex pretium mi iaculis aliquam quis non sapien. Ut interdum sagittis dolor, et viverra mi placerat in. Morbi sed diam viverra, bibendum sem ut, rutrum justo. Proin enim sem, interdum eget purus non, ullamcorper sollicitudin nisi. Aliquam sit amet elit vitae eros venenatis laoreet. Sed iaculis felis eget imperdiet tristique. In non rhoncus lectus. Suspendisse vitae molestie dolor. Quisque lacus nulla, commodo nec consectetur eget, placerat at orci. Nullam et urna a lacus accumsan tincidunt. Cras pretium molestie ante sed placerat. Aenean quis gravida ex, eget mollis lorem. Vivamus at justo et libero ultrices bibendum a et quam. Donec ut cursus metus, sit amet suscipit est. Phasellus hendrerit lectus et turpis luctus, vitae cursus turpis venenatis."
       }
     ]
   }

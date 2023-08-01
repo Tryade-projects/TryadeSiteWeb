@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 19px;
+  position: relative;
   &TextBackground {
     color: rgba(255, 255, 255, 0.1);
     font-size: 36px;
@@ -10,16 +11,34 @@
     line-height: 114%; /* 41.04px */
 
     position: absolute;
-    left: 39px;
+    left: 13px;
   }
   &Line {
     width: 3px;
     height: 29px;
-    background-color: $octonaryColor;
+    border-radius: 1.5px;
   }
   &Text {
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 1.8px;
+  }
+}
+
+@include large {
+  .listTitle {
+    gap: 20px;
+    &TextBackground {
+      font-size: 48px;
+      letter-spacing: 5.04px;
+      line-height: 114%; /* 54.72px */
+    }
+    &Line {
+      height: 41px;
+    }
+    &Text {
+      font-size: 24px;
+      letter-spacing: 2.16px;
+    }
   }
 }

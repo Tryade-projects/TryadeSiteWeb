@@ -7,8 +7,10 @@ const SectionContent = ({ sectionData }) => {
   return (
     <div className='sectionContent'>
       <Banner url={sectionData.urlBanner} />
-      <h2>{sectionData.sectionTitle}</h2>
-      <List rules={sectionData.rules} />
+      <List
+        rules={sectionData.rules}
+        colorLine={sectionData.colorLine}
+      />
     </div>
   );
 };

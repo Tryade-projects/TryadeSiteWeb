@@ -18,7 +18,8 @@ const ListTitle = ({ textBackground, colorLine, title, text }) => {
           className='listTitleLine'
           style={{
             backgroundColor: `${colorLine}`,
-          }}></div>
+          }}
+        />
         <h2 className='listTitleText'>{title}</h2>
       </div>
       <p className='listText'>{text}</p>
