@@ -1,10 +1,21 @@
 import React, { useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
 import Update from '../../components/Update/Update';
 import { Link } from 'react-router-dom';
+
+const QUERY_KEY_UPDATE = ['update'];
+
+const fetchUpdates = async () => {
+  const response = await fetch('/mockedData/updates.json');
+  const data = await response.json();
+  return data;
+}
+
+
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -20,6 +31,20 @@ export default function Home({ ifMobile }) {
   /** @type {RefType} */
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useQuery({
+    queryKey: QUERY_KEY_UPDATE,
+    queryFn: fetchUpdates,
+  });
+
+  console.log(data)
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -96,7 +121,7 @@ export default function Home({ ifMobile }) {
           </button>
         </section>
 
-        <section 
+        <section
           ref={nextSectionRef}
           className='streamerSection screenHeightWithoutHeader sectionWrap page'>
           <Title
@@ -116,12 +141,25 @@ export default function Home({ ifMobile }) {
           <Link to='/home/updates'>
             <Button title='Voir toutes nos mises à jour' />
           </Link>
-          <Update
-            updateTitle='Brothers & Hood'
-            updateVersion='1.12.15'
-            updateText='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a quam sem. Praesent lorem mauris, auctor sed leo quis, dictum interdum odio. Donec porta lorem ut vestibulum mattis. Donec aliquam nunc ut lorem pretium, consectetur eros blandit.'
-            updateThumbnail='updateBanner.png'
-          />
+
+          {status === 'loading' ? (
+            <p>Chargement en cours...</p>
+          ) : status === 'error' ? (
+            <p>Erreur : Impossible de récupérer les données.</p>
+          ) : (
+            <>
+              {data.map(update => (
+                <Update
+                  key={update.id}
+                  updateTitle={update.sectionTitle}
+                  updateVersion={update.version}
+                  updateText={update.details[0].content}
+                  updateThumbnail={update.urlBanner}
+                />
+              ))}
+            </>
+          )}
+
         </section>
 
         <section

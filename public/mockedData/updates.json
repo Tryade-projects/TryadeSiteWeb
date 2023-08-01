@@ -3,7 +3,7 @@
         "id": 1,
         "sectionTitle": "Brothers & Hood",
         "version": "1.12.15",
-        "urlBanner": "/images/updateThumbnail.png",
+        "urlBanner": "/images/updateBanner.png",
         "colorLine": "#6badea",
         "details": [
             {
@@ -32,7 +32,7 @@
         "id": 2,
         "sectionTitle": "Update 2.5.0",
         "version": "2.5.0",
-        "urlBanner": "/images/updateThumbnail.png",
+        "urlBanner": "/images/updateBanner.png",
         "colorLine": "#9f55ff",
         "details": [
             {
@@ -61,7 +61,7 @@
         "id": 3,
         "sectionTitle": "Release Notes",
         "version": "v3.0.1",
-        "urlBanner": "/images/updateThumbnail.png",
+        "urlBanner": "/images/updateBanner.png",
         "colorLine": "#ff7f50",
         "details": [
             {
@@ -90,7 +90,7 @@
         "id": 4,
         "sectionTitle": "Patch Update",
         "version": "1.1.10",
-        "urlBanner": "/images/updateThumbnail.png",
+        "urlBanner": "/images/updateBanner.png",
         "colorLine": "#66cdaa",
         "details": [
             {
@@ -119,7 +119,7 @@
         "id": 5,
         "sectionTitle": "New Features",
         "version": "4.0.0",
-        "urlBanner": "/images/updateThumbnail.png",
+        "urlBanner": "/images/updateBanner.png",
         "colorLine": "#f08080",
         "details": [
             {
