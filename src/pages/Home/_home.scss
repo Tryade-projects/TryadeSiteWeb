@@ -25,6 +25,23 @@
 
   section {
     background-color: $tertiaryColor;
+    justify-content: flex-start;
+    align-items: flex-start;
+    div.headerSection{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      row-gap: 25px;
+      @include large{
+        flex-direction: row;
+        align-items: baseline;
+        width: 100%;
+        row-gap: 0;
+        height: 100px;
+      }
+
+    }
   }
 
   article {

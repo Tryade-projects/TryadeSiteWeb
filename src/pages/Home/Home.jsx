@@ -124,23 +124,27 @@ export default function Home({ ifMobile }) {
         <section
           ref={nextSectionRef}
           className='streamerSection screenHeightWithoutHeader sectionWrap page'>
-          <Title
-            mainTitle='Nos Streamers'
-            shadowTitle='NETWORK'
-          />
-          <Link to='/home/streamers'>
-            <Button title='Voir tous nos streamers' />
-          </Link>
+          <div className="headerSection">
+            <Title
+              mainTitle='Nos Streamers'
+              shadowTitle='NETWORK'
+            />
+            <Link to='/home/streamers'>
+              <Button title='Voir tous nos streamers' />
+            </Link>
+          </div>
         </section>
 
         <section className='updateSection page'>
-          <Title
-            mainTitle='Mises à jour'
-            shadowTitle='DEVBLOG'
-          />
-          <Link to='/home/updates'>
-            <Button title='Voir toutes nos mises à jour' />
-          </Link>
+          <div className="headerSection">
+            <Title
+              mainTitle='Mises à jour'
+              shadowTitle='DEVBLOG'
+            />
+            <Link to='/home/updates'>
+              <Button title='Voir toutes nos mises à jour' />
+            </Link>
+          </div>
 
           {status === 'loading' ? (
             <p>Chargement en cours...</p>
