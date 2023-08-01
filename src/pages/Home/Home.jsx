@@ -96,9 +96,9 @@ export default function Home({ ifMobile }) {
           </button>
         </section>
 
-        <section
+        <section 
           ref={nextSectionRef}
-          className='streamerSection screenHeightWithoutHeader sectionWrap'>
+          className='streamerSection screenHeightWithoutHeader sectionWrap page'>
           <Title
             mainTitle='Nos Streamers'
             shadowTitle='NETWORK'
@@ -108,7 +108,7 @@ export default function Home({ ifMobile }) {
           </Link>
         </section>
 
-        <section className='updateSection'>
+        <section className='updateSection page'>
           <Title
             mainTitle='Mises à jour'
             shadowTitle='DEVBLOG'
@@ -126,7 +126,7 @@ export default function Home({ ifMobile }) {
 
         <section
           ref={howToPlaySectionRef}
-          className='gameplaySection'>
+          className='gameplaySection page'>
 
 
           <Title
@@ -135,7 +135,7 @@ export default function Home({ ifMobile }) {
           />
         </section>
 
-        <section className='networkSection'>
+        <section className='networkSection page'>
           <Title
             mainTitle='Nos réseaux'
             shadowTitle='NETWORK'
