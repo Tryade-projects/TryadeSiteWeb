@@ -19,11 +19,12 @@ export default function Home({ ifMobile }) {
   const headerHeight = ifMobile ? 123 : 107;
   /** @type {RefType} */
   const nextSectionRef = useRef(null);
+  const howToPlaySectionRef = useRef(null);
 
-  const handleButtonClick = () => {
-    if (nextSectionRef.current) {
-      const nextSectionRect = nextSectionRef.current.getBoundingClientRect();
-      const offset = nextSectionRect.top + window.scrollY - headerHeight;
+  const handleButtonClick = (goTo) => {
+    if (goTo.current) {
+      const goToRect = goTo.current.getBoundingClientRect();
+      const offset = goToRect.top + window.scrollY - headerHeight;
       window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   };
@@ -76,11 +77,18 @@ export default function Home({ ifMobile }) {
                 description='Le serveur à été conçu de manière à permettre totalement l’épanouissement de votre créativité.'
               />
             </div>
-            <p>Comment jouer ?</p>
+
+            <button
+              className='howToPlayButton'
+              onClick={() => handleButtonClick(howToPlaySectionRef)}
+            >
+              Comment jouer ?
+            </button>
+
           </article>
           <button
             className='goToTheNextSectionButton'
-            onClick={handleButtonClick}>
+            onClick={() => handleButtonClick(nextSectionRef)}>
             <img
               src='./assets/crossBottom.svg'
               alt='cross bottom'
@@ -123,7 +131,11 @@ export default function Home({ ifMobile }) {
           />
         </section>
 
-        <section className='gameplaySection'>
+        <section
+          ref={howToPlaySectionRef}
+          className='gameplaySection'>
+
+
           <Title
             mainTitle='Comment jouer ?'
             shadowTitle='GAMEPLAY'

@@ -41,36 +41,45 @@
   flex-direction: column;
   position: relative;
   min-height: 500px;
+
   @include large {
     flex-direction: row;
     align-items: center;
     gap: 18vw;
   }
+
   .titleArticle {
     height: 35%;
+
     .discordText {
       max-width: 500px;
       text-align: justify;
       letter-spacing: 0.4px;
     }
+
     @include large {
       .discordText {
         font-size: 20px;
         letter-spacing: 1.2px;
       }
+
       height: 50%;
     }
   }
+
   .argumentsArticle {
     height: 50%;
+
     @include large {
       height: 80%;
     }
+
     .argumentContainer {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       gap: 1.6vh;
+
       @include large {
         gap: 2vh;
       }
@@ -87,25 +96,44 @@
       width: 27px;
       height: 20px;
     }
+
     p {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: 1.44px;
     }
+
     font-size: 20px;
+
     @include large {
       width: 239px;
       height: 60px;
       gap: 1.4vw;
+
       img {
         width: 34px;
         height: 25px;
       }
+
       p {
         font-size: 24px;
       }
     }
   }
+
+  .howToPlayButton {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.575px;
+    color: $primaryColor;
+    text-align: left;
+
+    @include large {
+      font-size: 16px;
+      letter-spacing: 1.68px;
+    }
+  }
+
   .goToTheNextSectionButton {
     display: flex;
     align-items: center;
@@ -113,10 +141,12 @@
     font-size: 14px;
     letter-spacing: 0.49px;
     gap: 16px;
+
     img {
       width: 16px;
       height: 9px;
     }
+
     @include large {
       position: absolute;
       left: 10svw;
@@ -124,6 +154,9 @@
     }
   }
 }
+
+
+
 
 //The network section
 section.networkSection {
