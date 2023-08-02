@@ -9,6 +9,7 @@ import RulesPage from './pages/RulesPage/RulesPage';
 import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
 import LoginPage from './pages/LoginPage/LoginPage';
+import PanelPage from './pages/PanelPage/PanelPage';
 
 const breakpoints = {
   small: 576,
@@ -87,6 +88,10 @@ function App() {
         <Route
           path='/home/login'
           element={<LoginPage />}
+        />
+        <Route
+          path='/home/panel'
+          element={<PanelPage />}
         />
         <Route
           path='/rules'

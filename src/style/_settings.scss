@@ -62,6 +62,22 @@ button {
   }
 }
 
+.titleButtonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  @include large {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    .button {
+      position: relative;
+      bottom: 20px;
+    }
+  }
+}
+
 //Main CSS
 .sectionWrap {
   display: flex;
@@ -71,17 +87,6 @@ button {
   background-color: $tertiaryColor;
   @include large {
     gap: 48px;
-  }
-}
-
-.titleButtonContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 29px;
-  @include large {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 0;
   }
 }
 
