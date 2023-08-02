@@ -39,7 +39,7 @@ export default function Home({ ifMobile }) {
   };
   return (
     <>
-      <div className='homeBackground' />
+      <div className='imageBackground homeBackground' />
       <main className='home'>
         <section className='homeSection screenHeightWithoutHeader page'>
           <article className='titleArticle'>

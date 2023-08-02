@@ -1,0 +1,37 @@
+.loginPage {
+  background: inherit;
+  .loginForm {
+    flex: 1;
+    width: 1000px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+      font-size: 20px;
+      letter-spacing: 2.1px;
+      font-weight: 600;
+    }
+    &ĹabelUserName::before {
+      content: url('/assets/userLogin.svg');
+    }
+    &LabelPassword::before {
+      content: url('/assets/passwordLogin.svg');
+    }
+    .input {
+      background-color: $tertiaryColor;
+      height: 80px;
+      border: none;
+      border-radius: 10px;
+      padding-left: 46px;
+      color: $quaternaryColor;
+      letter-spacing: 0.8px;
+    }
+    .button {
+      border-color: $secondaryColor;
+    }
+  }
+}
