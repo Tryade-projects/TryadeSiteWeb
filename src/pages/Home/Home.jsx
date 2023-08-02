@@ -6,16 +6,9 @@ import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
 import Update from '../../components/Update/Update';
 import { Link } from 'react-router-dom';
+import { fetchUpdates } from '../../queries/fetchAPI';
 
 const QUERY_KEY_UPDATE = ['update'];
-
-const fetchUpdates = async () => {
-  const response = await fetch('/mockedData/updates.json');
-  const data = await response.json();
-  return data;
-}
-
-
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -32,19 +25,10 @@ export default function Home({ ifMobile }) {
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useQuery({
+  const { data, status } = useQuery({
     queryKey: QUERY_KEY_UPDATE,
     queryFn: fetchUpdates,
   });
-
-  console.log(data)
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -104,11 +88,9 @@ export default function Home({ ifMobile }) {
 
             <button
               className='howToPlayButton'
-              onClick={() => handleButtonClick(howToPlaySectionRef)}
-            >
+              onClick={() => handleButtonClick(howToPlaySectionRef)}>
               Comment jouer ?
             </button>
-
           </article>
           <button
             className='goToTheNextSectionButton'
@@ -124,7 +106,7 @@ export default function Home({ ifMobile }) {
         <section
           ref={nextSectionRef}
           className='streamerSection screenHeightWithoutHeader sectionWrap page'>
-          <div className="headerSection">
+          <div className='headerSection'>
             <Title
               mainTitle='Nos Streamers'
               shadowTitle='NETWORK'
@@ -136,7 +118,7 @@ export default function Home({ ifMobile }) {
         </section>
 
         <section className='updateSection page'>
-          <div className="headerSection">
+          <div className='headerSection'>
             <Title
               mainTitle='Mises à jour'
               shadowTitle='DEVBLOG'
@@ -152,7 +134,7 @@ export default function Home({ ifMobile }) {
             <p>Erreur : Impossible de récupérer les données.</p>
           ) : (
             <>
-              {data.map(update => (
+              {data.map((update) => (
                 <Update
                   key={update.id}
                   updateTitle={update.sectionTitle}
@@ -163,14 +145,11 @@ export default function Home({ ifMobile }) {
               ))}
             </>
           )}
-
         </section>
 
         <section
           ref={howToPlaySectionRef}
           className='gameplaySection page'>
-
-
           <Title
             mainTitle='Comment jouer ?'
             shadowTitle='GAMEPLAY'

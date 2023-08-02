@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import SectionContent from '../../components/SectionContent/SectionContent';
-
-const QUERY_KEY = ['rules'];
-const PAGE_SIZE = 1;
-
-const fetchRulesSections = async ({ pageParam = 0 }) => {
-  const response = await fetch('/mockedData/rules.json');
-  const data = await response.json();
-  const sectionIndex = pageParam * PAGE_SIZE;
-  return data.slice(sectionIndex, sectionIndex + PAGE_SIZE);
-};
+import useRulesQuery from '../../hooks/useRulesQuery';
 
 const RulesPage = () => {
   const {
@@ -23,12 +13,7 @@ const RulesPage = () => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery({
-    queryKey: QUERY_KEY,
-    queryFn: fetchRulesSections,
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.length === 0 ? false : pages.length,
-  });
+  } = useRulesQuery();
 
   const { ref, inView } = useInView({
     threshold: 0,
