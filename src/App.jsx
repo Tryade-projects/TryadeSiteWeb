@@ -84,6 +84,10 @@ function App() {
           }
         />
         <Route
+          path='/home/login'
+          element={<h1>Login</h1>}
+        />
+        <Route
           path='/rules'
           element={
             modalIsOpen ? (
