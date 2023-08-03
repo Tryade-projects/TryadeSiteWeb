@@ -1,0 +1,119 @@
+div.gameplay {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    padding: 30px 25px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @include large {
+        height: 200px;
+        border-radius: 20px;
+        padding: 40px 77px;
+    }
+
+
+    div.gameplayTitleShadow {
+        border-left: solid 3px $secondaryColor;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include large {
+            height: 120px;
+        }
+
+        h3 {
+            color:rgba(255, 255, 255, 0.15);
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: 6.72px;
+            padding-left: 17px;
+
+            @include large {
+                font-size: 140px;
+                letter-spacing: 14.7px;
+            }
+        }
+    }
+
+    div.gameplayContent {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        column-gap: 10px;
+        padding-left: 36px;
+
+        @include large {
+            padding-left: 90px;
+            column-gap: 50px;
+        }
+
+        div.gameplayInfo {
+            display: flex;
+            flex-direction: column;
+            row-gap: 6px;
+
+            h2.gameplayTitle {
+                color: #FFF;
+                font-size: 18px;
+                font-weight: 600;
+                letter-spacing: 1.89px;
+
+                @include large {
+                    font-size: 32px;
+                }
+            }
+
+            p.gameplayTexteMobile {
+                color: $quaternaryColor;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 600;
+                letter-spacing: 1.575px;
+            }
+
+            p.gameplayTexteLaptop {
+                display: none;
+                color: $quaternaryColor;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 600;
+                letter-spacing: 2.1px;
+            }
+
+            @include large {
+                p.gameplayTexteMobile {
+                    display: none;
+                }
+
+                p.gameplayTexteLaptop {
+                    display: block;
+                }
+            }
+
+        }
+
+        button {
+            border: none;
+
+            @include large {
+                border: 3px solid $secondaryColor;
+            }
+
+            p {
+                display: none;
+                text-transform: uppercase;
+
+                @include large {
+                    display: block;
+                }
+            }
+        }
+    }
+}
