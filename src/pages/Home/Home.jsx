@@ -5,6 +5,7 @@ import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import RoundLogo from '../../components/RoundLogo/RoundLogo';
 import Update from '../../components/Update/Update';
+import Gameplay from '../../components/Gameplay/Gameplay';
 import { Link } from 'react-router-dom';
 import { fetchUpdates } from '../../queries/fetchAPI';
 
@@ -158,6 +159,37 @@ export default function Home({ ifMobile }) {
           <Title
             mainTitle='Comment jouer ?'
             shadowTitle='GAMEPLAY'
+          />
+          <Gameplay
+            gameplayImage='images/howToPlayNecessary.png'
+            numberShadow='01'
+            title='Nécéssités'          
+            text='Afin de jouer sur Tryade, vous devrez posséder une copie légale du jeu GTA V (Steam, Rockstar, Epic), ainsi qu’un ordinateur obligatoirement.'
+            shortText='Achetez le jeu GTA V
+            sur PC (Obligatoire)'         
+            buttonIcon='assets/buy.svg'
+            buttonTitle='acheter'
+            iconAlt="Icone d'un caddie d'achat"
+          />
+          <Gameplay
+            gameplayImage='images/howToPlayInstallation.png'
+            numberShadow='02'
+            title='Installation'          
+            text='Une fois GTA V installé, vous devrez procéder à l’installation de FiveM qui est la plateforme permettant d’accéder à notre serveur.'
+            shortText='Installez FiveM pour accéder au serveur.'         
+            buttonIcon='assets/download.svg'
+            buttonTitle='télécharger'
+            iconAlt="Icone d'un nuage avec une flèche"
+          />
+          <Gameplay
+            gameplayImage='images/howToPlayConnexion.png'
+            numberShadow='03'
+            title='Connexion'          
+            text='Une fois FiveM installé, ouvrez le et appuyez sur jouer puis recherchez Tryade. En cas de problème contactez nous sur Discord'
+            shortText='Ouvrez FiveM et recherchez “Tryade”'         
+            buttonIcon='assets/controller.svg'
+            buttonTitle='joeur'
+            iconAlt="Icone d'une manette de jeu"
           />
         </section>
 
