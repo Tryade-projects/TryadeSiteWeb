@@ -1,0 +1,11 @@
+.panelPageContent {
+  display: flex;
+  flex: 1;
+  &Aside {
+    &Nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}

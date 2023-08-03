@@ -93,6 +93,7 @@ function App() {
           path='/home/panel'
           element={<PanelPage />}
         />
+
         <Route
           path='/rules'
           element={

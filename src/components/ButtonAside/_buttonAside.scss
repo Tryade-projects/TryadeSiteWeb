@@ -1,0 +1,68 @@
+.buttonAside {
+  padding-left: 15px;
+  height: 70px;
+  width: 290px;
+  background-color: $senaryColor;
+  border-radius: 10px;
+  color: $quaternaryColor;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  color: $quaternaryColor;
+}
+
+.buttonAsideConnected {
+  color: $primaryColor;
+  margin-bottom: 40px;
+
+  &Circle {
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    background-color: $tertiaryColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &Icon {
+      background-image: url('/assets/user.svg');
+      width: 19px;
+      height: 19px;
+    }
+  }
+
+  p {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.75px;
+    text-align: left;
+    line-height: 23px;
+    span {
+      color: $secondaryColor;
+    }
+  }
+}
+.buttonAsideNavIcon {
+  position: relative;
+  display: flex;
+  width: 47px;
+  height: 47px;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: '';
+    width: 2px;
+    height: 30px;
+    border-radius: 1.5px;
+    background-color: $tertiaryColor;
+    position: absolute;
+    left: 0;
+  }
+}
+
+.buttonAsideActive {
+  color: $primaryColor;
+  .buttonAsideNavIcon::before {
+    background-color: $secondaryColor;
+  }
+}
