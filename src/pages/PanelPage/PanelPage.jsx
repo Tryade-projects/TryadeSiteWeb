@@ -11,6 +11,14 @@ const PanelPage = () => {
     { id: 3, name: 'Streameurs' },
   ];
 
+  const selectSectionToDisplay =
+    active === 1 ? (
+      <h1>Reglement</h1>
+    ) : active === 2 ? (
+      <h1>Patchnotes</h1>
+    ) : (
+      <h1>Streameurs</h1>
+    );
   return (
     <main className='page'>
       <div className='titleButtonContainer'>
@@ -38,7 +46,9 @@ const PanelPage = () => {
             ))}
           </nav>
         </aside>
-        <section className='panelPageContentSection'></section>
+        <section className='panelPageContentSection'>
+          {selectSectionToDisplay}
+        </section>
       </div>
     </main>
   );

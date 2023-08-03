@@ -1,7 +1,7 @@
 .buttonAside {
   padding-left: 15px;
   height: 70px;
-  width: 290px;
+  width: 100%;
   background-color: $senaryColor;
   border-radius: 10px;
   color: $quaternaryColor;
@@ -16,7 +16,7 @@
   margin-bottom: 40px;
 
   &Circle {
-    width: 47px;
+    min-width: 47px;
     height: 47px;
     border-radius: 50%;
     background-color: $tertiaryColor;

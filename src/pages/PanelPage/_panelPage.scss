@@ -1,11 +1,16 @@
 .panelPageContent {
   display: flex;
+  justify-content: space-between;
   flex: 1;
   &Aside {
+    width: 15.1vw;
     &Nav {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
+  }
+  &Section {
+    width: 58.4vw;
   }
 }
