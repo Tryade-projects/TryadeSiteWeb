@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
-import RoundLogo from '../../components/RoundLogo/RoundLogo';
+import NetworkContainer from '../../components/NetworkContainer/NetworkContainer';
 import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import { Link } from 'react-router-dom';
@@ -163,10 +163,10 @@ export default function Home({ ifMobile }) {
           <Gameplay
             gameplayImage='images/howToPlayNecessary.png'
             numberShadow='01'
-            title='Nécéssités'          
+            title='Nécéssités'
             text='Afin de jouer sur Tryade, vous devrez posséder une copie légale du jeu GTA V (Steam, Rockstar, Epic), ainsi qu’un ordinateur obligatoirement.'
             shortText='Achetez le jeu GTA V
-            sur PC (Obligatoire)'         
+            sur PC (Obligatoire)'
             buttonIcon='assets/buy.svg'
             buttonTitle='acheter'
             iconAlt="Icone d'un caddie d'achat"
@@ -174,9 +174,9 @@ export default function Home({ ifMobile }) {
           <Gameplay
             gameplayImage='images/howToPlayInstallation.png'
             numberShadow='02'
-            title='Installation'          
+            title='Installation'
             text='Une fois GTA V installé, vous devrez procéder à l’installation de FiveM qui est la plateforme permettant d’accéder à notre serveur.'
-            shortText='Installez FiveM pour accéder au serveur.'         
+            shortText='Installez FiveM pour accéder au serveur.'
             buttonIcon='assets/download.svg'
             buttonTitle='télécharger'
             iconAlt="Icone d'un nuage avec une flèche"
@@ -184,13 +184,14 @@ export default function Home({ ifMobile }) {
           <Gameplay
             gameplayImage='images/howToPlayConnexion.png'
             numberShadow='03'
-            title='Connexion'          
+            title='Connexion'
             text='Une fois FiveM installé, ouvrez le et appuyez sur jouer puis recherchez Tryade. En cas de problème contactez nous sur Discord'
-            shortText='Ouvrez FiveM et recherchez “Tryade”'         
+            shortText='Ouvrez FiveM et recherchez “Tryade”'
             buttonIcon='assets/controller.svg'
             buttonTitle='joeur'
             iconAlt="Icone d'une manette de jeu"
           />
+
         </section>
 
         <section className='networkSection page'>
@@ -198,21 +199,37 @@ export default function Home({ ifMobile }) {
             mainTitle='Nos réseaux'
             shadowTitle='NETWORK'
           />
-          <article className='lighterBackgroundColor'>
-            <RoundLogo
-              imageSrc={'./assets/twitter.svg'}
+          <div className='articleContainer'>
+
+            <NetworkContainer
+              src='assets/twitter.svg'
               backgroundColorClass='backgroundColorClassSecondaryColor'
-              alt='Twitter'
+              alternatifText='Icone de Twitter'
+              networkTitle='Twitter'
+              networkLink='@TryadeRP'
             />
-            <div>
-              <h3>Twitter</h3>
-              <h3>@TryadeRP</h3>
-              <Button title='Visiter' />
-            </div>
-          </article>
-          <article></article>
-          <article></article>
-          <article></article>
+            <NetworkContainer
+              src='assets/tiktok.svg'
+              backgroundColorClass='backgroundColorClassSecondaryColor'
+              alternatifText='Icone de Tiktok'
+              networkTitle='Tiktok'
+              networkLink='@tryaderp'
+            />
+            <NetworkContainer
+              src='assets/youtube.svg'
+              backgroundColorClass='backgroundColorClassSecondaryColor'
+              alternatifText='Icone de Youtube'
+              networkTitle='Youtube'
+              networkLink='@TryadeRP'
+            />
+            <NetworkContainer
+              src='assets/discordBlack.svg'
+              backgroundColorClass='backgroundColorClassSecondaryColor'
+              alternatifText='Icone de Discord'
+              networkTitle='Discord'
+              networkLink='Tryade - RolePlay'
+            />
+          </div>
         </section>
       </main>
     </>
