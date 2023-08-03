@@ -127,24 +127,29 @@ export default function Home({ ifMobile }) {
               <Button title='Voir toutes nos mises à jour' />
             </Link>
           </div>
+          <div className='articleContainer'>
+            {status === 'loading' ? (
+              <p>Chargement en cours...</p>
+            ) : status === 'error' ? (
+              <p>Erreur : Impossible de récupérer les données.</p>
+            ) : (
+              <>
+                {data
+                  .sort((a, b) => b.id - a.id)
+                  .slice(0, 3)
+                  .map((update) => (
+                    <Update
+                      key={update.id}
+                      updateTitle={update.sectionTitle}
+                      updateVersion={update.version}
+                      updateText={update.details[0].content}
+                      updateThumbnail={update.urlBanner}
+                    />
+                  ))}
+              </>
+            )}
+          </div>
 
-          {status === 'loading' ? (
-            <p>Chargement en cours...</p>
-          ) : status === 'error' ? (
-            <p>Erreur : Impossible de récupérer les données.</p>
-          ) : (
-            <>
-              {data.map((update) => (
-                <Update
-                  key={update.id}
-                  updateTitle={update.sectionTitle}
-                  updateVersion={update.version}
-                  updateText={update.details[0].content}
-                  updateThumbnail={update.urlBanner}
-                />
-              ))}
-            </>
-          )}
         </section>
 
         <section
