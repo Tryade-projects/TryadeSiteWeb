@@ -14,16 +14,15 @@
   & section:first-child {
     background-color: transparent;
   }
-
-  section {
+  
+  section:nth-child(n+2) {
     background-color: $tertiaryColor;
-    justify-content: flex-start;
     align-items: flex-start;
+    justify-content: flex-start;
     div.headerSection {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
       row-gap: 25px;
       @include large {
         flex-direction: row;
@@ -32,6 +31,13 @@
         row-gap: 0;
         height: 100px;
       }
+    }
+    div.articleContainer{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 40px;
     }
   }
 
