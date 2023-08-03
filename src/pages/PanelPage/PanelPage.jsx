@@ -19,6 +19,13 @@ const PanelPage = () => {
     ) : (
       <h1>Streameurs</h1>
     );
+
+  const selectTextButtonToDisplay =
+    active === 1
+      ? 'Ajouter une section'
+      : active === 2
+      ? 'Ajouter un patchnote'
+      : 'Ajouter un streameur';
   return (
     <main className='page'>
       <div className='titleButtonContainer'>
@@ -26,7 +33,7 @@ const PanelPage = () => {
           mainTitle='Panel Gestion'
           shadowTitle='ADMINISTRATION'
         />
-        <Button title='Ajoutez une section' />
+        <Button title={selectTextButtonToDisplay} />
       </div>
       <div className='panelPageContent'>
         <aside className='panelPageContentAside'>
