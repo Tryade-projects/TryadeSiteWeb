@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -13,12 +13,36 @@ const cache = createCache({
   prepend: true,
 });
 
-const ControlledAccordion = ({
-  expanded,
-  handleChange,
+const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
+  console.log({ rulesSectionData });
+  const [data, setData] = useState(rulesSectionData);
+  console.log({ data });
 
-  rulesSectionData,
-}) => {
+  const updateArrayItemKey = (array, index, key, value) => {
+    return array.map((item, i) =>
+      i === index ? { ...item, [key]: value } : item
+    );
+  };
+  const handleRuleValueChange = (index, key, value) => {
+    // Copiez l'objet 'data' pour éviter de modifier l'objet d'origine directement
+    const newData = { ...data };
+
+    // Copiez le tableau 'rules' pour éviter de modifier le tableau d'origine directement
+    const newRules = [...newData.rules];
+
+    // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
+    const updatedRule = updateArrayItemKey(newRules, index, key, value);
+
+    // Mettez à jour le tableau 'rules' dans la copie de 'data'
+    newData.rules = updatedRule;
+
+    // Mettez à jour l'état avec les nouvelles données
+    setData(newData);
+  };
+
+  useEffect(() => {
+    setData(rulesSectionData);
+  }, [expanded, rulesSectionData]);
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
@@ -60,6 +84,13 @@ const ControlledAccordion = ({
                   <input
                     className='input'
                     type='text'
+                    value={data.sectionTitle}
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        sectionTitle: e.target.value,
+                      });
+                    }}
                   />
                 </div>
                 <div className='columnContainer'>
@@ -67,6 +98,13 @@ const ControlledAccordion = ({
                   <input
                     className='input'
                     type='text'
+                    value={data.urlBanner}
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        urlBanner: e.target.value,
+                      });
+                    }}
                   />
                 </div>
               </div>
@@ -76,47 +114,52 @@ const ControlledAccordion = ({
                   <input
                     className=' inputColor'
                     type='color'
+                    value={data.colorLine}
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        colorLine: e.target.value,
+                      });
+                    }}
                   />
-                  <span className='colorPreview'>color</span>
+                  <span className='colorPreview'>{data.colorLine}</span>
                 </div>
               </div>
               <div className='rulesFormContainer sectionWrap'>
-                <div className='ruleFormContainer columnContainer'>
-                  <label className='label'>
-                    Règle 1 : Titre de la règle
-                    <button>
-                      <img
-                        src='/assets/trash.svg'
-                        alt='supprimer regle'
-                        className='trashIcon'
-                      />
-                    </button>
-                  </label>
-                  <input
-                    className='input'
-                    type='text'
-                  />
-                  <label className='label'>Règle 1 : Contenu de la règle</label>
-                  <textarea className='input textArea' />
-                </div>
-                <div className='ruleFormContainer columnContainer'>
-                  <label className='label'>
-                    Règle 1 : Titre de la règle
-                    <button>
-                      <img
-                        src='/assets/trash.svg'
-                        alt='supprimer regle'
-                        className='trashIcon'
-                      />
-                    </button>
-                  </label>
-                  <input
-                    className='input'
-                    type='text'
-                  />
-                  <label className='label'>Règle 1 : Contenu de la règle</label>
-                  <textarea className='input textArea' />
-                </div>
+                {data.rules.map((rule, i) => (
+                  <div
+                    className='ruleFormContainer columnContainer'
+                    key={rule.id}>
+                    <label className='label'>
+                      Règle {i + 1} : Titre de la règle
+                      <button>
+                        <img
+                          src='/assets/trash.svg'
+                          alt='supprimer regle'
+                          className='trashIcon'
+                        />
+                      </button>
+                    </label>
+                    <input
+                      className='input'
+                      type='text'
+                      value={rule.title}
+                      onChange={(e) =>
+                        handleRuleValueChange(i, 'title', e.target.value)
+                      }
+                    />
+                    <label className='label'>
+                      Règle {i + 1} : Contenu de la règle
+                    </label>
+                    <textarea
+                      className='input textArea'
+                      value={rule.text}
+                      onChange={(e) =>
+                        handleRuleValueChange(i, 'text', e.target.value)
+                      }
+                    />
+                  </div>
+                ))}
               </div>
               <button className='addRules'>
                 + Ajouter une règle supplémentaire
