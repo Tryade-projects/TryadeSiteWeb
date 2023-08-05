@@ -9,9 +9,14 @@ const fetchRulesSections = async ({ pageParam = 0 }) => {
   }
 };
 
+const fetchRules = async () => {
+  const data = await fetchData('/mockedData/rules.json');
+  return data;
+};
+
 const fetchUpdates = async () => {
   const data = await fetchData('/mockedData/updates.json');
   return data;
 };
 
-export { fetchRulesSections, fetchUpdates };
+export { fetchRulesSections, fetchRules, fetchUpdates };

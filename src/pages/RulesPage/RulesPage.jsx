@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import SectionContent from '../../components/SectionContent/SectionContent';
-import useRulesQuery from '../../hooks/useRulesQuery';
+import useRulesSectionQuery from '../../hooks/useRulesSectionQuery';
 
 const RulesPage = () => {
   const {
@@ -13,7 +13,7 @@ const RulesPage = () => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useRulesQuery();
+  } = useRulesSectionQuery();
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -40,7 +40,7 @@ const RulesPage = () => {
         <p>Erreur : Impossible de récupérer les données.</p>
       ) : (
         <>
-          {data.pages.map((page, index) => (
+          {data?.pages.map((page, index) => (
             <React.Fragment key={index}>
               {page.map((section, sectionIndex) => (
                 <SectionContent
