@@ -1,0 +1,68 @@
+.MuiAccordion-root {
+  background-color: $senaryColor;
+  color: white;
+
+  letter-spacing: 1px;
+  min-height: 70px;
+  border-radius: 10px !important;
+  overflow: hidden;
+
+  .MuiAccordionSummary-root {
+    display: flex;
+    height: 100%;
+    min-height: 70px;
+    .MuiSvgIcon-root {
+      font-size: 20px;
+      color: white;
+      font-size: 40px;
+    }
+  }
+}
+
+// expanded
+.Mui-expanded {
+  margin: 0 !important;
+  height: 756px;
+  overflow-y: auto;
+  position: relative;
+  .MuiAccordionSummary-root {
+    display: none;
+  }
+  .MuiCollapse-root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    height: 150%;
+    .MuiAccordionDetails-root {
+      height: 150%;
+      position: relative;
+      // width: 100%;
+    }
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  button {
+    position: relative;
+    &:hover {
+      .tooltip {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.titleAndURLContainer {
+  display: flex;
+  gap: 5rem;
+  .columnContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+}

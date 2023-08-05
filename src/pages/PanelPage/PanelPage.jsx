@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
+import RulesForm from '../../components/RulesForm/RulesForm';
+import PatchnotesForm from '../../components/PatchnotesForm/PatchnotesForm';
+import StreameursForm from '../../components/StreameursForm/StreameursForm';
 
 const PanelPage = () => {
   const [active, setActive] = useState(1);
@@ -13,11 +16,11 @@ const PanelPage = () => {
 
   const selectSectionToDisplay =
     active === 1 ? (
-      <h1>Reglement</h1>
+      <RulesForm />
     ) : active === 2 ? (
-      <h1>Patchnotes</h1>
+      <PatchnotesForm />
     ) : (
-      <h1>Streameurs</h1>
+      <StreameursForm />
     );
 
   const selectTextButtonToDisplay =

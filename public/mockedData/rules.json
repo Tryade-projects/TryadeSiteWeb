@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "sectionTitle": "réglement discord",
+    "sectionTitle": "Réglement Discord",
     "urlBanner": "/images/bannerDiscordRules.png",
     "colorLine": "#6badea",
     "rules": [
@@ -33,7 +33,7 @@
   },
   {
     "id": "2",
-    "sectionTitle": "lexique roleplay",
+    "sectionTitle": "Lexique Roleplay",
     "urlBanner": "/images/bannerLexiqueRules.png",
     "colorLine": "#E9C24B",
     "rules": [
@@ -65,7 +65,7 @@
   },
   {
     "id": "3",
-    "sectionTitle": "réglement général",
+    "sectionTitle": "Réglement Général",
     "urlBanner": "/images/bannerGeneralRules.png",
     "colorLine": "#35E8BC",
     "rules": [
@@ -97,7 +97,7 @@
   },
   {
     "id": "4",
-    "sectionTitle": "réglement illégal",
+    "sectionTitle": "Réglement Illégal",
     "urlBanner": "/images/bannerIllegalRules.png",
     "colorLine": "#EB5656",
     "rules": [
