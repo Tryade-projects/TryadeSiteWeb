@@ -40,7 +40,7 @@ const RulesPage = () => {
         <p>Erreur : Impossible de récupérer les données.</p>
       ) : (
         <>
-          {data.pages.map((page, index) => (
+          {data?.pages.map((page, index) => (
             <React.Fragment key={index}>
               {page.map((section, sectionIndex) => (
                 <SectionContent

@@ -30,6 +30,13 @@ const ControlledAccordion = ({
             aria-controls='panel1bh-content'
             id='panel1bh-header'>
             {rulesSectionData.sectionTitle}
+            <button className='buttonTrash'>
+              <img
+                src='/assets/trash.svg'
+                alt='supprimer regle'
+                className='trashIcon'
+              />
+            </button>
           </AccordionSummary>
           <AccordionDetails>
             <div className='buttonsContainer'>
@@ -63,40 +70,57 @@ const ControlledAccordion = ({
                   />
                 </div>
               </div>
-              <div className='colorContainer'>
+              <div className='colorContainer columnContainer'>
                 <label className='label'>Couleur d&apos;accentuation</label>
-                <input
-                  className='input'
-                  type='color'
-                />
+                <div className='inputColorContainer'>
+                  <input
+                    className=' inputColor'
+                    type='color'
+                  />
+                  <span className='colorPreview'>color</span>
+                </div>
               </div>
-              <div className='rulesFormContainer'>
-                <div className='ruleFormContainer'>
-                  <label className='label'>Règle 1 : Titre de la règle</label>
+              <div className='rulesFormContainer sectionWrap'>
+                <div className='ruleFormContainer columnContainer'>
+                  <label className='label'>
+                    Règle 1 : Titre de la règle
+                    <button>
+                      <img
+                        src='/assets/trash.svg'
+                        alt='supprimer regle'
+                        className='trashIcon'
+                      />
+                    </button>
+                  </label>
                   <input
                     className='input'
                     type='text'
                   />
                   <label className='label'>Règle 1 : Contenu de la règle</label>
-                  <input
-                    className='input'
-                    type='text'
-                  />
+                  <textarea className='input textArea' />
                 </div>
-                <div className='ruleFormContainer'>
-                  <label className='label'>Règle 1 : Titre de la règle</label>
+                <div className='ruleFormContainer columnContainer'>
+                  <label className='label'>
+                    Règle 1 : Titre de la règle
+                    <button>
+                      <img
+                        src='/assets/trash.svg'
+                        alt='supprimer regle'
+                        className='trashIcon'
+                      />
+                    </button>
+                  </label>
                   <input
                     className='input'
                     type='text'
                   />
                   <label className='label'>Règle 1 : Contenu de la règle</label>
-                  <input
-                    className='input'
-                    type='text'
-                  />
+                  <textarea className='input textArea' />
                 </div>
               </div>
-              <button className='button'>Ajouter une règle</button>
+              <button className='addRules'>
+                + Ajouter une règle supplémentaire
+              </button>
             </form>
           </AccordionDetails>
         </Accordion>
