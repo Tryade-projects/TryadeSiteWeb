@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { fetchRules } from '../../queries/fetchAPI';
-import { useQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
 import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
-
-const QUERY_KEY_RULES = ['rules'];
+import useRulesSectionQuery from '../../hooks/useRulesSectionQuery';
 
 const RulesForm = () => {
-  const { data, status } = useQuery({
-    queryKey: QUERY_KEY_RULES,
-    queryFn: fetchRules,
-  });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useRulesSectionQuery();
   console.log({ data });
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
 
   const [expanded, setExpanded] = useState(null);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div className='rulesForm'>
@@ -26,14 +38,20 @@ const RulesForm = () => {
         <p>Erreur : Impossible de récupérer les données.</p>
       ) : (
         <>
-          {data.map((rulesSectionData) => (
-            <ControlledAccordion
-              key={rulesSectionData.id}
-              expanded={expanded}
-              handleChange={handleChange}
-              rulesSectionData={rulesSectionData}
-            />
+          {data?.pages.map((page, index) => (
+            <React.Fragment key={index}>
+              {page.map((section, sectionIndex) => (
+                <ControlledAccordion
+                  key={`${index}-${sectionIndex}`}
+                  expanded={expanded}
+                  handleChange={handleChange}
+                  rulesSectionData={section}
+                />
+              ))}
+            </React.Fragment>
           ))}
+          <div ref={ref}></div>
+          {isFetching && !isFetchingNextPage && <div>Chargement...</div>}
         </>
       )}
     </div>
