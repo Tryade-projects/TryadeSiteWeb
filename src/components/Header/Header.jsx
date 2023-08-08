@@ -3,6 +3,8 @@ import Button from '../Button/Button';
 import HeaderLogo from '../HeaderLogo/HeaderLogo';
 import HeaderBurger from '../HeaderBurger/HeaderBurger';
 import Navigation from '../Navigation/Navigation';
+import { useScroll } from '../../utils/scrollUtils';
+
 
 /**
  *
@@ -11,10 +13,14 @@ import Navigation from '../Navigation/Navigation';
  * @param {function} props.setModalIsOpen - function to set the state of the burger
  * @returns {JSX.Element}
  */
+
+
+
 export default function Header({ modalIsOpen, setModalIsOpen }) {
+  const scrolled = useScroll();
   return (
     <div className='headerContainer'>
-      <header className='header'>
+      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <HeaderLogo />
         <Navigation />
         <div className='headerButtonsContainer'>
