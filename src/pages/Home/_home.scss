@@ -7,9 +7,9 @@
 
 //Main CSS of the page
 .home {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: $tertiaryColor;
 
   & section:first-child {
     background-color: transparent;
@@ -46,6 +46,25 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+  }
+
+  article.titleArticle{
+    height: 35%;
+    button{
+      border-color: $secondaryColor;
+    }
+    @include large{
+      height: 70%;
+      max-height: 300px;
+    }
+  }
+
+  article.argumentsArticle{
+    height: 100%;
+    @include large{
+      height: 50%;
+    }
   }
 }
 
@@ -54,16 +73,22 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  min-height: 500px;
+  padding-top: 35px;
+  row-gap: 40px;
+  min-height: 620px;
 
   @include large {
     flex-direction: row;
     align-items: center;
     gap: 18vw;
+    min-height: 0;
+    padding-top: 60px;
   }
 
   .titleArticle {
     height: 35%;
+    row-gap: 15px;
+
 
     .discordText {
       max-width: 500px;
@@ -86,6 +111,10 @@
 
     @include large {
       height: 80%;
+    }
+
+    .title{
+      margin-bottom: 20px;
     }
 
     .argumentContainer {
@@ -145,16 +174,21 @@
     @include large {
       font-size: 16px;
       letter-spacing: 1.68px;
+      margin-top: 20px;
     }
   }
 
   .goToTheNextSectionButton {
-    display: flex;
     align-items: center;
     color: $primaryColor;
     font-size: 14px;
     letter-spacing: 0.49px;
     gap: 16px;
+    display: none;
+    @include large{
+      display: flex;
+
+    }
 
     img {
       width: 16px;
