@@ -2,7 +2,7 @@
 .homeBackground {
   min-height: calc(500px + $headerHeightMobile);
   background-image: url('/images/homeBackground.jpg');
-  z-index: -1;
+  z-index: 0;
 }
 
 //Main CSS of the page
