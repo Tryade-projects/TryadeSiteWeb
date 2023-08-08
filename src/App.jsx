@@ -31,6 +31,7 @@ function App() {
   const [ifMobile, setIfMobile] = useState(
     window.innerWidth < breakpoints.large
   );
+
   // if the screen width is more than 992px, the modal is closed
   useEffect(() => {
     const screenWidthThreshold = breakpoints.large;

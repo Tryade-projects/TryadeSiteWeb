@@ -2,7 +2,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchRulesSections } from '../queries/fetchAPI';
 
-const QUERY_KEY_RULES_SECTION = ['rules_section'];
+const QUERY_KEY_RULES_SECTION = ['rulesSectionsPages'];
 
 const useRulesSectionQuery = () => {
   const {

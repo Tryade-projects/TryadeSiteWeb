@@ -13,10 +13,16 @@ const cache = createCache({
   prepend: true,
 });
 
+/**
+ *
+ * @param {object} props
+ * @param {boolean} props.expanded - The state of the accordion
+ * @param {function} props.handleChange - The function to set the state of the accordion
+ * @param {object} props.rulesSectionData - The data of the rules section
+ * @returns
+ */
 const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
-  console.log({ rulesSectionData });
   const [data, setData] = useState(rulesSectionData);
-  console.log({ data });
 
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
@@ -161,10 +167,10 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   </div>
                 ))}
               </div>
-              <button className='addRules'>
-                + Ajouter une règle supplémentaire
-              </button>
             </form>
+            <button className='addRules'>
+              + Ajouter une règle supplémentaire
+            </button>
           </AccordionDetails>
         </Accordion>
       </CacheProvider>

@@ -5,8 +5,18 @@ import ButtonAside from '../../components/ButtonAside/ButtonAside';
 import RulesForm from '../../components/RulesForm/RulesForm';
 import PatchnotesForm from '../../components/PatchnotesForm/PatchnotesForm';
 import StreameursForm from '../../components/StreameursForm/StreameursForm';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { fetchRules } from '../../queries/fetchAPI';
+
+const RULES_QUERY_KEY = 'rulesSections';
 
 const PanelPage = () => {
+  const { data: rulesSections, status } = useQuery({
+    queryKey: [RULES_QUERY_KEY],
+    queryFn: fetchRules,
+  });
+  const queryClient = useQueryClient();
+
   const [active, setActive] = useState(1);
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
@@ -14,9 +24,19 @@ const PanelPage = () => {
     { id: 3, name: 'Streameurs' },
   ];
 
+  function selectDataToDisplay() {
+    if (active === 1) {
+      return 'rules_section';
+    } else if (active === 2) {
+      return 'patchnotes_section';
+    } else if (active === 3) {
+      return 'streameurs_section';
+    }
+  }
+
   const selectSectionToDisplay =
     active === 1 ? (
-      <RulesForm />
+      <RulesForm rulesSections={rulesSections} />
     ) : active === 2 ? (
       <PatchnotesForm />
     ) : (
@@ -29,37 +49,71 @@ const PanelPage = () => {
       : active === 2
       ? 'Ajouter un patchnote'
       : 'Ajouter un streameur';
+
+  function selectFunctionToUse() {
+    if (active === 1) {
+      addRules();
+    } else if (active === 2) {
+      addPatchnote();
+    } else if (active === 3) {
+      addStreameur();
+    }
+  }
+
+  function addRules() {
+    queryClient.setQueryData([RULES_QUERY_KEY], (oldData) => [
+      ...oldData,
+      {
+        id: oldData.length + 1,
+        sectionTitle: 'Nouvelle section',
+        colorLine: '#000000',
+        rules: [],
+      },
+    ]);
+  }
+
   return (
     <main className='page'>
-      <div className='titleButtonContainer'>
-        <Title
-          mainTitle='Panel Gestion'
-          shadowTitle='ADMINISTRATION'
-        />
-        <Button title={selectTextButtonToDisplay} />
-      </div>
-      <div className='panelPageContent'>
-        <aside className='panelPageContentAside'>
-          <ButtonAside
-            text='Vous êtes connectés: '
-            userName='Zoral'
-          />
-
-          <nav className='panelPageContentAsideNav'>
-            {CATEGORIES.map((categorie) => (
+      {status === 'loading' ? (
+        <p>Chargement en cours...</p>
+      ) : status === 'error' ? (
+        <p>Erreur : Impossible de récupérer les données.</p>
+      ) : (
+        <>
+          <div className='titleButtonContainer'>
+            <Title
+              mainTitle='Panel Gestion'
+              shadowTitle='ADMINISTRATION'
+            />
+            <Button
+              title={selectTextButtonToDisplay}
+              onClick={selectFunctionToUse}
+            />
+          </div>
+          <div className='panelPageContent'>
+            <aside className='panelPageContentAside'>
               <ButtonAside
-                key={categorie.id}
-                text={categorie.name}
-                active={active === categorie.id}
-                setActive={() => setActive(categorie.id)}
+                text='Vous êtes connectés: '
+                userName='Zoral'
               />
-            ))}
-          </nav>
-        </aside>
-        <section className='panelPageContentSection'>
-          {selectSectionToDisplay}
-        </section>
-      </div>
+
+              <nav className='panelPageContentAsideNav'>
+                {CATEGORIES.map((categorie) => (
+                  <ButtonAside
+                    key={categorie.id}
+                    text={categorie.name}
+                    active={active === categorie.id}
+                    setActive={() => setActive(categorie.id)}
+                  />
+                ))}
+              </nav>
+            </aside>
+            <section className='panelPageContentSection'>
+              {selectSectionToDisplay}
+            </section>
+          </div>
+        </>
+      )}
     </main>
   );
 };
