@@ -14,8 +14,11 @@ const PanelPage = () => {
   const { data: rulesSections, status } = useQuery({
     queryKey: [RULES_QUERY_KEY],
     queryFn: fetchRules,
+
+    staleTime: 1000 * 60 * 5, // 5 minutes
   });
   const queryClient = useQueryClient();
+  console.log({ rulesSections });
 
   const [active, setActive] = useState(1);
   const CATEGORIES = [
