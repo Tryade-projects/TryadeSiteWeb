@@ -4,24 +4,35 @@ import React from 'react';
  *
  * @param {object} props
  * @param {string} props.text - text of the button
- * @param {boolean=} props.active - if the button is active or not
- * @param {import('react').MouseEventHandler<HTMLButtonElement>=} props.setActive - function to set the button active
+ * @param {boolean=} props.activeCategories - if the button is active or not
+ * @param {import('react').MouseEventHandler<HTMLButtonElement>=} props.setActiveCategories - function to set the button active
  * @param {string=} props.userName - name of the user - optional
  * @returns {JSX.Element}
  */
-const ButtonAside = ({ text, active = false, setActive, userName }) => {
+const ButtonAside = ({
+  text,
+  activeCategories = false,
+  setActiveCategories,
+  userName,
+}) => {
   /**
    *  Return the path of the image corresponding to the text and the active state
    * @param {string} text - text of the button
-   * @param {boolean} active - if the button is active or not
+   * @param {boolean} activeCategories - if the button is active or not
    * @returns {string} - path of the image
    */
-  const displayIcon = (text, active) => {
+  const displayIcon = (text, activeCategories) => {
     // Mapping des chemins d'images pour chaque état (active ou non)
     const imagePaths = {
-      Règlement: active ? '/assets/shieldWhite.svg' : '/assets/shieldGrey.svg',
-      Patchnotes: active ? '/assets/rulesActive.svg' : '/assets/rulesGrey.svg',
-      Streameurs: active ? '/assets/photoWhite.svg' : '/assets/photo.svg',
+      Règlement: activeCategories
+        ? '/assets/shieldWhite.svg'
+        : '/assets/shieldGrey.svg',
+      Patchnotes: activeCategories
+        ? '/assets/rulesActive.svg'
+        : '/assets/rulesGrey.svg',
+      Streameurs: activeCategories
+        ? '/assets/photoWhite.svg'
+        : '/assets/photo.svg',
     };
 
     // Retourne le chemin d'image correspondant au texte et à l'état actif
@@ -32,10 +43,10 @@ const ButtonAside = ({ text, active = false, setActive, userName }) => {
     <button
       className={
         (userName ? 'buttonAside buttonAsideConnected' : 'buttonAside') +
-        (active ? ' buttonAsideActive' : '')
+        (activeCategories ? ' buttonAsideActive' : '')
       }
       type='button'
-      onClick={setActive}>
+      onClick={setActiveCategories}>
       {userName ? (
         <>
           <div className='buttonAsideConnectedCircle '>
@@ -51,7 +62,7 @@ const ButtonAside = ({ text, active = false, setActive, userName }) => {
         <>
           <div className='buttonAsideNavIcon'>
             <img
-              src={displayIcon(text, active)}
+              src={displayIcon(text, activeCategories)}
               alt={text}
             />
           </div>

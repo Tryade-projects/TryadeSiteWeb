@@ -5,22 +5,12 @@ import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
  *
  * @param {object} props
  * @param {array} props.rulesSections- The data of the rules sections
+ * @param {boolean} props.expanded - The state of the accordion
+ * @param {function} props.handleChange - The function to set the state of the accordion
  * @returns {JSX.Element}
  */
-const RulesForm = ({ rulesSections }) => {
-  console.log({ rulesSections });
-  const [expanded, setExpanded] = useState(false);
-  /**
-   * The handleChange function is used to toggle the expansion state of a panel in a React component.
-   * @param {boolean} panel - The panel to expand
-   * @returns {function} - The function to set the state of the expanded panel
-   */
-  const handleChange =
-    (panel) =>
-    (/** @type { MouseEvent } */ _event, /** @type {boolean} */ isExpanded) => {
-      setExpanded(isExpanded ? panel : false);
-    };
-
+const RulesForm = ({ rulesSections, expanded, handleChange }) => {
+  console.log({ rulesSections, expanded, handleChange });
   return (
     <div className='rulesForm'>
       {rulesSections.map((rulesSection, index) => (

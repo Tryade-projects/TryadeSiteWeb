@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -24,6 +24,7 @@ const cache = createCache({
  */
 const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   const [data, setData] = useState(rulesSectionData);
+  const accordionRef = useRef(null);
 
   const deleteRule = useDeleteRule();
 
@@ -51,13 +52,28 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
 
   useEffect(() => {
     setData(rulesSectionData);
+  }, [rulesSectionData]);
+
+  const handleButtonClick = (goTo) => {
+    if (goTo.current) {
+      const goToRect = goTo.current.getBoundingClientRect();
+      const offset = goToRect.top + window.scrollY - 123;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (expanded === rulesSectionData._id) {
+      handleButtonClick(accordionRef);
+    }
   }, [expanded, rulesSectionData]);
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
         <Accordion
           expanded={expanded === rulesSectionData._id}
-          onChange={handleChange(rulesSectionData._id)}>
+          onChange={handleChange(rulesSectionData._id)}
+          ref={expanded ? accordionRef : null}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1bh-content'
