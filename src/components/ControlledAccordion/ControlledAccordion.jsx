@@ -55,8 +55,8 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
         <Accordion
-          expanded={expanded === rulesSectionData.id}
-          onChange={handleChange(rulesSectionData.id)}>
+          expanded={expanded === rulesSectionData._id}
+          onChange={handleChange(rulesSectionData._id)}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1bh-content'
@@ -72,7 +72,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 );
                 queryClient.setQueryData(['rulesSections'], (oldData) =>
                   oldData.filter(
-                    (rulesSection) => rulesSection.id !== rulesSectionData.id
+                    (rulesSection) => rulesSection._id !== rulesSectionData._id
                   )
                 );
               }}>
@@ -150,7 +150,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 {data.rules.map((rule, i) => (
                   <div
                     className='ruleFormContainer columnContainer'
-                    key={rule.id}>
+                    key={rule._id}>
                     <label className='label'>
                       Règle {i + 1} : Titre de la règle
                       <button>

@@ -8,6 +8,7 @@ import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
  * @returns {JSX.Element}
  */
 const RulesForm = ({ rulesSections }) => {
+  console.log({ rulesSections });
   const [expanded, setExpanded] = useState(false);
   /**
    * The handleChange function is used to toggle the expansion state of a panel in a React component.
@@ -24,7 +25,7 @@ const RulesForm = ({ rulesSections }) => {
     <div className='rulesForm'>
       {rulesSections.map((rulesSection, index) => (
         <ControlledAccordion
-          key={`${index} ${rulesSection.id}`}
+          key={`${index} ${rulesSection._id}`}
           expanded={expanded}
           handleChange={handleChange}
           rulesSectionData={rulesSection}

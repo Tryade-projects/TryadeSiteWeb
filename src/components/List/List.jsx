@@ -15,7 +15,7 @@ const List = ({ rules, colorLine }) => {
       {rules.map((rule) => {
         return (
           <ListTitle
-            key={rule.id}
+            key={rule._id}
             textBackground={rule.textBackground}
             colorLine={colorLine}
             title={rule.title}
