@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import { useQueryClient } from '@tanstack/react-query';
+import { useDeleteRule } from '../../hooks/useDeleteRule';
 
 const cache = createCache({
   key: 'css',
@@ -23,8 +23,9 @@ const cache = createCache({
  * @returns
  */
 const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
-  const queryClient = useQueryClient();
   const [data, setData] = useState(rulesSectionData);
+
+  const deleteRule = useDeleteRule();
 
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
@@ -64,18 +65,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
             {rulesSectionData.sectionTitle}
             <button
               className='buttonTrash'
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.confirm(
-                  'Êtes-vous sûr de vouloir supprimer cette section ?'
-                );
-                queryClient.setQueryData(['rulesSections'], (oldData) =>
-                  oldData.filter(
-                    (rulesSection) => rulesSection._id !== rulesSectionData._id
-                  )
-                );
-              }}>
+              onClick={deleteRule(rulesSectionData)}>
               <img
                 src='/assets/trash.svg'
                 alt='supprimer regle'
