@@ -14,9 +14,9 @@ const fetchRules = async () => {
   return data;
 };
 
-const fetchUpdates = async () => {
+async function fetchUpdates() {
   const data = await fetchData('/mockedData/updates.json');
   return data;
-};
+}
 
 export { fetchRulesSections, fetchRules, fetchUpdates };
