@@ -8,6 +8,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 const cache = createCache({
@@ -334,7 +335,21 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 ))}
               </div>
             </form>
-            <button className='addRules'>
+            <button
+              className='addRules'
+              onClick={() => {
+                setNewData({
+                  ...newData,
+                  rules: [
+                    ...newData.rules,
+                    {
+                      _id: uuidv4(),
+                      title: '',
+                      text: '',
+                    },
+                  ],
+                });
+              }}>
               + Ajouter une règle supplémentaire
             </button>
           </AccordionDetails>
