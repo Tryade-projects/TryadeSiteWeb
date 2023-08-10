@@ -7,8 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import { useDeleteRule } from '../../hooks/useDeleteRule';
-import { usePostOrUpdateRulesSection } from '../../hooks/usePostOrUpdateRulesSection';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 
 const cache = createCache({
   key: 'css',
@@ -24,13 +24,41 @@ const cache = createCache({
  * @returns
  */
 const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
+  // console.log({ expanded, handleChange, rulesSectionData });
   const [data, setData] = useState(rulesSectionData);
   const [newData, setNewData] = useState(rulesSectionData);
+  const [save, setSave] = useState(rulesSectionData.newSection ? false : true);
+
   const accordionRef = useRef(null);
 
-  const deleteRule = useDeleteRule();
-  const postOrUpdateRulesSection = usePostOrUpdateRulesSection();
+  const queryClient = useQueryClient();
 
+  const mutationPost = useMutation({
+    mutationFn: (newData) => {
+      return axios.post('http://localhost:5000/rulesSections', newData);
+    },
+  });
+
+  const mutationPut = useMutation({
+    /**
+     * The mutationFn function is used to update the data of a rules section in a React component.
+     * @param {object} newData
+     * @param {string} newData._id - The id of the rules section
+     * @returns  - The axios request
+     */
+    mutationFn: (newData) => {
+      return axios.put(
+        `http://localhost:5000/rulesSections/${newData._id}`,
+        newData
+      );
+    },
+  });
+
+  const mutationDelete = useMutation({
+    mutationFn: (id) => {
+      return axios.delete(`http://localhost:5000/rulesSections/${id}`);
+    },
+  });
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
       i === index ? { ...item, [key]: value } : item
@@ -58,6 +86,12 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
     setNewData(rulesSectionData);
   }, [rulesSectionData]);
 
+  useEffect(() => {
+    if (data !== newData || rulesSectionData.newSection) {
+      setSave(false);
+    }
+  }, [data, newData, rulesSectionData.newSection]);
+
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
       const goToRect = goTo.current.getBoundingClientRect();
@@ -71,14 +105,72 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
       handleButtonClick(accordionRef);
     }
   }, [expanded, rulesSectionData]);
+  // console.log(rulesSectionData.newSection, save);
+
+  function formatDataForPost() {
+    // eslint-disable-next-line no-unused-vars
+    const { newSection, _id, ...rest } = newData;
+    const restWithout_Id = rest.rules.map((rule) => {
+      // eslint-disable-next-line no-unused-vars
+      const { _id, ...rest } = rule;
+      return rest;
+    });
+    return { ...rest, rules: restWithout_Id };
+  }
+
+  useEffect(() => {
+    if (
+      mutationPost.isSuccess ||
+      mutationPut.isSuccess ||
+      mutationDelete.isSuccess
+    ) {
+      setTimeout(() => {
+        mutationDelete.reset();
+        mutationPost.reset();
+        mutationPut.reset();
+      }, 5000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mutationDelete.isSuccess, mutationPost.isSuccess, mutationPut.isSuccess]);
 
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
+        {mutationDelete.isLoading && <div>Suppression en cours...</div>}
+
+        {mutationDelete.isError && (
+          <div>Une erreur est survenue lors de la suppression</div>
+        )}
+
+        {mutationDelete.isSuccess && (
+          <div>La suppression a été effectuée avec succès</div>
+        )}
+
+        {mutationPost.isLoading && <div>Enregistrement en cours...</div>}
+
+        {mutationPost.isError && (
+          <div>Une erreur est survenue lors de l&apos;enregistrement</div>
+        )}
+
+        {mutationPost.isSuccess && (
+          <div>L&apos;enregistrement a été effectué avec succès</div>
+        )}
+
+        {mutationPut.isLoading && <div>Mise à jour en cours...</div>}
+
+        {mutationPut.isError && (
+          <div>Une erreur est survenue lors de la mise à jour</div>
+        )}
+
+        {mutationPut.isSuccess && (
+          <div>La mise à jour a été effectuée avec succès</div>
+        )}
+
         <Accordion
           expanded={expanded === rulesSectionData._id}
           onChange={handleChange(rulesSectionData._id)}
-          ref={expanded ? accordionRef : null}>
+          ref={expanded ? accordionRef : null}
+          className={!save ? 'notSave' : ''}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1bh-content'
@@ -86,7 +178,24 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
             {rulesSectionData.sectionTitle}
             <button
               className='buttonTrash'
-              onClick={deleteRule(rulesSectionData)}>
+              onClick={(e) => {
+                e.stopPropagation();
+
+                if (
+                  window.confirm(
+                    'Êtes-vous sûr de vouloir supprimer cette section ?'
+                  )
+                ) {
+                  if (!rulesSectionData.newSection) {
+                    mutationDelete.mutate(rulesSectionData._id);
+                  }
+                  queryClient.setQueriesData(['rulesSections'], (oldData) => {
+                    return oldData.filter(
+                      (section) => section._id !== rulesSectionData._id
+                    );
+                  });
+                }
+              }}>
               <img
                 src='/assets/trash.svg'
                 alt='supprimer regle'
@@ -94,20 +203,49 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
               />
             </button>
           </AccordionSummary>
+
           <AccordionDetails>
             <form className='form'>
               <div className='buttonsContainer'>
                 <button
                   type='submit'
-                  onClick={postOrUpdateRulesSection(newData)}>
+                  className='saveButton'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (rulesSectionData.newSection) {
+                      mutationPost.mutate(formatDataForPost());
+                    } else {
+                      mutationPut.mutate(newData);
+                    }
+                    setSave(true);
+                  }}
+                  disabled={
+                    save
+                      ? true
+                      : false || mutationPost.isLoading || mutationPut.isLoading
+                  }>
                   <img
-                    src='/assets/validation.svg'
+                    src={
+                      save
+                        ? '/assets/validation.svg'
+                        : '/assets/validationGreen.svg'
+                    }
                     alt='confirm'
                   />
                 </button>
-                <button>
+                <button
+                  type='button'
+                  className='cancelButton'
+                  onClick={() => {
+                    setNewData(data);
+                    handleChange(
+                      expanded === rulesSectionData._id
+                        ? ''
+                        : rulesSectionData._id
+                    )(null, !expanded);
+                  }}>
                   <img
-                    src='/assets/cancel.svg'
+                    src={save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'}
                     alt='cancel'
                   />
                 </button>
