@@ -29,6 +29,10 @@
   }
 }
 
+.notSave {
+  border: 1px solid $septenaryColor;
+}
+
 // expanded
 .Mui-expanded {
   margin: 0 !important;
@@ -68,6 +72,9 @@
         visibility: visible;
       }
     }
+  }
+  .saveButton:disabled {
+    cursor: not-allowed;
   }
 }
 

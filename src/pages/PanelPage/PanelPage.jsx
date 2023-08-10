@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
@@ -20,17 +21,17 @@ const PanelPage = () => {
   const queryClient = useQueryClient();
 
   const [activeCategories, setActiveCategories] = useState(1);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState('');
 
   /**
    * The handleChange function is used to toggle the expansion state of a panel in a React component.
-   * @param {boolean} panel - The panel to expand
+   * @param {string} panel - The panel to expand
    * @returns {function} - The function to set the state of the expanded panel
    */
   const handleChange =
     (panel) =>
     (/** @type { MouseEvent } */ _event, /** @type {boolean} */ isExpanded) => {
-      setExpanded(isExpanded ? panel : false);
+      setExpanded(isExpanded ? panel : '');
     };
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
@@ -70,7 +71,7 @@ const PanelPage = () => {
 
   function selectFunctionToUse() {
     if (activeCategories === 1) {
-      addRules();
+      addRulesSection();
     } else if (activeCategories === 2) {
       addPatchnote();
     } else if (activeCategories === 3) {
@@ -78,12 +79,21 @@ const PanelPage = () => {
     }
   }
 
-  function addRules() {
+  function addRulesSection() {
     const newSection = {
-      _id: rulesSections.length + 1,
+      _id: uuidv4(),
       sectionTitle: 'Nouvelle section',
+      urlBanner: 'test',
       colorLine: '#000000',
-      rules: [],
+      rules: [
+        {
+          _id: uuidv4(),
+          textBackground: 'Description de la règle',
+          title: 'Nouvelle règle',
+          text: 'Description de la règle',
+        },
+      ],
+      newSection: true,
     };
     queryClient.setQueryData([RULES_QUERY_KEY], (oldData) => [
       ...oldData,
