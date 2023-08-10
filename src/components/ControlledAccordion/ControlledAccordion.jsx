@@ -8,6 +8,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { useDeleteRule } from '../../hooks/useDeleteRule';
+import { usePostOrUpdateRulesSection } from '../../hooks/usePostOrUpdateRulesSection';
 
 const cache = createCache({
   key: 'css',
@@ -17,16 +18,18 @@ const cache = createCache({
 /**
  *
  * @param {object} props
- * @param {boolean} props.expanded - The state of the accordion
+ * @param {string} props.expanded - The state of the accordion
  * @param {function} props.handleChange - The function to set the state of the accordion
  * @param {object} props.rulesSectionData - The data of the rules section
  * @returns
  */
 const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   const [data, setData] = useState(rulesSectionData);
+  const [newData, setNewData] = useState(rulesSectionData);
   const accordionRef = useRef(null);
 
   const deleteRule = useDeleteRule();
+  const postOrUpdateRulesSection = usePostOrUpdateRulesSection();
 
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
@@ -35,23 +38,24 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   };
   const handleRuleValueChange = (index, key, value) => {
     // Copiez l'objet 'data' pour éviter de modifier l'objet d'origine directement
-    const newData = { ...data };
+    const newDataCopy = { ...newData };
 
     // Copiez le tableau 'rules' pour éviter de modifier le tableau d'origine directement
-    const newRules = [...newData.rules];
+    const newRules = [...newDataCopy.rules];
 
     // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
     const updatedRule = updateArrayItemKey(newRules, index, key, value);
 
     // Mettez à jour le tableau 'rules' dans la copie de 'data'
-    newData.rules = updatedRule;
+    newDataCopy.rules = updatedRule;
 
     // Mettez à jour l'état avec les nouvelles données
-    setData(newData);
+    setNewData(newDataCopy);
   };
 
   useEffect(() => {
     setData(rulesSectionData);
+    setNewData(rulesSectionData);
   }, [rulesSectionData]);
 
   const handleButtonClick = (goTo) => {
@@ -67,6 +71,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
       handleButtonClick(accordionRef);
     }
   }, [expanded, rulesSectionData]);
+
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
@@ -90,31 +95,33 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
             </button>
           </AccordionSummary>
           <AccordionDetails>
-            <div className='buttonsContainer'>
-              <button>
-                <img
-                  src='/assets/validation.svg'
-                  alt='confirm'
-                />
-              </button>
-              <button>
-                <img
-                  src='/assets/cancel.svg'
-                  alt='cancel'
-                />
-              </button>
-            </div>
             <form className='form'>
+              <div className='buttonsContainer'>
+                <button
+                  type='submit'
+                  onClick={postOrUpdateRulesSection(newData)}>
+                  <img
+                    src='/assets/validation.svg'
+                    alt='confirm'
+                  />
+                </button>
+                <button>
+                  <img
+                    src='/assets/cancel.svg'
+                    alt='cancel'
+                  />
+                </button>
+              </div>
               <div className='titleAndURLContainer'>
                 <div className='columnContainer'>
                   <label className='label'>Titre de la section</label>
                   <input
                     className='input'
                     type='text'
-                    value={data.sectionTitle}
+                    value={newData.sectionTitle}
                     onChange={(e) => {
-                      setData({
-                        ...data,
+                      setNewData({
+                        ...newData,
                         sectionTitle: e.target.value,
                       });
                     }}
@@ -125,10 +132,10 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   <input
                     className='input'
                     type='text'
-                    value={data.urlBanner}
+                    value={newData.urlBanner}
                     onChange={(e) => {
-                      setData({
-                        ...data,
+                      setNewData({
+                        ...newData,
                         urlBanner: e.target.value,
                       });
                     }}
@@ -141,10 +148,10 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   <input
                     className=' inputColor'
                     type='color'
-                    value={data.colorLine}
+                    value={newData.colorLine}
                     onChange={(e) => {
-                      setData({
-                        ...data,
+                      setNewData({
+                        ...newData,
                         colorLine: e.target.value,
                       });
                     }}
@@ -153,7 +160,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 </div>
               </div>
               <div className='rulesFormContainer sectionWrap'>
-                {data.rules.map((rule, i) => (
+                {newData.rules.map((rule, i) => (
                   <div
                     className='ruleFormContainer columnContainer'
                     key={rule._id}>
