@@ -28,6 +28,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   // console.log({ expanded, handleChange, rulesSectionData });
   const [data, setData] = useState(rulesSectionData);
   const [newData, setNewData] = useState(rulesSectionData);
+  console.log({ data, newData });
   const [save, setSave] = useState(rulesSectionData.newSection ? false : true);
 
   const accordionRef = useRef(null);
@@ -216,9 +217,19 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                     if (rulesSectionData.newSection) {
                       mutationPost.mutate(formatDataForPost());
                     } else {
+                      newData.rules.forEach((rule) => {
+                        if (rule._id.includes('-')) {
+                          delete rule._id;
+                        }
+                      });
                       mutationPut.mutate(newData);
                     }
+
                     setSave(true);
+
+                    //reset data
+                    setData(rulesSectionData);
+                    setNewData(rulesSectionData);
                   }}
                   disabled={
                     save
