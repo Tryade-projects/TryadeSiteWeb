@@ -81,13 +81,13 @@ const PanelPage = () => {
 
   function addRulesSection() {
     const newSection = {
-      _id: uuidv4(),
+      id: uuidv4(),
       sectionTitle: 'Nouvelle section',
       urlBanner: 'test',
       colorLine: '#000000',
       rules: [
         {
-          _id: uuidv4(),
+          id: uuidv4(),
           textBackground: 'Description de la règle',
           title: 'Nouvelle règle',
           text: 'Description de la règle',
@@ -100,7 +100,7 @@ const PanelPage = () => {
       newSection,
     ]);
 
-    setExpanded(newSection._id);
+    setExpanded(newSection.id);
   }
 
   return (

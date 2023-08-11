@@ -6,7 +6,7 @@ import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
  * @param {object} props
  * @param {array} props.rulesSections- The data of the rules sections
  * @param {string} props.expanded - The state of the accordion
- * @param {function} props.handleChange - The function to set the state of the accordion
+ * @param {Function} props.handleChange - The function to set the state of the accordion
  * @returns {JSX.Element}
  */
 const RulesForm = ({ rulesSections, expanded, handleChange }) => {
@@ -14,7 +14,7 @@ const RulesForm = ({ rulesSections, expanded, handleChange }) => {
     <div className='rulesForm'>
       {rulesSections.map((rulesSection, index) => (
         <ControlledAccordion
-          key={`${index} ${rulesSection._id}`}
+          key={`${index} ${rulesSection.id}`}
           expanded={expanded}
           handleChange={handleChange}
           rulesSectionData={rulesSection}
