@@ -4,24 +4,31 @@ import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
 /**
  *
  * @param {object} props
- * @param {array} props.rulesSections- The data of the rules sections
+ * @param {array} props.dataSections- The data of the sections
  * @param {string} props.expanded - The state of the accordion
  * @param {Function} props.handleChange - The function to set the state of the accordion
+ * @param {number} props.category - The category of the panel
  * @returns {JSX.Element}
  */
-const RulesForm = ({ rulesSections, expanded, handleChange }) => {
+const PanelFormContainer = ({
+  dataSections,
+  expanded,
+  handleChange,
+  category,
+}) => {
   return (
-    <div className='rulesForm'>
-      {rulesSections.map((rulesSection, index) => (
+    <div className='panelFormContainer'>
+      {dataSections.map((dataSection, index) => (
         <ControlledAccordion
-          key={`${index} ${rulesSection.id}`}
+          key={`${index} ${dataSection.id}`}
           expanded={expanded}
           handleChange={handleChange}
-          rulesSectionData={rulesSection}
+          dataSection={dataSection}
+          category={category}
         />
       ))}
     </div>
   );
 };
 
-export default RulesForm;
+export default PanelFormContainer;

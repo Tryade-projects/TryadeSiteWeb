@@ -1,7 +1,7 @@
 import fetchData from '../utils/fetchData';
 const PAGE_SIZE_RULES = 1;
 
-const fetchRulesSections = async ({ pageParam = 0 }) => {
+const fetchRulesSectionsPage = async ({ pageParam = 0 }) => {
   const data = await fetchData('http://localhost:5000/rulesSections');
   if (data) {
     const sectionIndex = pageParam * PAGE_SIZE_RULES;
@@ -9,14 +9,14 @@ const fetchRulesSections = async ({ pageParam = 0 }) => {
   }
 };
 
-const fetchRules = async () => {
+const fetchRulesSections = async () => {
   const data = await fetchData('http://localhost:5000/rulesSections');
   return data;
 };
 
-async function fetchUpdates() {
-  const data = await fetchData('/mockedData/updates.json');
+async function fetchUpdatesSections() {
+  const data = await fetchData('http://localhost:5000/updatesSections');
   return data;
 }
 
-export { fetchRulesSections, fetchRules, fetchUpdates };
+export { fetchRulesSectionsPage, fetchRulesSections, fetchUpdatesSections };

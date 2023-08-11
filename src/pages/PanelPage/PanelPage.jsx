@@ -3,21 +3,33 @@ import { v4 as uuidv4 } from 'uuid';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
-import RulesForm from '../../components/RulesForm/RulesForm';
-import PatchnotesForm from '../../components/PatchnotesForm/PatchnotesForm';
+import PanelFormContainer from '../../components/PanelFormContainer/PanelFormContainer';
 import StreameursForm from '../../components/StreameursForm/StreameursForm';
+
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchRules } from '../../queries/fetchAPI';
+import {
+  fetchRulesSections,
+  fetchUpdatesSections,
+} from '../../queries/fetchAPI';
 
 const RULES_QUERY_KEY = 'rulesSections';
+const UPDATES_QUERY_KEY = 'updatesSections';
 
 const PanelPage = () => {
-  const { data: rulesSections, status } = useQuery({
+  const { data: rulesSections, status: rulesStatus } = useQuery({
     queryKey: [RULES_QUERY_KEY],
-    queryFn: fetchRules,
+    queryFn: fetchRulesSections,
 
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
+
+  const { data: updatesSections, status: updatesSectionsStatus } = useQuery({
+    queryKey: [UPDATES_QUERY_KEY],
+    queryFn: fetchUpdatesSections,
+
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+
   const queryClient = useQueryClient();
 
   const [activeCategories, setActiveCategories] = useState(1);
@@ -35,7 +47,7 @@ const PanelPage = () => {
     };
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
-    { id: 2, name: 'Patchnotes' },
+    { id: 2, name: 'Updates' },
     { id: 3, name: 'Streameurs' },
   ];
 
@@ -43,7 +55,7 @@ const PanelPage = () => {
     if (activeCategories === 1) {
       return 'rules_section';
     } else if (activeCategories === 2) {
-      return 'patchnotes_section';
+      return 'updates_section';
     } else if (activeCategories === 3) {
       return 'streameurs_section';
     }
@@ -51,13 +63,19 @@ const PanelPage = () => {
 
   const selectSectionToDisplay =
     activeCategories === 1 ? (
-      <RulesForm
-        rulesSections={rulesSections}
+      <PanelFormContainer
+        dataSections={rulesSections}
         expanded={expanded}
         handleChange={handleChange}
+        category={activeCategories}
       />
     ) : activeCategories === 2 ? (
-      <PatchnotesForm />
+      <PanelFormContainer
+        dataSections={updatesSections}
+        expanded={expanded}
+        handleChange={handleChange}
+        category={activeCategories}
+      />
     ) : (
       <StreameursForm />
     );
@@ -105,9 +123,9 @@ const PanelPage = () => {
 
   return (
     <main className='page'>
-      {status === 'loading' ? (
+      {(rulesStatus || updatesSectionsStatus) === 'loading' ? (
         <p>Chargement en cours...</p>
-      ) : status === 'error' ? (
+      ) : (rulesStatus || updatesSectionsStatus) === 'error' ? (
         <p>Erreur : Impossible de récupérer les données.</p>
       ) : (
         <>

@@ -21,14 +21,20 @@ const cache = createCache({
  * @param {object} props
  * @param {string} props.expanded - The state of the accordion
  * @param {function} props.handleChange - The function to set the state of the accordion
- * @param {object} props.rulesSectionData - The data of the rules section
+ * @param {object} props.dataSection - The data of the rules section
+ * @param {number} props.category - The category of the panel
  * @returns
  */
-const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
-  // console.log({ expanded, handleChange, rulesSectionData });
-  const [data, setData] = useState(rulesSectionData);
-  const [newData, setNewData] = useState(rulesSectionData);
-  const [save, setSave] = useState(rulesSectionData.newSection ? false : true);
+const ControlledAccordion = ({
+  expanded,
+  handleChange,
+  dataSection,
+  category,
+}) => {
+  // console.log({ expanded, handleChange, dataSection });
+  const [data, setData] = useState(dataSection);
+  const [newData, setNewData] = useState(dataSection);
+  const [save, setSave] = useState(dataSection.newSection ? false : true);
 
   const accordionRef = useRef(null);
 
@@ -83,17 +89,17 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   };
 
   useEffect(() => {
-    setData(rulesSectionData);
-    setNewData(rulesSectionData);
-  }, [rulesSectionData]);
+    setData(dataSection);
+    setNewData(dataSection);
+  }, [dataSection]);
 
   useEffect(() => {
-    if (data !== newData || rulesSectionData.newSection) {
+    if (data !== newData || dataSection.newSection) {
       setSave(false);
     } else {
       setSave(true);
     }
-  }, [data, newData, rulesSectionData.newSection]);
+  }, [data, newData, dataSection.newSection]);
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -104,11 +110,11 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   };
 
   useEffect(() => {
-    if (expanded === rulesSectionData.id) {
+    if (expanded === dataSection.id) {
       handleButtonClick(accordionRef);
     }
-  }, [expanded, rulesSectionData]);
-  // console.log(rulesSectionData.newSection, save);
+  }, [expanded, dataSection]);
+  // console.log(dataSection.newSection, save);
 
   function deleteNewSection() {
     // eslint-disable-next-line no-unused-vars
@@ -169,15 +175,15 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
         )}
 
         <Accordion
-          expanded={expanded === rulesSectionData.id}
-          onChange={handleChange(rulesSectionData.id)}
+          expanded={expanded === dataSection.id}
+          onChange={handleChange(dataSection.id)}
           ref={expanded ? accordionRef : null}
           className={!save ? 'notSave' : ''}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1bh-content'
             id='panel1bh-header'>
-            {rulesSectionData.sectionTitle}
+            {dataSection.sectionTitle}
             <button
               className='buttonTrash'
               onClick={(e) => {
@@ -188,12 +194,12 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                     'Êtes-vous sûr de vouloir supprimer cette section ?'
                   )
                 ) {
-                  if (!rulesSectionData.newSection) {
-                    mutationDelete.mutate(rulesSectionData._id);
+                  if (!dataSection.newSection) {
+                    mutationDelete.mutate(dataSection._id);
                   }
                   queryClient.setQueriesData(['rulesSections'], (oldData) => {
                     return oldData.filter(
-                      (section) => section._id !== rulesSectionData._id
+                      (section) => section._id !== dataSection._id
                     );
                   });
                 }
@@ -207,163 +213,284 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
           </AccordionSummary>
 
           <AccordionDetails>
-            <form className='form'>
-              <div className='buttonsContainer'>
-                <button
-                  type='submit'
-                  className='saveButton'
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (newData.newSection) {
-                      mutationPost.mutate(deleteNewSection());
-                    } else {
-                      mutationPut.mutate(newData);
-                    }
-                  }}
-                  disabled={
-                    save
-                      ? true
-                      : false || mutationPost.isLoading || mutationPut.isLoading
-                  }>
-                  <img
-                    src={
-                      save
-                        ? '/assets/validation.svg'
-                        : '/assets/validationGreen.svg'
-                    }
-                    alt='confirm'
-                  />
-                </button>
-                <button
-                  type='button'
-                  className='cancelButton'
-                  onClick={() => {
-                    setNewData(data);
-                    handleChange(
-                      expanded === rulesSectionData.id
-                        ? ''
-                        : rulesSectionData.id
-                    )(null, !expanded);
-                  }}>
-                  <img
-                    src={save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'}
-                    alt='cancel'
-                  />
-                </button>
-              </div>
-              <div className='titleAndURLContainer'>
-                <div className='columnContainer'>
-                  <label className='label'>Titre de la section</label>
-                  <input
-                    className='input'
-                    type='text'
-                    value={newData.sectionTitle}
-                    onChange={(e) => {
-                      setNewData({
-                        ...newData,
-                        sectionTitle: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-                <div className='columnContainer'>
-                  <label className='label'>URL de la section</label>
-                  <input
-                    className='input'
-                    type='text'
-                    value={newData.urlBanner}
-                    onChange={(e) => {
-                      setNewData({
-                        ...newData,
-                        urlBanner: e.target.value,
-                      });
-                    }}
-                  />
-                </div>
-              </div>
-              <div className='colorContainer columnContainer'>
-                <label className='label'>Couleur d&apos;accentuation</label>
-                <div className='inputColorContainer'>
-                  <input
-                    className=' inputColor'
-                    type='color'
-                    value={newData.colorLine}
-                    onChange={(e) => {
-                      setNewData({
-                        ...newData,
-                        colorLine: e.target.value,
-                      });
-                    }}
-                  />
-                  <span className='colorPreview'>{data.colorLine}</span>
-                </div>
-              </div>
-              <div className='rulesFormContainer sectionWrap'>
-                {newData.rules.map((rule, i) => (
-                  <div
-                    className='ruleFormContainer columnContainer'
-                    key={rule.id}>
-                    <label className='label'>
-                      Règle {i + 1} : Titre de la règle
-                      <button
-                        type='button'
-                        onClick={(e) => {
-                          e.stopPropagation();
-
+            {category === 1 && (
+              <>
+                <form className='form'>
+                  <div className='buttonsContainer'>
+                    <button
+                      type='submit'
+                      className='saveButton'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (newData.newSection) {
+                          mutationPost.mutate(deleteNewSection());
+                        } else {
+                          mutationPut.mutate(newData);
+                        }
+                      }}
+                      disabled={
+                        save
+                          ? true
+                          : false ||
+                            mutationPost.isLoading ||
+                            mutationPut.isLoading
+                      }>
+                      <img
+                        src={
+                          save
+                            ? '/assets/validation.svg'
+                            : '/assets/validationGreen.svg'
+                        }
+                        alt='confirm'
+                      />
+                    </button>
+                    <button
+                      type='button'
+                      className='cancelButton'
+                      onClick={() => {
+                        setNewData(data);
+                        handleChange(
+                          expanded === dataSection.id ? '' : dataSection.id
+                        )(null, !expanded);
+                      }}>
+                      <img
+                        src={
+                          save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'
+                        }
+                        alt='cancel'
+                      />
+                    </button>
+                  </div>
+                  <div className='titleAndURLContainer'>
+                    <div className='columnContainer'>
+                      <label className='label'>Titre de la section</label>
+                      <input
+                        className='input'
+                        type='text'
+                        value={newData.sectionTitle}
+                        onChange={(e) => {
                           setNewData({
                             ...newData,
-                            rules: newData.rules.filter(
-                              (rule, index) => index !== i
-                            ),
+                            sectionTitle: e.target.value,
                           });
-                        }}>
-                        <img
-                          src='/assets/trash.svg'
-                          alt='supprimer regle'
-                          className='trashIcon'
-                        />
-                      </button>
-                    </label>
-                    <input
-                      className='input'
-                      type='text'
-                      value={rule.title}
-                      onChange={(e) =>
-                        handleRuleValueChange(i, 'title', e.target.value)
-                      }
-                    />
-                    <label className='label'>
-                      Règle {i + 1} : Contenu de la règle
-                    </label>
-                    <textarea
-                      className='input textArea'
-                      value={rule.text}
-                      onChange={(e) =>
-                        handleRuleValueChange(i, 'text', e.target.value)
-                      }
-                    />
+                        }}
+                      />
+                    </div>
+                    <div className='columnContainer'>
+                      <label className='label'>URL de la section</label>
+                      <input
+                        className='input'
+                        type='text'
+                        value={newData.urlBanner}
+                        onChange={(e) => {
+                          setNewData({
+                            ...newData,
+                            urlBanner: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </form>
-            <button
-              className='addRules'
-              onClick={() => {
-                setNewData({
-                  ...newData,
-                  rules: [
-                    ...newData.rules,
-                    {
-                      id: uuidv4(),
-                      title: '',
-                      text: '',
-                      textBackground: '',
-                    },
-                  ],
-                });
-              }}>
-              + Ajouter une règle supplémentaire
-            </button>
+                  <div className='colorContainer columnContainer'>
+                    <label className='label'>Couleur d&apos;accentuation</label>
+                    <div className='inputColorContainer'>
+                      <input
+                        className=' inputColor'
+                        type='color'
+                        value={newData.colorLine}
+                        onChange={(e) => {
+                          setNewData({
+                            ...newData,
+                            colorLine: e.target.value,
+                          });
+                        }}
+                      />
+                      <span className='colorPreview'>{data.colorLine}</span>
+                    </div>
+                  </div>
+                  <div className='rulesFormContainer sectionWrap'>
+                    {newData.rules.map((rule, i) => (
+                      <div
+                        className='ruleFormContainer columnContainer'
+                        key={rule.id}>
+                        <label className='label'>
+                          Règle {i + 1} : Titre de la règle
+                          <button
+                            type='button'
+                            onClick={(e) => {
+                              e.stopPropagation();
+
+                              setNewData({
+                                ...newData,
+                                rules: newData.rules.filter(
+                                  (rule, index) => index !== i
+                                ),
+                              });
+                            }}>
+                            <img
+                              src='/assets/trash.svg'
+                              alt='supprimer regle'
+                              className='trashIcon'
+                            />
+                          </button>
+                        </label>
+                        <input
+                          className='input'
+                          type='text'
+                          value={rule.title}
+                          onChange={(e) =>
+                            handleRuleValueChange(i, 'title', e.target.value)
+                          }
+                        />
+                        <label className='label'>
+                          Règle {i + 1} : Contenu de la règle
+                        </label>
+                        <textarea
+                          className='input textArea'
+                          value={rule.text}
+                          onChange={(e) =>
+                            handleRuleValueChange(i, 'text', e.target.value)
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </form>
+                <button
+                  className='addRules'
+                  onClick={() => {
+                    setNewData({
+                      ...newData,
+                      rules: [
+                        ...newData.rules,
+                        {
+                          id: uuidv4(),
+                          title: '',
+                          text: '',
+                          textBackground: '',
+                        },
+                      ],
+                    });
+                  }}>
+                  + Ajouter une règle supplémentaire
+                </button>
+              </>
+            )}
+
+            {category === 2 && (
+              <>
+                <form className='form'>
+                  <div className='buttonsContainer'>
+                    <button
+                      type='submit'
+                      className='saveButton'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (newData.newSection) {
+                          mutationPost.mutate(deleteNewSection());
+                        } else {
+                          mutationPut.mutate(newData);
+                        }
+                      }}
+                      disabled={
+                        save
+                          ? true
+                          : false ||
+                            mutationPost.isLoading ||
+                            mutationPut.isLoading
+                      }>
+                      <img
+                        src={
+                          save
+                            ? '/assets/validation.svg'
+                            : '/assets/validationGreen.svg'
+                        }
+                        alt='confirm'
+                      />
+                    </button>
+                    <button
+                      type='button'
+                      className='cancelButton'
+                      onClick={() => {
+                        setNewData(data);
+                        handleChange(
+                          expanded === dataSection.id ? '' : dataSection.id
+                        )(null, !expanded);
+                      }}>
+                      <img
+                        src={
+                          save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'
+                        }
+                        alt='cancel'
+                      />
+                    </button>
+                  </div>
+                  <div className='titleAndURLContainer'>
+                    <div className='titleAndVersionContainer'>
+                      <div className='columnContainer'>
+                        <label className='label'>Titre de la section</label>
+                        <input
+                          className='input'
+                          type='text'
+                          value={newData.sectionTitle}
+                          onChange={(e) => {
+                            setNewData({
+                              ...newData,
+                              sectionTitle: e.target.value,
+                            });
+                          }}
+                        />
+                      </div>
+                      <div className='columnContainer'>
+                        <label className='label'>Version</label>
+                        <input
+                          className='input'
+                          type='text'
+                          value={newData.version}
+                          onChange={(e) => {
+                            setNewData({
+                              ...newData,
+                              version: e.target.value,
+                            });
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className='columnContainer'>
+                      <label className='label'>URL de la section</label>
+                      <input
+                        className='input'
+                        type='text'
+                        value={newData.urlBanner}
+                        onChange={(e) => {
+                          setNewData({
+                            ...newData,
+                            urlBanner: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className='rulesFormContainer sectionWrap'>
+                    {newData.details.map((detail, i) => (
+                      <div
+                        className='ruleFormContainer columnContainer'
+                        key={detail.id}>
+                        <label className='label'>{detail.title}</label>
+                        <textarea
+                          className='input textArea'
+                          value={detail.content}
+                          onChange={(e) =>
+                            handleRuleValueChange(i, 'text', e.target.value)
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </form>
+              </>
+            )}
           </AccordionDetails>
         </Accordion>
       </CacheProvider>
