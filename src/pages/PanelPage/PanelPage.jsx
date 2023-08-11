@@ -107,8 +107,23 @@ const PanelPage = () => {
       details: [
         {
           id: uuidv4(),
-          title: 'Nouvelle mise à jour',
+          title: 'Description',
           content: 'Description de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Ajouts',
+          content: 'Ajouts de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Retraits',
+          content: 'Retraits de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Modifications',
+          content: 'Modifications de la mise à jour',
         },
       ],
       newSection: true,
