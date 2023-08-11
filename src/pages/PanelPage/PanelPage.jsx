@@ -91,10 +91,34 @@ const PanelPage = () => {
     if (activeCategories === 1) {
       addRulesSection();
     } else if (activeCategories === 2) {
-      addPatchnote();
+      addUpdate();
     } else if (activeCategories === 3) {
       addStreameur();
     }
+  }
+
+  function addUpdate() {
+    const newSection = {
+      id: uuidv4(),
+      sectionTitle: 'Nouvelle section',
+      version: '1.0.0',
+      urlBanner: 'test',
+      colorLine: '#000000',
+      details: [
+        {
+          id: uuidv4(),
+          title: 'Nouvelle mise à jour',
+          content: 'Description de la mise à jour',
+        },
+      ],
+      newSection: true,
+    };
+    queryClient.setQueryData([UPDATES_QUERY_KEY], (oldData) => [
+      ...oldData,
+      newSection,
+    ]);
+
+    setExpanded(newSection.id);
   }
 
   function addRulesSection() {
