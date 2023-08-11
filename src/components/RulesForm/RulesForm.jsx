@@ -14,7 +14,7 @@ const RulesForm = ({ rulesSections, expanded, handleChange }) => {
     <div className='rulesForm'>
       {rulesSections.map((rulesSection, index) => (
         <ControlledAccordion
-          key={`${index} ${rulesSection._id}`}
+          key={`${index} ${rulesSection.id}`}
           expanded={expanded}
           handleChange={handleChange}
           rulesSectionData={rulesSection}

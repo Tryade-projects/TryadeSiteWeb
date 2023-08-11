@@ -28,7 +28,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   // console.log({ expanded, handleChange, rulesSectionData });
   const [data, setData] = useState(rulesSectionData);
   const [newData, setNewData] = useState(rulesSectionData);
-  console.log({ data, newData });
+  console.log({ rulesSectionData, data, newData });
   const [save, setSave] = useState(rulesSectionData.newSection ? false : true);
 
   const accordionRef = useRef(null);
@@ -45,7 +45,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
     /**
      * The mutationFn function is used to update the data of a rules section in a React component.
      * @param {object} newData
-     * @param {string} newData._id - The id of the rules section
+     * @param {string} newData.id - The id of the rules section
      * @returns  - The axios request
      */
     mutationFn: (newData) => {
@@ -91,6 +91,8 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   useEffect(() => {
     if (data !== newData || rulesSectionData.newSection) {
       setSave(false);
+    } else {
+      setSave(true);
     }
   }, [data, newData, rulesSectionData.newSection]);
 
@@ -103,21 +105,16 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   };
 
   useEffect(() => {
-    if (expanded === rulesSectionData._id) {
+    if (expanded === rulesSectionData.id) {
       handleButtonClick(accordionRef);
     }
   }, [expanded, rulesSectionData]);
   // console.log(rulesSectionData.newSection, save);
 
-  function formatDataForPost() {
+  function deleteNewSection() {
     // eslint-disable-next-line no-unused-vars
-    const { newSection, _id, ...rest } = newData;
-    const restWithout_Id = rest.rules.map((rule) => {
-      // eslint-disable-next-line no-unused-vars
-      const { _id, ...rest } = rule;
-      return rest;
-    });
-    return { ...rest, rules: restWithout_Id };
+    const { newSection, ...rest } = newData;
+    return rest;
   }
 
   useEffect(() => {
@@ -126,6 +123,10 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
       mutationPut.isSuccess ||
       mutationDelete.isSuccess
     ) {
+      setData(newData);
+      setSave(true);
+      queryClient.invalidateQueries(['rulesSections']);
+
       setTimeout(() => {
         mutationDelete.reset();
         mutationPost.reset();
@@ -169,8 +170,8 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
         )}
 
         <Accordion
-          expanded={expanded === rulesSectionData._id}
-          onChange={handleChange(rulesSectionData._id)}
+          expanded={expanded === rulesSectionData.id}
+          onChange={handleChange(rulesSectionData.id)}
           ref={expanded ? accordionRef : null}
           className={!save ? 'notSave' : ''}>
           <AccordionSummary
@@ -214,22 +215,11 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   className='saveButton'
                   onClick={(e) => {
                     e.preventDefault();
-                    if (rulesSectionData.newSection) {
-                      mutationPost.mutate(formatDataForPost());
+                    if (newData.newSection) {
+                      mutationPost.mutate(deleteNewSection());
                     } else {
-                      newData.rules.forEach((rule) => {
-                        if (rule._id.includes('-')) {
-                          delete rule._id;
-                        }
-                      });
                       mutationPut.mutate(newData);
                     }
-
-                    setSave(true);
-
-                    //reset data
-                    setData(rulesSectionData);
-                    setNewData(rulesSectionData);
                   }}
                   disabled={
                     save
@@ -251,9 +241,9 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   onClick={() => {
                     setNewData(data);
                     handleChange(
-                      expanded === rulesSectionData._id
+                      expanded === rulesSectionData.id
                         ? ''
-                        : rulesSectionData._id
+                        : rulesSectionData.id
                     )(null, !expanded);
                   }}>
                   <img
@@ -313,10 +303,21 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 {newData.rules.map((rule, i) => (
                   <div
                     className='ruleFormContainer columnContainer'
-                    key={rule._id}>
+                    key={rule.id || rule._id}>
                     <label className='label'>
                       Règle {i + 1} : Titre de la règle
-                      <button>
+                      <button
+                        type='button'
+                        onClick={(e) => {
+                          e.stopPropagation();
+
+                          setNewData({
+                            ...newData,
+                            rules: newData.rules.filter(
+                              (rule, index) => index !== i
+                            ),
+                          });
+                        }}>
                         <img
                           src='/assets/trash.svg'
                           alt='supprimer regle'
@@ -354,9 +355,10 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                   rules: [
                     ...newData.rules,
                     {
-                      _id: uuidv4(),
+                      id: uuidv4(),
                       title: '',
                       text: '',
+                      textBackground: '',
                     },
                   ],
                 });
