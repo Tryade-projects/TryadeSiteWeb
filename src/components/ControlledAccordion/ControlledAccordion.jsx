@@ -61,11 +61,18 @@ const ControlledAccordion = ({
     },
   });
 
-  const mutationDelete = useMutation({
+  const mutationDeleteRulesSections = useMutation({
     mutationFn: (_id) => {
       return axios.delete(`http://localhost:5000/rulesSections/${_id}`);
     },
   });
+
+  const mutationDeleteUpdatesSections = useMutation({
+    mutationFn: (_id) => {
+      return axios.delete(`http://localhost:5000/updatesSections/${_id}`);
+    },
+  });
+
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
       i === index ? { ...item, [key]: value } : item
@@ -126,31 +133,37 @@ const ControlledAccordion = ({
     if (
       mutationPost.isSuccess ||
       mutationPut.isSuccess ||
-      mutationDelete.isSuccess
+      mutationDeleteRulesSections.isSuccess
     ) {
       setData(newData);
       setSave(true);
       queryClient.invalidateQueries(['rulesSections']);
 
       setTimeout(() => {
-        mutationDelete.reset();
+        mutationDeleteRulesSections.reset();
         mutationPost.reset();
         mutationPut.reset();
       }, 5000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mutationDelete.isSuccess, mutationPost.isSuccess, mutationPut.isSuccess]);
+  }, [
+    mutationDeleteRulesSections.isSuccess,
+    mutationPost.isSuccess,
+    mutationPut.isSuccess,
+  ]);
 
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
-        {mutationDelete.isLoading && <div>Suppression en cours...</div>}
+        {mutationDeleteRulesSections.isLoading && (
+          <div>Suppression en cours...</div>
+        )}
 
-        {mutationDelete.isError && (
+        {mutationDeleteRulesSections.isError && (
           <div>Une erreur est survenue lors de la suppression</div>
         )}
 
-        {mutationDelete.isSuccess && (
+        {mutationDeleteRulesSections.isSuccess && (
           <div>La suppression a été effectuée avec succès</div>
         )}
 
@@ -194,14 +207,42 @@ const ControlledAccordion = ({
                     'Êtes-vous sûr de vouloir supprimer cette section ?'
                   )
                 ) {
-                  if (!dataSection.newSection) {
-                    mutationDelete.mutate(dataSection._id);
+                  if (category === 1) {
+                    if (!dataSection.newSection) {
+                      mutationDeleteRulesSections.mutate(dataSection._id);
+                    }
+                    queryClient.setQueriesData(['rulesSections'], (oldData) => {
+                      return oldData.filter(
+                        (section) => section._id !== dataSection._id
+                      );
+                    });
                   }
-                  queryClient.setQueriesData(['rulesSections'], (oldData) => {
-                    return oldData.filter(
-                      (section) => section._id !== dataSection._id
+                  if (category === 2) {
+                    if (!dataSection.newSection) {
+                      mutationDeleteUpdatesSections.mutate(dataSection._id);
+                    }
+                    queryClient.setQueriesData(
+                      ['updatesSections'],
+                      (oldData) => {
+                        return oldData.filter(
+                          (section) => section._id !== dataSection._id
+                        );
+                      }
                     );
-                  });
+                  }
+                  if (category === 3) {
+                    if (!dataSection.newSection) {
+                      mutationDeleteStreameursSections.mutate(dataSection._id);
+                    }
+                    queryClient.setQueriesData(
+                      ['streameursSections'],
+                      (oldData) => {
+                        return oldData.filter(
+                          (section) => section._id !== dataSection._id
+                        );
+                      }
+                    );
+                  }
                 }
               }}>
               <img
