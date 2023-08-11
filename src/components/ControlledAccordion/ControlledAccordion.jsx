@@ -40,13 +40,19 @@ const ControlledAccordion = ({
 
   const queryClient = useQueryClient();
 
-  const mutationPost = useMutation({
+  const mutationPostRulesSection = useMutation({
     mutationFn: (newData) => {
       return axios.post('http://localhost:5000/rulesSections', newData);
     },
   });
 
-  const mutationPut = useMutation({
+  const mutationPostUpdatesSection = useMutation({
+    mutationFn: (newData) => {
+      return axios.post('http://localhost:5000/updatesSections', newData);
+    },
+  });
+
+  const mutationPutRulesSection = useMutation({
     /**
      * The mutationFn function is used to update the data of a rules section in a React component.
      * @param {object} newData
@@ -61,13 +67,28 @@ const ControlledAccordion = ({
     },
   });
 
-  const mutationDeleteRulesSections = useMutation({
+  const mutationPutUpdatesSection = useMutation({
+    /**
+     * The mutationFn function is used to update the data of a updates section in a React component.
+     * @param {object} newData
+     * @param {string} newData._id - The id of the updates section
+     * @returns  - The axios request
+     */
+    mutationFn: (newData) => {
+      return axios.put(
+        `http://localhost:5000/updatesSections/${newData._id}`,
+        newData
+      );
+    },
+  });
+
+  const mutationDeleteRulesSection = useMutation({
     mutationFn: (_id) => {
       return axios.delete(`http://localhost:5000/rulesSections/${_id}`);
     },
   });
 
-  const mutationDeleteUpdatesSections = useMutation({
+  const mutationDeleteUpdatesSection = useMutation({
     mutationFn: (_id) => {
       return axios.delete(`http://localhost:5000/updatesSections/${_id}`);
     },
@@ -78,18 +99,38 @@ const ControlledAccordion = ({
       i === index ? { ...item, [key]: value } : item
     );
   };
-  const handleRuleValueChange = (index, key, value) => {
+  const handleRuleValueChange = (index, key, value, category) => {
     // Copiez l'objet 'data' pour éviter de modifier l'objet d'origine directement
     const newDataCopy = { ...newData };
+    console.log(category);
+    console.log({ newData });
+    let newDataArray = [];
+    if (category === 1) {
+      newDataArray = [...newDataCopy.rules];
+      // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
+      const updatedRule = updateArrayItemKey(newDataArray, index, key, value);
 
-    // Copiez le tableau 'rules' pour éviter de modifier le tableau d'origine directement
-    const newRules = [...newDataCopy.rules];
+      // Mettez à jour le tableau 'rules' dans la copie de 'data'
+      newDataCopy.rules = updatedRule;
+    }
 
-    // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
-    const updatedRule = updateArrayItemKey(newRules, index, key, value);
+    if (category === 2) {
+      newDataArray = [...newDataCopy.details];
+      // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
+      const updatedRule = updateArrayItemKey(newDataArray, index, key, value);
 
-    // Mettez à jour le tableau 'rules' dans la copie de 'data'
-    newDataCopy.rules = updatedRule;
+      // Mettez à jour le tableau 'rules' dans la copie de 'data'
+      newDataCopy.details = updatedRule;
+    }
+
+    if (category === 3) {
+      newDataArray = [...newDataCopy.streameurs];
+      // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
+      const updatedRule = updateArrayItemKey(newDataArray, index, key, value);
+
+      // Mettez à jour le tableau 'rules' dans la copie de 'data'
+      newDataCopy.streameurs = updatedRule;
+    }
 
     // Mettez à jour l'état avec les nouvelles données
     setNewData(newDataCopy);
@@ -131,59 +172,91 @@ const ControlledAccordion = ({
 
   useEffect(() => {
     if (
-      mutationPost.isSuccess ||
-      mutationPut.isSuccess ||
-      mutationDeleteRulesSections.isSuccess
+      mutationPostRulesSection.isSuccess ||
+      mutationPutRulesSection.isSuccess ||
+      mutationDeleteRulesSection.isSuccess
     ) {
       setData(newData);
       setSave(true);
       queryClient.invalidateQueries(['rulesSections']);
 
       setTimeout(() => {
-        mutationDeleteRulesSections.reset();
-        mutationPost.reset();
-        mutationPut.reset();
+        mutationDeleteRulesSection.reset();
+        mutationPostRulesSection.reset();
+        mutationPutRulesSection.reset();
+      }, 5000);
+    }
+
+    if (
+      mutationPostUpdatesSection.isSuccess ||
+      mutationPutUpdatesSection.isSuccess ||
+      mutationDeleteUpdatesSection.isSuccess
+    ) {
+      setData(newData);
+      setSave(true);
+      queryClient.invalidateQueries(['updatesSections']);
+
+      setTimeout(() => {
+        mutationPostUpdatesSection.reset();
+        mutationPutUpdatesSection.reset();
+        mutationDeleteUpdatesSection.reset();
       }, 5000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    mutationDeleteRulesSections.isSuccess,
-    mutationPost.isSuccess,
-    mutationPut.isSuccess,
+    mutationDeleteRulesSection.isSuccess,
+    mutationPostRulesSection.isSuccess,
+    mutationPutRulesSection.isSuccess,
+    mutationDeleteUpdatesSection.isSuccess,
+    mutationPostUpdatesSection.isSuccess,
+    mutationPutUpdatesSection.isSuccess,
   ]);
 
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
-        {mutationDeleteRulesSections.isLoading && (
+        {(mutationDeleteRulesSection.isLoading ||
+          mutationDeleteUpdatesSection.isLoading) && (
           <div>Suppression en cours...</div>
         )}
 
-        {mutationDeleteRulesSections.isError && (
+        {(mutationDeleteRulesSection.isError ||
+          mutationDeleteUpdatesSection.isError) && (
           <div>Une erreur est survenue lors de la suppression</div>
         )}
 
-        {mutationDeleteRulesSections.isSuccess && (
+        {(mutationDeleteRulesSection.isSuccess ||
+          mutationDeleteUpdatesSection.isSuccess) && (
           <div>La suppression a été effectuée avec succès</div>
         )}
 
-        {mutationPost.isLoading && <div>Enregistrement en cours...</div>}
+        {(mutationPostRulesSection.isLoading ||
+          mutationPostUpdatesSection.isLoading) && (
+          <div>Enregistrement en cours...</div>
+        )}
 
-        {mutationPost.isError && (
+        {(mutationPostRulesSection.isError ||
+          mutationPostUpdatesSection.isError) && (
           <div>Une erreur est survenue lors de l&apos;enregistrement</div>
         )}
 
-        {mutationPost.isSuccess && (
+        {(mutationPostRulesSection.isSuccess ||
+          mutationPostUpdatesSection.isSuccess) && (
           <div>L&apos;enregistrement a été effectué avec succès</div>
         )}
 
-        {mutationPut.isLoading && <div>Mise à jour en cours...</div>}
+        {(mutationPutRulesSection.isLoading ||
+          mutationPutUpdatesSection.isLoading) && (
+          <div>Mise à jour en cours...</div>
+        )}
 
-        {mutationPut.isError && (
+        {(mutationPutRulesSection.isError ||
+          mutationPutUpdatesSection.isError) && (
           <div>Une erreur est survenue lors de la mise à jour</div>
         )}
 
-        {mutationPut.isSuccess && (
+        {(mutationPutRulesSection.isSuccess ||
+          mutationPutUpdatesSection.isSuccess) && (
           <div>La mise à jour a été effectuée avec succès</div>
         )}
 
@@ -209,7 +282,7 @@ const ControlledAccordion = ({
                 ) {
                   if (category === 1) {
                     if (!dataSection.newSection) {
-                      mutationDeleteRulesSections.mutate(dataSection._id);
+                      mutationDeleteRulesSection.mutate(dataSection._id);
                     }
                     queryClient.setQueriesData(['rulesSections'], (oldData) => {
                       return oldData.filter(
@@ -219,7 +292,7 @@ const ControlledAccordion = ({
                   }
                   if (category === 2) {
                     if (!dataSection.newSection) {
-                      mutationDeleteUpdatesSections.mutate(dataSection._id);
+                      mutationDeleteUpdatesSection.mutate(dataSection._id);
                     }
                     queryClient.setQueriesData(
                       ['updatesSections'],
@@ -264,17 +337,17 @@ const ControlledAccordion = ({
                       onClick={(e) => {
                         e.preventDefault();
                         if (newData.newSection) {
-                          mutationPost.mutate(deleteNewSection());
+                          mutationPostRulesSection.mutate(deleteNewSection());
                         } else {
-                          mutationPut.mutate(newData);
+                          mutationPutRulesSection.mutate(newData);
                         }
                       }}
                       disabled={
                         save
                           ? true
                           : false ||
-                            mutationPost.isLoading ||
-                            mutationPut.isLoading
+                            mutationPostRulesSection.isLoading ||
+                            mutationPutRulesSection.isLoading
                       }>
                       <img
                         src={
@@ -380,7 +453,12 @@ const ControlledAccordion = ({
                           type='text'
                           value={rule.title}
                           onChange={(e) =>
-                            handleRuleValueChange(i, 'title', e.target.value)
+                            handleRuleValueChange(
+                              i,
+                              'title',
+                              e.target.value,
+                              category
+                            )
                           }
                         />
                         <label className='label'>
@@ -390,7 +468,12 @@ const ControlledAccordion = ({
                           className='input textArea'
                           value={rule.text}
                           onChange={(e) =>
-                            handleRuleValueChange(i, 'text', e.target.value)
+                            handleRuleValueChange(
+                              i,
+                              'text',
+                              e.target.value,
+                              category
+                            )
                           }
                         />
                       </div>
@@ -428,17 +511,17 @@ const ControlledAccordion = ({
                       onClick={(e) => {
                         e.preventDefault();
                         if (newData.newSection) {
-                          mutationPost.mutate(deleteNewSection());
+                          mutationPostUpdatesSection.mutate(deleteNewSection());
                         } else {
-                          mutationPut.mutate(newData);
+                          mutationPutUpdatesSection.mutate(newData);
                         }
                       }}
                       disabled={
                         save
                           ? true
                           : false ||
-                            mutationPost.isLoading ||
-                            mutationPut.isLoading
+                            mutationPostUpdatesSection.isLoading ||
+                            mutationPutUpdatesSection.isLoading
                       }>
                       <img
                         src={
@@ -523,7 +606,12 @@ const ControlledAccordion = ({
                           className='input textArea'
                           value={detail.content}
                           onChange={(e) =>
-                            handleRuleValueChange(i, 'text', e.target.value)
+                            handleRuleValueChange(
+                              i,
+                              'content',
+                              e.target.value,
+                              category
+                            )
                           }
                         />
                       </div>
