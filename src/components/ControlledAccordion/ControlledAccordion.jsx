@@ -302,7 +302,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
                 {newData.rules.map((rule, i) => (
                   <div
                     className='ruleFormContainer columnContainer'
-                    key={rule.id || rule._id}>
+                    key={rule.id}>
                     <label className='label'>
                       Règle {i + 1} : Titre de la règle
                       <button
