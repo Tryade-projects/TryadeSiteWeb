@@ -28,7 +28,6 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   // console.log({ expanded, handleChange, rulesSectionData });
   const [data, setData] = useState(rulesSectionData);
   const [newData, setNewData] = useState(rulesSectionData);
-  console.log({ rulesSectionData, data, newData });
   const [save, setSave] = useState(rulesSectionData.newSection ? false : true);
 
   const accordionRef = useRef(null);
@@ -45,7 +44,7 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
     /**
      * The mutationFn function is used to update the data of a rules section in a React component.
      * @param {object} newData
-     * @param {string} newData.id - The id of the rules section
+     * @param {string} newData._id - The id of the rules section
      * @returns  - The axios request
      */
     mutationFn: (newData) => {
@@ -57,8 +56,8 @@ const ControlledAccordion = ({ expanded, handleChange, rulesSectionData }) => {
   });
 
   const mutationDelete = useMutation({
-    mutationFn: (id) => {
-      return axios.delete(`http://localhost:5000/rulesSections/${id}`);
+    mutationFn: (_id) => {
+      return axios.delete(`http://localhost:5000/rulesSections/${_id}`);
     },
   });
   const updateArrayItemKey = (array, index, key, value) => {
