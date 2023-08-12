@@ -4,7 +4,7 @@ import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
 import PanelFormContainer from '../../components/PanelFormContainer/PanelFormContainer';
-import StreameursForm from '../../components/StreameursForm/StreameursForm';
+import StreamersForm from '../../components/StreamersForm/StreamersForm';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
@@ -48,7 +48,7 @@ const PanelPage = () => {
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
     { id: 2, name: 'Updates' },
-    { id: 3, name: 'Streameurs' },
+    { id: 3, name: 'Streamers' },
   ];
 
   function selectDataToDisplay() {
@@ -57,7 +57,7 @@ const PanelPage = () => {
     } else if (activeCategories === 2) {
       return 'updates_section';
     } else if (activeCategories === 3) {
-      return 'streameurs_section';
+      return 'Streamers_section';
     }
   }
 
@@ -77,7 +77,7 @@ const PanelPage = () => {
         category={activeCategories}
       />
     ) : (
-      <StreameursForm />
+      <StreamersForm />
     );
 
   const selectTextButtonToDisplay =

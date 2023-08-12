@@ -31,7 +31,7 @@ const ButtonAside = ({
       Updates: activeCategories
         ? '/assets/rulesActive.svg'
         : '/assets/rulesGrey.svg',
-      Streameurs: activeCategories
+      Streamers: activeCategories
         ? '/assets/photoWhite.svg'
         : '/assets/photo.svg',
     };

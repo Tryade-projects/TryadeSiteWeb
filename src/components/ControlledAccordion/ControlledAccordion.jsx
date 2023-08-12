@@ -124,12 +124,12 @@ const ControlledAccordion = ({
     }
 
     if (category === 3) {
-      newDataArray = [...newDataCopy.streameurs];
+      newDataArray = [...newDataCopy.Streamers];
       // Utilisez la fonction générique pour mettre à jour la clé spécifiée dans la règle avec l'index donné
       const updatedRule = updateArrayItemKey(newDataArray, index, key, value);
 
       // Mettez à jour le tableau 'rules' dans la copie de 'data'
-      newDataCopy.streameurs = updatedRule;
+      newDataCopy.Streamers = updatedRule;
     }
 
     // Mettez à jour l'état avec les nouvelles données
@@ -305,10 +305,10 @@ const ControlledAccordion = ({
                   }
                   if (category === 3) {
                     if (!dataSection.newSection) {
-                      mutationDeleteStreameursSections.mutate(dataSection._id);
+                      mutationDeleteStreamersSections.mutate(dataSection._id);
                     }
                     queryClient.setQueriesData(
-                      ['streameursSections'],
+                      ['StreamersSections'],
                       (oldData) => {
                         return oldData.filter(
                           (section) => section._id !== dataSection._id
