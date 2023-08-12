@@ -23,14 +23,15 @@ const ButtonAside = ({
    */
   const displayIcon = (text, activeCategories) => {
     // Mapping des chemins d'images pour chaque état (active ou non)
+    console.log(activeCategories);
     const imagePaths = {
       Règlement: activeCategories
         ? '/assets/shieldWhite.svg'
         : '/assets/shieldGrey.svg',
-      Patchnotes: activeCategories
+      Updates: activeCategories
         ? '/assets/rulesActive.svg'
         : '/assets/rulesGrey.svg',
-      Streameurs: activeCategories
+      Streamers: activeCategories
         ? '/assets/photoWhite.svg'
         : '/assets/photo.svg',
     };

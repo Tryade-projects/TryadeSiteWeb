@@ -1,6 +1,6 @@
 // rulesQuery.js (nouveau fichier)
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { fetchRulesSections } from '../queries/fetchAPI';
+import { fetchRulesSectionsPage } from '../queries/fetchAPI';
 
 const QUERY_KEY_RULES_SECTION = ['rulesSectionsPages'];
 
@@ -14,7 +14,7 @@ const useRulesSectionQuery = () => {
     status,
   } = useInfiniteQuery({
     queryKey: QUERY_KEY_RULES_SECTION,
-    queryFn: fetchRulesSections,
+    queryFn: fetchRulesSectionsPage,
     getNextPageParam: (lastPage, pages) =>
       lastPage.length === 0 ? false : pages.length,
   });

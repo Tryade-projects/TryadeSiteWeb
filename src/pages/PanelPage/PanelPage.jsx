@@ -3,21 +3,33 @@ import { v4 as uuidv4 } from 'uuid';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
-import RulesForm from '../../components/RulesForm/RulesForm';
-import PatchnotesForm from '../../components/PatchnotesForm/PatchnotesForm';
-import StreameursForm from '../../components/StreameursForm/StreameursForm';
+import PanelFormContainer from '../../components/PanelFormContainer/PanelFormContainer';
+import StreamersForm from '../../components/StreamersForm/StreamersForm';
+
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchRules } from '../../queries/fetchAPI';
+import {
+  fetchRulesSections,
+  fetchUpdatesSections,
+} from '../../queries/fetchAPI';
 
 const RULES_QUERY_KEY = 'rulesSections';
+const UPDATES_QUERY_KEY = 'updatesSections';
 
 const PanelPage = () => {
-  const { data: rulesSections, status } = useQuery({
+  const { data: rulesSections, status: rulesStatus } = useQuery({
     queryKey: [RULES_QUERY_KEY],
-    queryFn: fetchRules,
+    queryFn: fetchRulesSections,
 
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
+
+  const { data: updatesSections, status: updatesSectionsStatus } = useQuery({
+    queryKey: [UPDATES_QUERY_KEY],
+    queryFn: fetchUpdatesSections,
+
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+
   const queryClient = useQueryClient();
 
   const [activeCategories, setActiveCategories] = useState(1);
@@ -35,31 +47,37 @@ const PanelPage = () => {
     };
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
-    { id: 2, name: 'Patchnotes' },
-    { id: 3, name: 'Streameurs' },
+    { id: 2, name: 'Updates' },
+    { id: 3, name: 'Streamers' },
   ];
 
   function selectDataToDisplay() {
     if (activeCategories === 1) {
       return 'rules_section';
     } else if (activeCategories === 2) {
-      return 'patchnotes_section';
+      return 'updates_section';
     } else if (activeCategories === 3) {
-      return 'streameurs_section';
+      return 'Streamers_section';
     }
   }
 
   const selectSectionToDisplay =
     activeCategories === 1 ? (
-      <RulesForm
-        rulesSections={rulesSections}
+      <PanelFormContainer
+        dataSections={rulesSections}
         expanded={expanded}
         handleChange={handleChange}
+        category={activeCategories}
       />
     ) : activeCategories === 2 ? (
-      <PatchnotesForm />
+      <PanelFormContainer
+        dataSections={updatesSections}
+        expanded={expanded}
+        handleChange={handleChange}
+        category={activeCategories}
+      />
     ) : (
-      <StreameursForm />
+      <StreamersForm />
     );
 
   const selectTextButtonToDisplay =
@@ -73,10 +91,49 @@ const PanelPage = () => {
     if (activeCategories === 1) {
       addRulesSection();
     } else if (activeCategories === 2) {
-      addPatchnote();
+      addUpdate();
     } else if (activeCategories === 3) {
       addStreameur();
     }
+  }
+
+  function addUpdate() {
+    const newSection = {
+      id: uuidv4(),
+      sectionTitle: 'Nouvelle section',
+      version: '1.0.0',
+      urlBanner: 'test',
+      colorLine: '#000000',
+      details: [
+        {
+          id: uuidv4(),
+          title: 'Description',
+          content: 'Description de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Ajouts',
+          content: 'Ajouts de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Retraits',
+          content: 'Retraits de la mise à jour',
+        },
+        {
+          id: uuidv4(),
+          title: 'Modifications',
+          content: 'Modifications de la mise à jour',
+        },
+      ],
+      newSection: true,
+    };
+    queryClient.setQueryData([UPDATES_QUERY_KEY], (oldData) => [
+      ...oldData,
+      newSection,
+    ]);
+
+    setExpanded(newSection.id);
   }
 
   function addRulesSection() {
@@ -105,9 +162,9 @@ const PanelPage = () => {
 
   return (
     <main className='page'>
-      {status === 'loading' ? (
+      {(rulesStatus || updatesSectionsStatus) === 'loading' ? (
         <p>Chargement en cours...</p>
-      ) : status === 'error' ? (
+      ) : (rulesStatus || updatesSectionsStatus) === 'error' ? (
         <p>Erreur : Impossible de récupérer les données.</p>
       ) : (
         <>

@@ -7,7 +7,7 @@ import NetworkContainer from '../../components/NetworkContainer/NetworkContainer
 import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import { Link } from 'react-router-dom';
-import { fetchUpdates } from '../../queries/fetchAPI';
+import { fetchUpdatesSections } from '../../queries/fetchAPI';
 
 const QUERY_KEY_UPDATE = ['update'];
 
@@ -28,7 +28,7 @@ export default function Home({ ifMobile }) {
 
   const { data, status } = useQuery({
     queryKey: QUERY_KEY_UPDATE,
-    queryFn: fetchUpdates,
+    queryFn: fetchUpdatesSections,
   });
 
   const handleButtonClick = (goTo) => {
@@ -150,7 +150,6 @@ export default function Home({ ifMobile }) {
               </>
             )}
           </div>
-
         </section>
 
         <section
@@ -191,7 +190,6 @@ export default function Home({ ifMobile }) {
             buttonTitle='joeur'
             iconAlt="Icone d'une manette de jeu"
           />
-
         </section>
 
         <section className='networkSection page'>
@@ -200,7 +198,6 @@ export default function Home({ ifMobile }) {
             shadowTitle='NETWORK'
           />
           <div className='articleContainer'>
-
             <NetworkContainer
               src='assets/twitter.svg'
               backgroundColorClass='backgroundColorClassSecondaryColor'
