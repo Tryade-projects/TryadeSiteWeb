@@ -1,0 +1,17 @@
+.saveAndCancelFormButtonsContainer {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  right: 1rem;
+  button {
+    position: relative;
+    &:hover {
+      .tooltip {
+        visibility: visible;
+      }
+    }
+  }
+  .saveButton:disabled {
+    cursor: not-allowed;
+  }
+}

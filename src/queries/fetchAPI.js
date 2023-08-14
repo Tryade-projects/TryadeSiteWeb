@@ -19,4 +19,14 @@ async function fetchUpdatesSections() {
   return data;
 }
 
-export { fetchRulesSectionsPage, fetchRulesSections, fetchUpdatesSections };
+async function fetchStreamersSections() {
+  const data = await fetchData('http://localhost:5000/streamersSections');
+  return data;
+}
+
+export {
+  fetchRulesSectionsPage,
+  fetchRulesSections,
+  fetchUpdatesSections,
+  fetchStreamersSections,
+};

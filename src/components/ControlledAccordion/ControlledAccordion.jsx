@@ -1,8 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // Use for SASS style is priority over MUI style
 import { StyledEngineProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
@@ -10,6 +6,11 @@ import createCache from '@emotion/cache';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SaveAndCancelFormButtonsContainer from '../SaveAndCancelFormButtonsContainer/SaveAndCancelFormButtonsContainer';
 
 const cache = createCache({
   key: 'css',
@@ -23,7 +24,7 @@ const cache = createCache({
  * @param {function} props.handleChange - The function to set the state of the accordion
  * @param {object} props.dataSection - The data of the rules section
  * @param {number} props.category - The category of the panel
- * @returns
+
  */
 const ControlledAccordion = ({
   expanded,
@@ -40,59 +41,69 @@ const ControlledAccordion = ({
 
   const queryClient = useQueryClient();
 
-  const mutationPostRulesSection = useMutation({
-    mutationFn: (newData) => {
-      return axios.post('http://localhost:5000/rulesSections', newData);
-    },
-  });
+  /**
+   *
+   * @param {number} category - The active category of the panel (1: rules, 2: updates, 3: streamers)
+   * @param {string} operation - The operation to perform
+   * @returns {object} - The configuration object for the mutation
+   */
+  const getMutationConfig = (category, operation) => {
+    const baseUrl = 'http://localhost:5000/';
+    let url;
+    let entityName;
 
-  const mutationPostUpdatesSection = useMutation({
-    mutationFn: (newData) => {
-      return axios.post('http://localhost:5000/updatesSections', newData);
-    },
-  });
+    if (category === 1) {
+      url = 'rulesSections';
+      entityName = 'rules sections';
+    } else if (category === 2) {
+      url = 'updatesSections';
+      entityName = 'updates section';
+    } else if (category === 3) {
+      url = 'streamersSections';
+      entityName = 'streamers section';
+    }
 
-  const mutationPutRulesSection = useMutation({
-    /**
-     * The mutationFn function is used to update the data of a rules section in a React component.
-     * @param {object} newData
-     * @param {string} newData._id - The id of the rules section
-     * @returns  - The axios request
-     */
-    mutationFn: (newData) => {
-      return axios.put(
-        `http://localhost:5000/rulesSections/${newData._id}`,
-        newData
-      );
-    },
-  });
+    let config = {};
+    switch (operation) {
+      case 'post':
+        config = {
+          entityName,
+          mutationFn: (newData) => axios.post(`${baseUrl}${url}`, newData),
+          onError: (error) =>
+            console.error(`Error creating ${entityName}:`, error),
+        };
+        break;
+      case 'put':
+        config = {
+          entityName,
+          mutationFn: (newData) =>
+            axios.put(`${baseUrl}${url}/${newData._id}`, newData),
+          onError: (error) =>
+            console.error(`Error updating ${entityName}:`, error),
+        };
+        break;
+      case 'delete':
+        config = {
+          entityName,
+          mutationFn: (_id) => axios.delete(`${baseUrl}${url}/${_id}`),
+          onError: (error) =>
+            console.error(`Error deleting ${entityName}:`, error),
+        };
+        break;
+      default:
+        break;
+    }
 
-  const mutationPutUpdatesSection = useMutation({
-    /**
-     * The mutationFn function is used to update the data of a updates section in a React component.
-     * @param {object} newData
-     * @param {string} newData._id - The id of the updates section
-     * @returns  - The axios request
-     */
-    mutationFn: (newData) => {
-      return axios.put(
-        `http://localhost:5000/updatesSections/${newData._id}`,
-        newData
-      );
-    },
-  });
+    return config;
+  };
 
-  const mutationDeleteRulesSection = useMutation({
-    mutationFn: (_id) => {
-      return axios.delete(`http://localhost:5000/rulesSections/${_id}`);
-    },
-  });
+  const mutationPostConfig = getMutationConfig(category, 'post');
+  const mutationPutConfig = getMutationConfig(category, 'put');
+  const mutationDeleteConfig = getMutationConfig(category, 'delete');
 
-  const mutationDeleteUpdatesSection = useMutation({
-    mutationFn: (_id) => {
-      return axios.delete(`http://localhost:5000/updatesSections/${_id}`);
-    },
-  });
+  const mutationPostSection = useMutation(mutationPostConfig);
+  const mutationPutSection = useMutation(mutationPutConfig);
+  const mutationDeleteSection = useMutation(mutationDeleteConfig);
 
   const updateArrayItemKey = (array, index, key, value) => {
     return array.map((item, i) =>
@@ -102,8 +113,6 @@ const ControlledAccordion = ({
   const handleRuleValueChange = (index, key, value, category) => {
     // Copiez l'objet 'data' pour éviter de modifier l'objet d'origine directement
     const newDataCopy = { ...newData };
-    console.log(category);
-    console.log({ newData });
     let newDataArray = [];
     if (category === 1) {
       newDataArray = [...newDataCopy.rules];
@@ -171,92 +180,61 @@ const ControlledAccordion = ({
   }
 
   useEffect(() => {
-    if (
-      mutationPostRulesSection.isSuccess ||
-      mutationPutRulesSection.isSuccess ||
-      mutationDeleteRulesSection.isSuccess
-    ) {
-      setData(newData);
-      setSave(true);
-      queryClient.invalidateQueries(['rulesSections']);
+    const handleMutationSuccess = (mutation) => {
+      if (mutation.isSuccess) {
+        setData(newData);
+        setSave(true);
+        queryClient.invalidateQueries([
+          `${
+            category === 1 ? 'rules' : category === 2 ? 'updates' : 'streamers'
+          }Sections`,
+        ]);
 
-      setTimeout(() => {
-        mutationDeleteRulesSection.reset();
-        mutationPostRulesSection.reset();
-        mutationPutRulesSection.reset();
-      }, 5000);
-    }
+        setTimeout(() => {
+          mutation.reset();
+        }, 5000);
+      }
+    };
 
-    if (
-      mutationPostUpdatesSection.isSuccess ||
-      mutationPutUpdatesSection.isSuccess ||
-      mutationDeleteUpdatesSection.isSuccess
-    ) {
-      setData(newData);
-      setSave(true);
-      queryClient.invalidateQueries(['updatesSections']);
-
-      setTimeout(() => {
-        mutationPostUpdatesSection.reset();
-        mutationPutUpdatesSection.reset();
-        mutationDeleteUpdatesSection.reset();
-      }, 5000);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    handleMutationSuccess(mutationPostSection);
+    handleMutationSuccess(mutationPutSection);
+    handleMutationSuccess(mutationDeleteSection);
   }, [
-    mutationDeleteRulesSection.isSuccess,
-    mutationPostRulesSection.isSuccess,
-    mutationPutRulesSection.isSuccess,
-    mutationDeleteUpdatesSection.isSuccess,
-    mutationPostUpdatesSection.isSuccess,
-    mutationPutUpdatesSection.isSuccess,
+    mutationPostSection.isSuccess,
+    mutationPutSection.isSuccess,
+    mutationDeleteSection.isSuccess,
   ]);
 
   return (
     <StyledEngineProvider injectFirst>
       <CacheProvider value={cache}>
-        {(mutationDeleteRulesSection.isLoading ||
-          mutationDeleteUpdatesSection.isLoading) && (
-          <div>Suppression en cours...</div>
-        )}
+        {mutationDeleteSection.isLoading && <div>Suppression en cours...</div>}
 
-        {(mutationDeleteRulesSection.isError ||
-          mutationDeleteUpdatesSection.isError) && (
+        {mutationDeleteSection.isError && (
           <div>Une erreur est survenue lors de la suppression</div>
         )}
 
-        {(mutationDeleteRulesSection.isSuccess ||
-          mutationDeleteUpdatesSection.isSuccess) && (
+        {mutationDeleteSection.isSuccess && (
           <div>La suppression a été effectuée avec succès</div>
         )}
 
-        {(mutationPostRulesSection.isLoading ||
-          mutationPostUpdatesSection.isLoading) && (
-          <div>Enregistrement en cours...</div>
-        )}
+        {mutationPostSection.isLoading && <div>Enregistrement en cours...</div>}
 
-        {(mutationPostRulesSection.isError ||
-          mutationPostUpdatesSection.isError) && (
+        {mutationPostSection.isError && (
           <div>Une erreur est survenue lors de l&apos;enregistrement</div>
         )}
 
-        {(mutationPostRulesSection.isSuccess ||
-          mutationPostUpdatesSection.isSuccess) && (
+        {mutationPostSection.isSuccess && (
           <div>L&apos;enregistrement a été effectué avec succès</div>
         )}
 
-        {(mutationPutRulesSection.isLoading ||
-          mutationPutUpdatesSection.isLoading) && (
-          <div>Mise à jour en cours...</div>
-        )}
+        {mutationPutSection.isLoading && <div>Mise à jour en cours...</div>}
 
-        {(mutationPutRulesSection.isError ||
-          mutationPutUpdatesSection.isError) && (
+        {mutationPutSection.isError && (
           <div>Une erreur est survenue lors de la mise à jour</div>
         )}
 
-        {(mutationPutRulesSection.isSuccess ||
-          mutationPutUpdatesSection.isSuccess) && (
+        {mutationPutSection.isSuccess && (
           <div>La mise à jour a été effectuée avec succès</div>
         )}
 
@@ -264,12 +242,14 @@ const ControlledAccordion = ({
           expanded={expanded === dataSection.id}
           onChange={handleChange(dataSection.id)}
           ref={expanded ? accordionRef : null}
-          className={!save ? 'notSave' : ''}>
+          className={
+            (!save ? 'notSave' : '') || (category === 3 ? 'accordionSmall' : '')
+          }>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1bh-content'
             id='panel1bh-header'>
-            {dataSection.sectionTitle}
+            {dataSection.sectionTitle || dataSection.name}
             <button
               className='buttonTrash'
               onClick={(e) => {
@@ -280,42 +260,8 @@ const ControlledAccordion = ({
                     'Êtes-vous sûr de vouloir supprimer cette section ?'
                   )
                 ) {
-                  if (category === 1) {
-                    if (!dataSection.newSection) {
-                      mutationDeleteRulesSection.mutate(dataSection._id);
-                    }
-                    queryClient.setQueriesData(['rulesSections'], (oldData) => {
-                      return oldData.filter(
-                        (section) => section._id !== dataSection._id
-                      );
-                    });
-                  }
-                  if (category === 2) {
-                    if (!dataSection.newSection) {
-                      mutationDeleteUpdatesSection.mutate(dataSection._id);
-                    }
-                    queryClient.setQueriesData(
-                      ['updatesSections'],
-                      (oldData) => {
-                        return oldData.filter(
-                          (section) => section._id !== dataSection._id
-                        );
-                      }
-                    );
-                  }
-                  if (category === 3) {
-                    if (!dataSection.newSection) {
-                      mutationDeleteStreamersSections.mutate(dataSection._id);
-                    }
-                    queryClient.setQueriesData(
-                      ['StreamersSections'],
-                      (oldData) => {
-                        return oldData.filter(
-                          (section) => section._id !== dataSection._id
-                        );
-                      }
-                    );
-                  }
+                  const deleteMutation = mutationDeleteSection;
+                  deleteMutation.mutate(dataSection._id);
                 }
               }}>
               <img
@@ -330,51 +276,17 @@ const ControlledAccordion = ({
             {category === 1 && (
               <>
                 <form className='form'>
-                  <div className='buttonsContainer'>
-                    <button
-                      type='submit'
-                      className='saveButton'
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (newData.newSection) {
-                          mutationPostRulesSection.mutate(deleteNewSection());
-                        } else {
-                          mutationPutRulesSection.mutate(newData);
-                        }
-                      }}
-                      disabled={
-                        save
-                          ? true
-                          : false ||
-                            mutationPostRulesSection.isLoading ||
-                            mutationPutRulesSection.isLoading
-                      }>
-                      <img
-                        src={
-                          save
-                            ? '/assets/validation.svg'
-                            : '/assets/validationGreen.svg'
-                        }
-                        alt='confirm'
-                      />
-                    </button>
-                    <button
-                      type='button'
-                      className='cancelButton'
-                      onClick={() => {
-                        setNewData(data);
-                        handleChange(
-                          expanded === dataSection.id ? '' : dataSection.id
-                        )(null, !expanded);
-                      }}>
-                      <img
-                        src={
-                          save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'
-                        }
-                        alt='cancel'
-                      />
-                    </button>
-                  </div>
+                  <SaveAndCancelFormButtonsContainer
+                    data={data}
+                    newData={newData}
+                    setNewData={setNewData}
+                    mutationPostSection={mutationPostSection}
+                    mutationPutSection={mutationPutSection}
+                    deleteNewSection={deleteNewSection}
+                    save={save}
+                    expanded={expanded}
+                    handleChange={handleChange}
+                  />
                   <div className='titleAndURLContainer'>
                     <div className='columnContainer'>
                       <label className='label'>Titre de la section</label>
@@ -504,51 +416,18 @@ const ControlledAccordion = ({
             {category === 2 && (
               <>
                 <form className='form'>
-                  <div className='buttonsContainer'>
-                    <button
-                      type='submit'
-                      className='saveButton'
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (newData.newSection) {
-                          mutationPostUpdatesSection.mutate(deleteNewSection());
-                        } else {
-                          mutationPutUpdatesSection.mutate(newData);
-                        }
-                      }}
-                      disabled={
-                        save
-                          ? true
-                          : false ||
-                            mutationPostUpdatesSection.isLoading ||
-                            mutationPutUpdatesSection.isLoading
-                      }>
-                      <img
-                        src={
-                          save
-                            ? '/assets/validation.svg'
-                            : '/assets/validationGreen.svg'
-                        }
-                        alt='confirm'
-                      />
-                    </button>
-                    <button
-                      type='button'
-                      className='cancelButton'
-                      onClick={() => {
-                        setNewData(data);
-                        handleChange(
-                          expanded === dataSection.id ? '' : dataSection.id
-                        )(null, !expanded);
-                      }}>
-                      <img
-                        src={
-                          save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'
-                        }
-                        alt='cancel'
-                      />
-                    </button>
-                  </div>
+                  <SaveAndCancelFormButtonsContainer
+                    data={data}
+                    newData={newData}
+                    setNewData={setNewData}
+                    mutationPostSection={mutationPostSection}
+                    mutationPutSection={mutationPutSection}
+                    deleteNewSection={deleteNewSection}
+                    save={save}
+                    expanded={expanded}
+                    handleChange={handleChange}
+                  />
+
                   <div className='titleAndURLContainer'>
                     <div className='titleAndVersionContainer'>
                       <div className='columnContainer'>
@@ -616,6 +495,52 @@ const ControlledAccordion = ({
                         />
                       </div>
                     ))}
+                  </div>
+                </form>
+              </>
+            )}
+
+            {category === 3 && (
+              <>
+                <form className='form'>
+                  <SaveAndCancelFormButtonsContainer
+                    data={data}
+                    newData={newData}
+                    setNewData={setNewData}
+                    mutationPostSection={mutationPostSection}
+                    mutationPutSection={mutationPutSection}
+                    deleteNewSection={deleteNewSection}
+                    save={save}
+                    expanded={expanded}
+                    handleChange={handleChange}
+                  />
+                  <div className='columnContainer'>
+                    <label className='label'>Nom du streamer</label>
+                    <input
+                      className='input'
+                      type='text'
+                      value={newData.name}
+                      onChange={(e) => {
+                        setNewData({
+                          ...newData,
+                          name: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                  <div className='columnContainer'>
+                    <label className='label'>Lien de la chaine</label>
+                    <input
+                      className='input'
+                      type='text'
+                      value={newData.channelLink}
+                      onChange={(e) => {
+                        setNewData({
+                          ...newData,
+                          channelLink: e.target.value,
+                        });
+                      }}
+                    />
                   </div>
                 </form>
               </>

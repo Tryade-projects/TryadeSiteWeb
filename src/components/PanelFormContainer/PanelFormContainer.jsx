@@ -17,10 +17,15 @@ const PanelFormContainer = ({
   category,
 }) => {
   return (
-    <div className='panelFormContainer'>
-      {dataSections.map((dataSection, index) => (
+    <div
+      className={
+        category === 3
+          ? 'sectionWrap streamersFormContainer'
+          : 'panelFormContainer'
+      }>
+      {dataSections.map((dataSection) => (
         <ControlledAccordion
-          key={`${index} ${dataSection.id}`}
+          key={dataSection.id}
           expanded={expanded}
           handleChange={handleChange}
           dataSection={dataSection}

@@ -4,36 +4,45 @@ import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
 import PanelFormContainer from '../../components/PanelFormContainer/PanelFormContainer';
-import StreamersForm from '../../components/StreamersForm/StreamersForm';
-
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   fetchRulesSections,
   fetchUpdatesSections,
+  fetchStreamersSections,
 } from '../../queries/fetchAPI';
 
 const RULES_QUERY_KEY = 'rulesSections';
 const UPDATES_QUERY_KEY = 'updatesSections';
+const STREAMERS_QUERY_KEY = 'streamersSections';
 
 const PanelPage = () => {
-  const { data: rulesSections, status: rulesStatus } = useQuery({
-    queryKey: [RULES_QUERY_KEY],
-    queryFn: fetchRulesSections,
-
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
-
-  const { data: updatesSections, status: updatesSectionsStatus } = useQuery({
-    queryKey: [UPDATES_QUERY_KEY],
-    queryFn: fetchUpdatesSections,
-
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
-
   const queryClient = useQueryClient();
 
-  const [activeCategories, setActiveCategories] = useState(1);
+  const [activeCategory, setActiveCategory] = useState(1);
   const [expanded, setExpanded] = useState('');
+
+  let queryConfig;
+  if (activeCategory === 1) {
+    queryConfig = {
+      queryKey: [RULES_QUERY_KEY],
+      queryFn: fetchRulesSections,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    };
+  } else if (activeCategory === 2) {
+    queryConfig = {
+      queryKey: [UPDATES_QUERY_KEY],
+      queryFn: fetchUpdatesSections,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    };
+  } else {
+    queryConfig = {
+      queryKey: [STREAMERS_QUERY_KEY],
+      queryFn: fetchStreamersSections,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    };
+  }
+
+  const { data: sections, status: sectionsStatus } = useQuery(queryConfig);
 
   /**
    * The handleChange function is used to toggle the expansion state of a panel in a React component.
@@ -51,50 +60,42 @@ const PanelPage = () => {
     { id: 3, name: 'Streamers' },
   ];
 
-  function selectDataToDisplay() {
-    if (activeCategories === 1) {
-      return 'rules_section';
-    } else if (activeCategories === 2) {
-      return 'updates_section';
-    } else if (activeCategories === 3) {
-      return 'Streamers_section';
-    }
-  }
-
-  const selectSectionToDisplay =
-    activeCategories === 1 ? (
-      <PanelFormContainer
-        dataSections={rulesSections}
-        expanded={expanded}
-        handleChange={handleChange}
-        category={activeCategories}
-      />
-    ) : activeCategories === 2 ? (
-      <PanelFormContainer
-        dataSections={updatesSections}
-        expanded={expanded}
-        handleChange={handleChange}
-        category={activeCategories}
-      />
-    ) : (
-      <StreamersForm />
-    );
-
   const selectTextButtonToDisplay =
-    activeCategories === 1
+    activeCategory === 1
       ? 'Ajouter une section'
-      : activeCategories === 2
+      : activeCategory === 2
       ? 'Ajouter un patchnote'
       : 'Ajouter un streameur';
 
   function selectFunctionToUse() {
-    if (activeCategories === 1) {
+    if (activeCategory === 1) {
       addRulesSection();
-    } else if (activeCategories === 2) {
+    } else if (activeCategory === 2) {
       addUpdate();
-    } else if (activeCategories === 3) {
-      addStreameur();
+    } else if (activeCategory === 3) {
+      addStreamer();
     }
+  }
+
+  function addStreamer() {
+    const newSection = {
+      id: uuidv4(),
+      urlImageAvatar: '/images/avatar.png',
+      name: 'Cristiano_CR7',
+      nbOfFollowers: 257,
+      nbOfViewers: 257,
+      date: new Date().toLocaleDateString(),
+      urlTwitch: 'urlTwitch',
+      urlBackground: '/images/streamer.jpg',
+      channelLink: 'channelLink',
+      newSection: true,
+    };
+    queryClient.setQueryData([STREAMERS_QUERY_KEY], (oldData) => [
+      ...oldData,
+      newSection,
+    ]);
+
+    setExpanded(newSection.id);
   }
 
   function addUpdate() {
@@ -159,51 +160,54 @@ const PanelPage = () => {
 
     setExpanded(newSection.id);
   }
-
+  console.log(sectionsStatus);
   return (
     <main className='page'>
-      {(rulesStatus || updatesSectionsStatus) === 'loading' ? (
-        <p>Chargement en cours...</p>
-      ) : (rulesStatus || updatesSectionsStatus) === 'error' ? (
-        <p>Erreur : Impossible de récupérer les données.</p>
-      ) : (
-        <>
-          <div className='titleButtonContainer'>
-            <Title
-              mainTitle='Panel Gestion'
-              shadowTitle='ADMINISTRATION'
+      <>
+        <div className='titleButtonContainer'>
+          <Title
+            mainTitle='Panel Gestion'
+            shadowTitle='ADMINISTRATION'
+          />
+          <Button
+            title={selectTextButtonToDisplay}
+            onClick={selectFunctionToUse}
+          />
+        </div>
+        <div className='panelPageContent'>
+          <aside className='panelPageContentAside'>
+            <ButtonAside
+              text='Vous êtes connectés: '
+              userName='Zoral'
             />
-            <Button
-              title={selectTextButtonToDisplay}
-              onClick={selectFunctionToUse}
-            />
-          </div>
-          <div className='panelPageContent'>
-            <aside className='panelPageContentAside'>
-              <ButtonAside
-                text='Vous êtes connectés: '
-                userName='Zoral'
-              />
 
-              <nav className='panelPageContentAsideNav'>
-                {CATEGORIES.map((categorie) => (
-                  <ButtonAside
-                    key={categorie.id}
-                    text={categorie.name}
-                    activeCategories={activeCategories === categorie.id}
-                    setActiveCategories={() =>
-                      setActiveCategories(categorie.id)
-                    }
-                  />
-                ))}
-              </nav>
-            </aside>
+            <nav className='panelPageContentAsideNav'>
+              {CATEGORIES.map((categorie) => (
+                <ButtonAside
+                  key={categorie.id}
+                  text={categorie.name}
+                  activeCategory={activeCategory === categorie.id}
+                  setActiveCategory={() => setActiveCategory(categorie.id)}
+                />
+              ))}
+            </nav>
+          </aside>
+          {sectionsStatus === 'loading' ? (
+            <p>Chargement en cours...</p>
+          ) : sectionsStatus === 'error' ? (
+            <p>Erreur : Impossible de récupérer les données.</p>
+          ) : (
             <section className='panelPageContentSection'>
-              {selectSectionToDisplay}
+              <PanelFormContainer
+                dataSections={sections}
+                expanded={expanded}
+                handleChange={handleChange}
+                category={activeCategory}
+              />
             </section>
-          </div>
-        </>
-      )}
+          )}
+        </div>
+      </>
     </main>
   );
 };
