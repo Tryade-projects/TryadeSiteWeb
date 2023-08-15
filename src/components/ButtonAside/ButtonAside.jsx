@@ -23,7 +23,6 @@ const ButtonAside = ({
    */
   const displayIcon = (text, activeCategory) => {
     // Mapping des chemins d'images pour chaque état (active ou non)
-    console.log(activeCategory);
     const imagePaths = {
       Règlement: activeCategory
         ? '/assets/shieldWhite.svg'

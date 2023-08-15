@@ -6,25 +6,39 @@ import React from 'react';
  * @param {object} props.data - The data of the section
  * @param {object} props.newData - The new data of the section
  * @param {Function} props.setNewData - The function to set the new data of the section
- * @param {object} props.mutationPostSection - The mutation to post a section
- * @param {object} props.mutationPutSection - The mutation to put a section
- * @param {object} props.deleteNewSection - The function to delete the new section
  * @param {boolean} props.save - The state of the save button
- * @param {string} props.expanded - The state of the accordion
- * @param {Function} props.handleChange - The function to set the state of the accordion
+ * @param {object=} props.mutationPostSection - The mutation to post a section
+ * @param {object=} props.mutationPutSection - The mutation to put a section
+ * @param {object=} props.mutationPutOrderSections - The mutation to put the order of the sections
+ * @param {object=} props.deleteNewSection - The function to delete the new section
+ * @param {string=} props.expanded - The state of the accordion
+ * @param {Function=} props.handleChange - The function to set the state of the accordion
+ *
  * @returns {JSX.Element} - The save and cancel buttons
  */
 const SaveAndCancelFormButtonsContainer = ({
   data,
   newData,
   setNewData,
+  save,
   mutationPostSection,
   mutationPutSection,
+  mutationPutOrderSections,
   deleteNewSection,
-  save,
   expanded,
-  handleChange,
+  setExpanded,
 }) => {
+  console.log({ newData, mutationPostSection });
+
+  function disabledForPutAndPost() {
+    return save
+      ? true
+      : false || mutationPostSection.isLoading || mutationPutSection.isLoading;
+  }
+
+  function disabledForPutOrder() {
+    return save ? true : false || mutationPutOrderSections.isLoading;
+  }
   return (
     <div className='saveAndCancelFormButtonsContainer'>
       <button
@@ -32,18 +46,20 @@ const SaveAndCancelFormButtonsContainer = ({
         className='saveButton'
         onClick={(e) => {
           e.preventDefault();
-          if (newData.newSection) {
-            mutationPostSection.mutate(deleteNewSection());
+          if (mutationPutOrderSections) {
+            mutationPutOrderSections.mutate(newData);
           } else {
-            mutationPutSection.mutate(newData);
+            if (newData.newSection) {
+              mutationPostSection.mutate(deleteNewSection());
+            } else {
+              mutationPutSection.mutate(newData);
+            }
           }
         }}
         disabled={
-          save
-            ? true
-            : false ||
-              mutationPostSection.isLoading ||
-              mutationPutSection.isLoading
+          mutationPutOrderSections
+            ? disabledForPutOrder()
+            : disabledForPutAndPost()
         }>
         <img
           src={save ? '/assets/validation.svg' : '/assets/validationGreen.svg'}
@@ -55,7 +71,7 @@ const SaveAndCancelFormButtonsContainer = ({
         className='cancelButton'
         onClick={() => {
           setNewData(data);
-          handleChange(expanded === data.id ? '' : data.id)(null, !expanded);
+          setExpanded('');
         }}>
         <img
           src={save ? '/assets/cancel.svg' : '/assets/cancelRed.svg'}

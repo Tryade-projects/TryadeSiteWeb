@@ -44,16 +44,17 @@ const PanelPage = () => {
 
   const { data: sections, status: sectionsStatus } = useQuery(queryConfig);
 
-  /**
-   * The handleChange function is used to toggle the expansion state of a panel in a React component.
-   * @param {string} panel - The panel to expand
-   * @returns {function} - The function to set the state of the expanded panel
-   */
-  const handleChange =
-    (panel) =>
-    (/** @type { MouseEvent } */ _event, /** @type {boolean} */ isExpanded) => {
-      setExpanded(isExpanded ? panel : '');
-    };
+  // /**
+  //  * The handleChange function is used to toggle the expansion state of a panel in a React component.
+  //  * @param {string} panel - The panel to expand
+  //  * @returns {function} - The function to set the state of the expanded panel
+  //  */
+  // const handleChange =
+  //   (panel) =>
+  //   (/** @type { MouseEvent } */ _event, /** @type {boolean} */ isExpanded) => {
+  //     console.log(panel, isExpanded);
+  //     setExpanded(isExpanded ? panel : '');
+  //   };
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
     { id: 2, name: 'Updates' },
@@ -187,7 +188,10 @@ const PanelPage = () => {
                   key={categorie.id}
                   text={categorie.name}
                   activeCategory={activeCategory === categorie.id}
-                  setActiveCategory={() => setActiveCategory(categorie.id)}
+                  setActiveCategory={() => {
+                    setExpanded('');
+                    setActiveCategory(categorie.id);
+                  }}
                 />
               ))}
             </nav>
@@ -201,7 +205,7 @@ const PanelPage = () => {
               <PanelFormContainer
                 dataSections={sections}
                 expanded={expanded}
-                handleChange={handleChange}
+                setExpanded={setExpanded}
                 category={activeCategory}
               />
             </section>

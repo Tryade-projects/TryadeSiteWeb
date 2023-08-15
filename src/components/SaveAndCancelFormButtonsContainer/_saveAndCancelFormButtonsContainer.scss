@@ -1,8 +1,11 @@
 .saveAndCancelFormButtonsContainer {
   display: flex;
+  justify-content: flex-end;
   gap: 1rem;
   position: absolute;
-  right: 1rem;
+  top: -2rem;
+  width: 100%;
+
   button {
     position: relative;
     &:hover {
@@ -14,4 +17,8 @@
   .saveButton:disabled {
     cursor: not-allowed;
   }
+}
+
+.form .saveAndCancelFormButtonsContainer {
+  top: 0;
 }
