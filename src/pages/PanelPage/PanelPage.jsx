@@ -85,7 +85,6 @@ const PanelPage = () => {
       name: 'Cristiano_CR7',
       nbOfFollowers: 257,
       nbOfViewers: 257,
-      date: new Date().toLocaleDateString(),
       urlTwitch: 'urlTwitch',
       urlBackground: '/images/streamer.jpg',
       channelLink: 'channelLink',
@@ -104,7 +103,7 @@ const PanelPage = () => {
       id: uuidv4(),
       sectionTitle: 'Nouvelle section',
       version: '1.0.0',
-      urlBanner: 'test',
+      urlBanner: '/images/updateBanner.png',
       colorLine: '#000000',
       details: [
         {
@@ -142,7 +141,7 @@ const PanelPage = () => {
     const newSection = {
       id: uuidv4(),
       sectionTitle: 'Nouvelle section',
-      urlBanner: 'test',
+      urlBanner: '/images/bannerDiscordRules.png',
       colorLine: '#000000',
       rules: [
         {

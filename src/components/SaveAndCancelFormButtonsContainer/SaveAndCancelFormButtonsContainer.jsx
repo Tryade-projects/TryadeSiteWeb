@@ -25,11 +25,7 @@ const SaveAndCancelFormButtonsContainer = ({
   mutationPutSection,
   mutationPutOrderSections,
   deleteNewSection,
-  expanded,
-  setExpanded,
 }) => {
-  console.log({ newData, mutationPostSection });
-
   function disabledForPutAndPost() {
     return save
       ? true
@@ -52,7 +48,9 @@ const SaveAndCancelFormButtonsContainer = ({
             if (newData.newSection) {
               mutationPostSection.mutate(deleteNewSection());
             } else {
-              mutationPutSection.mutate(newData);
+              const newDataCopy = { ...newData };
+              newDataCopy.date = new Date();
+              mutationPutSection.mutate(newDataCopy);
             }
           }
         }}

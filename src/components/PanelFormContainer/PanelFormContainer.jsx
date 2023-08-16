@@ -38,8 +38,13 @@ const PanelFormContainer = ({
       url = `streamersSections`;
     }
     return {
-      mutationFn: (accordionsData) => {
-        return axios.put(`${baseUrl}${url}`, accordionsData);
+      /**
+       *
+       * @param {Array} newOrder - The new order of the sections
+       * @returns  {Promise} - The promise to put the order of the sections
+       */
+      mutationFn: (newOrder) => {
+        return axios.put(`${baseUrl}${url}`, newOrder);
       },
       onSuccess: () => {
         queryClient.invalidateQueries([url]);
