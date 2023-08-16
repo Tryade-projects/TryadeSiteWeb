@@ -19,6 +19,13 @@ async function fetchUpdatesSections() {
   return data;
 }
 
+const fetchStreamersSectionsPage = async ({ pageParam = 0 }) => {
+  const data = await fetchData(
+    `http://localhost:5000/streamersSections?cursor=${pageParam}`
+  );
+  return data;
+};
+
 async function fetchStreamersSections() {
   const data = await fetchData('http://localhost:5000/streamersSections');
   return data;
@@ -28,5 +35,6 @@ export {
   fetchRulesSectionsPage,
   fetchRulesSections,
   fetchUpdatesSections,
+  fetchStreamersSectionsPage,
   fetchStreamersSections,
 };
