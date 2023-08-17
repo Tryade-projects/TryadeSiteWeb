@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
@@ -244,7 +243,4 @@ export default function Home({ ifMobile }) {
       </main>
     </>
   );
-}
-function useUpdatesSectionsQuery() {
-  throw new Error('Function not implemented.');
 }
