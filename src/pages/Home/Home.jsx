@@ -115,7 +115,7 @@ export default function Home({ ifMobile }) {
               <Button title='Voir tous nos streamers' />
             </Link>
           </div>
-          <div className='articleContainer'>
+          <div className='sectionWrap'>
             {streamersStatus === 'loading' ? (
               <p>Chargement en cours...</p>
             ) : streamersStatus === 'error' ? (
@@ -143,7 +143,7 @@ export default function Home({ ifMobile }) {
               <Button title='Voir toutes nos mises à jour' />
             </Link>
           </div>
-          <div className='articleContainer'>
+          <div className='sectionWrap'>
             {updatesStatus === 'loading' ? (
               <p>Chargement en cours...</p>
             ) : updatesStatus === 'error' ? (
@@ -199,7 +199,7 @@ export default function Home({ ifMobile }) {
             text='Une fois FiveM installé, ouvrez le et appuyez sur jouer puis recherchez Tryade. En cas de problème contactez nous sur Discord'
             shortText='Ouvrez FiveM et recherchez “Tryade”'
             buttonIcon='assets/controller.svg'
-            buttonTitle='joeur'
+            buttonTitle='jouer'
             iconAlt="Icone d'une manette de jeu"
           />
         </section>
@@ -209,7 +209,7 @@ export default function Home({ ifMobile }) {
             mainTitle='Nos réseaux'
             shadowTitle='NETWORK'
           />
-          <div className='articleContainer'>
+          <div className='sectionWrap'>
             <NetworkContainer
               src='assets/twitter.svg'
               backgroundColorClass='backgroundColorClassSecondaryColor'
