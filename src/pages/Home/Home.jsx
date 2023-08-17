@@ -7,11 +7,9 @@ import NetworkContainer from '../../components/NetworkContainer/NetworkContainer
 import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import { Link } from 'react-router-dom';
-import { fetchUpdatesSections } from '../../queries/fetchAPI';
 import useStreamersSectionQuery from '../../hooks/useStreamersSectionQuery';
+import useUpdatesSectionQuery from '../../hooks/useUpdatesSectionQuery';
 import Streamer from '../../components/Streamer/Streamer';
-
-const QUERY_KEY_UPDATE = ['update'];
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -28,13 +26,10 @@ export default function Home({ ifMobile }) {
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
 
-  const { data: updatesData, status: updatesStatus } = useQuery({
-    queryKey: QUERY_KEY_UPDATE,
-    queryFn: fetchUpdatesSections,
-  });
-
   const { data: streamersData, status: streamersStatus } =
     useStreamersSectionQuery();
+
+  const { data: updatesData, status: updatesStatus } = useUpdatesSectionQuery();
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -156,18 +151,15 @@ export default function Home({ ifMobile }) {
               <p>Erreur : Impossible de récupérer les données.</p>
             ) : (
               <>
-                {updatesData
-                  .sort((a, b) => b.id - a.id)
-                  .slice(0, 3)
-                  .map((update) => (
-                    <Update
-                      key={update.id}
-                      updateTitle={update.sectionTitle}
-                      updateVersion={update.version}
-                      updateText={update.details[0].content}
-                      updateThumbnail={update.urlBanner}
-                    />
-                  ))}
+                {updatesData?.pages[0].map((update) => (
+                  <Update
+                    key={update.id}
+                    updateTitle={update.sectionTitle}
+                    updateVersion={update.version}
+                    updateText={update.details[0].content}
+                    updateThumbnail={update.urlBanner}
+                  />
+                ))}
               </>
             )}
           </div>
@@ -252,4 +244,7 @@ export default function Home({ ifMobile }) {
       </main>
     </>
   );
+}
+function useUpdatesSectionsQuery() {
+  throw new Error('Function not implemented.');
 }
