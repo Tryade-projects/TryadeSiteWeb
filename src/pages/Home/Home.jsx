@@ -8,6 +8,8 @@ import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import { Link } from 'react-router-dom';
 import { fetchUpdatesSections } from '../../queries/fetchAPI';
+import useStreamersSectionQuery from '../../hooks/useStreamersSectionQuery';
+import Streamer from '../../components/Streamer/Streamer';
 
 const QUERY_KEY_UPDATE = ['update'];
 
@@ -26,10 +28,13 @@ export default function Home({ ifMobile }) {
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
 
-  const { data, status } = useQuery({
+  const { data: updatesData, status: updatesStatus } = useQuery({
     queryKey: QUERY_KEY_UPDATE,
     queryFn: fetchUpdatesSections,
   });
+
+  const { data: streamersData, status: streamersStatus } =
+    useStreamersSectionQuery();
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -43,7 +48,7 @@ export default function Home({ ifMobile }) {
       <div className='imageBackground homeBackground' />
       <main className='home'>
         <section className='homeSection screenHeightWithoutHeader page'>
-          <article className='titleArticle'>
+          <article className='article titleArticle'>
             <Title
               mainTitle='Qu’attends-tu pour nous rejoindre ?'
               shadowTitle='DISCORD'
@@ -60,7 +65,7 @@ export default function Home({ ifMobile }) {
               alt='Discord'
             />
           </article>
-          <article className='argumentsArticle'>
+          <article className='article argumentsArticle'>
             <Title
               mainTitle='Pourquoi nous?'
               shadowTitle='TRYADE'
@@ -106,7 +111,7 @@ export default function Home({ ifMobile }) {
 
         <section
           ref={nextSectionRef}
-          className='streamerSection screenHeightWithoutHeader sectionWrap page'>
+          className='streamerSection screenHeightWithoutHeader  page'>
           <div className='headerSection'>
             <Title
               mainTitle='Nos Streamers'
@@ -115,6 +120,22 @@ export default function Home({ ifMobile }) {
             <Link to='/home/streamers'>
               <Button title='Voir tous nos streamers' />
             </Link>
+          </div>
+          <div className='articleContainer'>
+            {streamersStatus === 'loading' ? (
+              <p>Chargement en cours...</p>
+            ) : streamersStatus === 'error' ? (
+              <p>Erreur : Impossible de récupérer les données.</p>
+            ) : (
+              <>
+                {streamersData?.pages[0].map((section) => (
+                  <Streamer
+                    key={section.id}
+                    sectionData={section}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </section>
 
@@ -129,13 +150,13 @@ export default function Home({ ifMobile }) {
             </Link>
           </div>
           <div className='articleContainer'>
-            {status === 'loading' ? (
+            {updatesStatus === 'loading' ? (
               <p>Chargement en cours...</p>
-            ) : status === 'error' ? (
+            ) : updatesStatus === 'error' ? (
               <p>Erreur : Impossible de récupérer les données.</p>
             ) : (
               <>
-                {data
+                {updatesData
                   .sort((a, b) => b.id - a.id)
                   .slice(0, 3)
                   .map((update) => (
