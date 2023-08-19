@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  useIsAuthenticated,
+  useAuthUser /*, useSignOut*/,
+} from 'react-auth-kit';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import ButtonAside from '../../components/ButtonAside/ButtonAside';
@@ -10,12 +14,17 @@ import {
   fetchUpdatesSections,
   fetchStreamersSections,
 } from '../../queries/fetchAPI';
+import { Navigate } from 'react-router';
 
 const RULES_QUERY_KEY = 'rulesSections';
 const UPDATES_QUERY_KEY = 'updatesSections';
 const STREAMERS_QUERY_KEY = 'streamersSections';
 
 const PanelPage = () => {
+  const isAuthenticated = useIsAuthenticated();
+  const authUser = useAuthUser();
+  // const signOut = useSignOut();
+
   const queryClient = useQueryClient();
 
   const [activeCategory, setActiveCategory] = useState(1);
@@ -44,17 +53,6 @@ const PanelPage = () => {
 
   const { data: sections, status: sectionsStatus } = useQuery(queryConfig);
 
-  // /**
-  //  * The handleChange function is used to toggle the expansion state of a panel in a React component.
-  //  * @param {string} panel - The panel to expand
-  //  * @returns {function} - The function to set the state of the expanded panel
-  //  */
-  // const handleChange =
-  //   (panel) =>
-  //   (/** @type { MouseEvent } */ _event, /** @type {boolean} */ isExpanded) => {
-  //     console.log(panel, isExpanded);
-  //     setExpanded(isExpanded ? panel : '');
-  //   };
   const CATEGORIES = [
     { id: 1, name: 'Règlement' },
     { id: 2, name: 'Updates' },
@@ -160,58 +158,62 @@ const PanelPage = () => {
 
     setExpanded(newSection.id);
   }
+  if (!isAuthenticated()) {
+    return <Navigate to='/home' />;
+  }
   console.log(sectionsStatus);
   return (
+    // <>
     <main className='page'>
-      <>
-        <div className='titleButtonContainer'>
-          <Title
-            mainTitle='Panel Gestion'
-            shadowTitle='ADMINISTRATION'
+      <div className='titleButtonContainer'>
+        <Title
+          mainTitle='Panel Gestion'
+          shadowTitle='ADMINISTRATION'
+        />
+        <Button
+          title={selectTextButtonToDisplay}
+          onClick={selectFunctionToUse}
+        />
+      </div>
+      <div className='panelPageContent'>
+        <aside className='panelPageContentAside'>
+          <ButtonAside
+            text='Vous êtes connectés: '
+            userName={authUser()?.username}
           />
-          <Button
-            title={selectTextButtonToDisplay}
-            onClick={selectFunctionToUse}
-          />
-        </div>
-        <div className='panelPageContent'>
-          <aside className='panelPageContentAside'>
-            <ButtonAside
-              text='Vous êtes connectés: '
-              userName='Zoral'
-            />
 
-            <nav className='panelPageContentAsideNav'>
-              {CATEGORIES.map((categorie) => (
-                <ButtonAside
-                  key={categorie.id}
-                  text={categorie.name}
-                  activeCategory={activeCategory === categorie.id}
-                  setActiveCategory={() => {
-                    setExpanded('');
-                    setActiveCategory(categorie.id);
-                  }}
-                />
-              ))}
-            </nav>
-          </aside>
-          {sectionsStatus === 'loading' ? (
-            <p>Chargement en cours...</p>
-          ) : sectionsStatus === 'error' ? (
-            <p>Erreur : Impossible de récupérer les données.</p>
-          ) : (
-            <section className='panelPageContentSection'>
-              <PanelFormContainer
-                dataSections={sections}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                category={activeCategory}
+          <nav className='panelPageContentAsideNav'>
+            {CATEGORIES.map((categorie) => (
+              <ButtonAside
+                key={categorie.id}
+                text={categorie.name}
+                activeCategory={activeCategory === categorie.id}
+                setActiveCategory={() => {
+                  setExpanded('');
+                  setActiveCategory(categorie.id);
+                }}
               />
-            </section>
-          )}
-        </div>
-      </>
+            ))}
+          </nav>
+        </aside>
+        {sectionsStatus === 'loading' ? (
+          <p>Chargement en cours...</p>
+        ) : sectionsStatus === 'error' ? (
+          <p>Erreur : Impossible de récupérer les données.</p>
+        ) : (
+          <section className='panelPageContentSection'>
+            <PanelFormContainer
+              dataSections={sections}
+              expanded={expanded}
+              setExpanded={setExpanded}
+              category={activeCategory}
+            />
+          </section>
+        )}
+      </div>
     </main>
+    /* <button onClick={() => signOut()}>Sign Out</button>
+    </> */
   );
 };
 

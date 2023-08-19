@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { RequireAuth } from 'react-auth-kit';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -99,6 +100,14 @@ function App() {
           path='/home/panel'
           element={<PanelPage />}
         />
+        {/* <Route
+          path={'/home/panel'}
+          element={
+            <RequireAuth loginPath={'/home/panel'}>
+              <PanelPage />
+            </RequireAuth>
+          }
+        /> */}
 
         <Route
           path='/rules'
