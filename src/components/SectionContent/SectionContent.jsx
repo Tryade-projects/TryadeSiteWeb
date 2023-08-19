@@ -8,8 +8,11 @@ import List from '../../components/List/List';
  * @param {object} props.sectionData - Data of the section
  * @param {string} props.sectionData.urlBanner - Url of the banner
  * @param {string} props.sectionData.colorLine - Color of the line
- * @param {array} props.sectionData.rules - Rules of the section
- * @param {Date} props.sectionData.date - Date of the section
+ * @param {array=} props.sectionData.rules - Rules of the section (only for rules)
+ * @param {array=} props.sectionData.details - Details of the section (only for updates)
+ * @param {Date=} props.sectionData.date - Date of the section (only for updates)
+ * @param {string=} props.sectionData.version - Version of the section (only for updates)
+ * @param {string=} props.sectionData.sectionTitle - Title of the section (only for updates)
  * @returns  {JSX.Element} - Rendered SectionContent component
  */
 const SectionContent = ({ sectionData }) => {
@@ -18,9 +21,11 @@ const SectionContent = ({ sectionData }) => {
       <Banner
         url={sectionData.urlBanner}
         date={sectionData.date}
+        version={sectionData.version}
+        updateTitle={sectionData.sectionTitle}
       />
       <List
-        rules={sectionData.rules}
+        datas={sectionData.rules || sectionData.details}
         colorLine={sectionData.colorLine}
       />
     </div>

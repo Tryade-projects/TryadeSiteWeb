@@ -4,22 +4,22 @@ import ListTitle from '../ListTitle/ListTitle';
 /**
  * List component
  * @param {object} props
- * @param {array} props.rules - Text to display in the background
+ * @param {array=} props.datas - Array of data
  * @param {string} props.colorLine - Color of the line
  * @returns {JSX.Element} - Rendered List component
  */
-const List = ({ rules, colorLine }) => {
-  console.log({ rules });
+const List = ({ datas, colorLine }) => {
+  console.log({ datas });
   return (
     <div className='list'>
-      {rules.map((rule) => {
+      {datas?.map((data, index) => {
         return (
           <ListTitle
-            key={rule.id}
-            textBackground={rule.textBackground}
+            key={data.id}
+            textBackground={data.textBackground || `0${index + 1}`}
             colorLine={colorLine}
-            title={rule.title}
-            text={rule.text}
+            title={data.title}
+            text={data.text || data.content}
           />
         );
       })}

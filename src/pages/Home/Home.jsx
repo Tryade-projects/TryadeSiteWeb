@@ -147,7 +147,9 @@ export default function Home({ ifMobile }) {
             {updatesStatus === 'loading' ? (
               <p>Chargement en cours...</p>
             ) : updatesStatus === 'error' ? (
-              <p>Erreur : Impossible de récupérer les données.</p>
+              <p>
+                Erreur : Impossible de récupérer les données: {error.message}
+              </p>
             ) : (
               <>
                 {updatesData?.pages[0].map((update) => (
@@ -157,6 +159,7 @@ export default function Home({ ifMobile }) {
                     updateVersion={update.version}
                     updateText={update.details[0].content}
                     updateThumbnail={update.urlBanner}
+                    updateId={update.id}
                   />
                 ))}
               </>
