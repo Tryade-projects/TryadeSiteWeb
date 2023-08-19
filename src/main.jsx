@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { AuthProvider } from 'react-auth-kit';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -14,7 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <DndProvider backend={HTML5Backend}>
-        <App />
+        <AuthProvider
+          authType={'cookie'}
+          authName={'_auth'}
+          cookieDomain={window.location.hostname}
+          cookieSecure={window.location.protocol === 'https:'}>
+          <App />
+        </AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </DndProvider>
     </QueryClientProvider>

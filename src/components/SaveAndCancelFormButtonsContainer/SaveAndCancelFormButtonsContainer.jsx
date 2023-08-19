@@ -12,8 +12,7 @@ import React from 'react';
  * @param {object=} props.mutationPutOrderSections - The mutation to put the order of the sections
  * @param {object=} props.deleteNewSection - The function to delete the new section
  * @param {string=} props.expanded - The state of the accordion
- * @param {Function=} props.handleChange - The function to set the state of the accordion
- *
+ * @param {Function=} props.setExpanded - The function to set the state of the accordion
  * @returns {JSX.Element} - The save and cancel buttons
  */
 const SaveAndCancelFormButtonsContainer = ({
@@ -25,6 +24,7 @@ const SaveAndCancelFormButtonsContainer = ({
   mutationPutSection,
   mutationPutOrderSections,
   deleteNewSection,
+  setExpanded,
 }) => {
   function disabledForPutAndPost() {
     return save
