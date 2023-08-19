@@ -11,7 +11,9 @@ import { AuthProvider } from 'react-auth-kit';
 // Create a client
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(
+  document.getElementById('root') || document.createElement('root')
+).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <DndProvider backend={HTML5Backend}>
