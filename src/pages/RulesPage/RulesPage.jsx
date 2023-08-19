@@ -3,21 +3,9 @@ import { useInView } from 'react-intersection-observer';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import SectionContent from '../../components/SectionContent/SectionContent';
-// import useRulesSectionQuery from '../../hooks/useRulesSectionQuery';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { fetchRulesSectionsPage } from '../../queries/fetchAPI';
-
-const QUERY_KEY_RULES_SECTION = ['rulesSectionsPages'];
+import useRulesSectionQuery from '../../hooks/useRulesSectionQuery';
 
 const RulesPage = () => {
-  // const {
-  //   data,
-  //   fetchNextPage,
-  //   hasNextPage,
-  //   isFetching,
-  //   isFetchingNextPage,
-  //   status,
-  // } = useRulesSectionQuery();
   const {
     data,
     fetchNextPage,
@@ -25,12 +13,7 @@ const RulesPage = () => {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery({
-    queryKey: QUERY_KEY_RULES_SECTION,
-    queryFn: fetchRulesSectionsPage,
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.length === 0 ? false : pages.length,
-  });
+  } = useRulesSectionQuery();
 
   const { ref, inView } = useInView({
     threshold: 0,
