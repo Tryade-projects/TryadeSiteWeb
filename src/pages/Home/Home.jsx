@@ -25,10 +25,17 @@ export default function Home({ ifMobile }) {
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
 
-  const { data: streamersData, status: streamersStatus } =
-    useStreamersSectionQuery();
+  const {
+    data: streamersData,
+    status: streamersStatus,
+    error: streamersError,
+  } = useStreamersSectionQuery();
 
-  const { data: updatesData, status: updatesStatus } = useUpdatesSectionQuery();
+  const {
+    data: updatesData,
+    status: updatesStatus,
+    error: updatesError,
+  } = useUpdatesSectionQuery();
 
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
@@ -119,7 +126,10 @@ export default function Home({ ifMobile }) {
             {streamersStatus === 'loading' ? (
               <p>Chargement en cours...</p>
             ) : streamersStatus === 'error' ? (
-              <p>Erreur : Impossible de récupérer les données.</p>
+              <p>
+                Erreur : Impossible de récupérer les données:{' '}
+                {streamersError.message}
+              </p>
             ) : (
               <>
                 {streamersData?.pages[0].map((section) => (
@@ -148,7 +158,8 @@ export default function Home({ ifMobile }) {
               <p>Chargement en cours...</p>
             ) : updatesStatus === 'error' ? (
               <p>
-                Erreur : Impossible de récupérer les données: {error.message}
+                Erreur : Impossible de récupérer les données:{' '}
+                {updatesError.message}
               </p>
             ) : (
               <>
