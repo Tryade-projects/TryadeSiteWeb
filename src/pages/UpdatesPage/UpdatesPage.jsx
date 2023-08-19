@@ -8,7 +8,6 @@ import { useInView } from 'react-intersection-observer';
 const UpdatesPage = () => {
   const {
     data,
-    error,
     fetchNextPage,
     hasNextPage,
     isFetching,
@@ -25,6 +24,7 @@ const UpdatesPage = () => {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  console.log({ data });
 
   return (
     <main className='page'>
@@ -33,7 +33,7 @@ const UpdatesPage = () => {
           mainTitle='Mises à jour'
           shadowTitle='DEVBLOG'
         />
-        <Button title='Voir toutes nos mise à jour' />
+        <Button title='Proposez vos idées' />
       </div>
       <section
         id='updates'
@@ -53,6 +53,7 @@ const UpdatesPage = () => {
                     updateVersion={section.version}
                     updateText={section.details[0].content}
                     updateThumbnail={section.urlBanner}
+                    updateId={section.id}
                   />
                 ))}
               </React.Fragment>

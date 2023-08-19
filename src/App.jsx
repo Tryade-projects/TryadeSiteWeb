@@ -10,6 +10,7 @@ import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
 import LoginPage from './pages/LoginPage/LoginPage';
 import PanelPage from './pages/PanelPage/PanelPage';
+import UpdateDetailsPage from './pages/UpdateDetailsPage/UpdateDetailsPage';
 
 const breakpoints = {
   small: 576,
@@ -85,6 +86,10 @@ function App() {
               <UpdatesPage />
             )
           }
+        />
+        <Route
+          path='/home/updates/:id'
+          element={<UpdateDetailsPage />}
         />
         <Route
           path='/home/login'

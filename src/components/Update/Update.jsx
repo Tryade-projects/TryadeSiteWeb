@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button/Button';
+import { Link } from 'react-router-dom';
 
 /**
  * @param {object} props
@@ -7,6 +8,7 @@ import Button from '../Button/Button';
  * @param {number} props.updateVersion - The version of the update
  * @param {string} props.updateText - The presentation text of the update
  * @param {string} props.updateThumbnail - The name of the png image of the update
+ * @param {number} props.updateId - The id of the update
  * @returns {JSX.Element} - Update
  */
 
@@ -15,7 +17,9 @@ const Update = ({
   updateVersion,
   updateText,
   updateThumbnail,
+  updateId,
 }) => {
+  console.log({ updateId });
   const isMobile = window.innerWidth < 992;
 
   return (
@@ -32,7 +36,13 @@ const Update = ({
         </div>
         <p className='updateText'>{updateText}</p>
       </div>
-      <Button title='LIRE' />
+
+      <Link to={`/home/updates/${updateId}`}>
+        <Button
+          title='Lire'
+          onClick={() => true}
+        />
+      </Link>
     </div>
   );
 };
