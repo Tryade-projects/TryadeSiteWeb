@@ -54,10 +54,6 @@ function App() {
         setModalIsOpen={setModalIsOpen}
       />
       <Routes>
-        {/* <Route
-          path='/'
-          element={<Navigate to='/home' />}
-        /> */}
         <Route
           path='/'
           element={
@@ -100,14 +96,6 @@ function App() {
           path='/panel'
           element={<PanelPage />}
         />
-        {/* <Route
-          path={'/home/panel'}
-          element={
-            <RequireAuth loginPath={'/home/panel'}>
-              <PanelPage />
-            </RequireAuth>
-          }
-        /> */}
 
         <Route
           path='/rules'

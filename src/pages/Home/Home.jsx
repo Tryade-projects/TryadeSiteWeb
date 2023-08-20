@@ -149,7 +149,7 @@ export default function Home({ ifMobile }) {
               mainTitle='Mises à jour'
               shadowTitle='DEVBLOG'
             />
-            <Link to='/home/updates'>
+            <Link to='/updates'>
               <Button title='Voir toutes nos mises à jour' />
             </Link>
           </div>
