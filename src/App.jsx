@@ -56,10 +56,6 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<Navigate to='/home' />}
-        />
-        <Route
-          path='/home'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -69,7 +65,7 @@ function App() {
           }
         />
         <Route
-          path='/home/streamers'
+          path='/streamers'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -79,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path='/home/updates'
+          path='/updates'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -89,25 +85,17 @@ function App() {
           }
         />
         <Route
-          path='/home/updates/:id'
+          path='/updates/:id'
           element={<UpdateDetailsPage />}
         />
         <Route
-          path='/home/login'
+          path='/login'
           element={<LoginPage />}
         />
         <Route
-          path='/home/panel'
+          path='/panel'
           element={<PanelPage />}
         />
-        {/* <Route
-          path={'/home/panel'}
-          element={
-            <RequireAuth loginPath={'/home/panel'}>
-              <PanelPage />
-            </RequireAuth>
-          }
-        /> */}
 
         <Route
           path='/rules'
@@ -131,10 +119,10 @@ function App() {
           path='/discord'
           element={<h1>Discord</h1>}
         />
-        <Route
+        {/* <Route
           path='*'
           element={<h1>404</h1>}
-        />
+        /> */}
       </Routes>
       {/* If the modal is open, the footer is display in the modal  */}
       {!modalIsOpen && <Footer ifMobile={ifMobile} />}
