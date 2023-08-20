@@ -37,7 +37,7 @@ const Update = ({
         <p className='updateText'>{updateText}</p>
       </div>
 
-      <Link to={`/home/updates/${updateId}`}>
+      <Link to={`/updates/${updateId}`}>
         <Button
           title='Lire'
           onClick={() => true}

@@ -32,7 +32,7 @@ const LoginPage = () => {
             })
           ) {
             // Redirect if sign-in is successful
-            navigate('/home/panel');
+            navigate('/panel');
           } else {
             // Throw an error or handle unsuccessful sign-in
             throw new Error('Sign-in unsuccessful'); // Simulate an error

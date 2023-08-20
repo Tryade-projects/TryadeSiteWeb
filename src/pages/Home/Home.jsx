@@ -118,7 +118,7 @@ export default function Home({ ifMobile }) {
               mainTitle='Nos Streamers'
               shadowTitle='NETWORK'
             />
-            <Link to='/home/streamers'>
+            <Link to='/streamers'>
               <Button title='Voir tous nos streamers' />
             </Link>
           </div>
