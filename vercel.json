@@ -14,7 +14,7 @@
     },
     {
       "source": "/updates",
-      "destination": "updates"
+      "destination": "/updates"
     },
     {
       "source": "/login",
