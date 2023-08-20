@@ -88,7 +88,7 @@ const Accordion = ({
    * @returns {object} - The configuration object for the mutation
    */
   const getMutationConfig = (category, operation) => {
-    const baseUrl = 'http://localhost:5000/';
+    const baseUrl = 'https://tryade-site-web-server.vercel.app/';
     let url;
     let entityName;
 

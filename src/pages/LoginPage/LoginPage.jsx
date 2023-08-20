@@ -17,7 +17,7 @@ const LoginPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:5000/admins', formData)
+      .post('https://tryade-site-web-server.vercel.app/admins', formData)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);
