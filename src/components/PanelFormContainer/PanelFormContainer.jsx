@@ -28,7 +28,7 @@ const PanelFormContainer = ({
   const queryClient = useQueryClient();
 
   const getMutationPutOrderConfig = (category) => {
-    const baseUrl = 'http://localhost:5000/';
+    const baseUrl = 'https://tryade-site-web-server.vercel.app/';
     let url;
     if (category === 1) {
       url = `rulesSections`;
