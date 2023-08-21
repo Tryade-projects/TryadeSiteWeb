@@ -201,13 +201,11 @@
 section.streamerSection {
   flex-wrap: nowrap;
   height: auto;
-  div.streamercontainer {
+  div.streamerContainer {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    row-gap: 30px;
-    column-gap: 30px;
-    justify-content: space-around;
+    gap: 48px;
   }
 }
 

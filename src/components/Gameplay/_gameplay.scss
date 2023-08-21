@@ -94,6 +94,10 @@ div.gameplay {
 
                 p.gameplayTexteLaptop {
                     display: block;
+                    a{
+                        color: $secondaryColor;
+                        text-decoration: underline;
+                    }
                 }
             }
 
