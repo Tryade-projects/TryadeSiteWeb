@@ -34,8 +34,10 @@
     }
   }
 
-  .article {
-    height: 30%;
+
+  article {
+    // height: 30%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -193,6 +195,20 @@
         height: 9px;
       }
     }
+  }
+}
+
+//The streamer Section
+section.streamerSection{
+  flex-wrap: nowrap;
+  height: auto;
+  div.streamercontainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 30px;
+    justify-content: space-between;
   }
 }
 

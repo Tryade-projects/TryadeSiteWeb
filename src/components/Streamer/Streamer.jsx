@@ -1,37 +1,35 @@
 import React from 'react';
 
-/**
- *
- * @param {object} props
- * @param {object} props.sectionData - Data of the section
- * @returns  {JSX.Element} - Streamer component
- */
-const Streamer = ({ sectionData }) => {
+const Streamer = ({ login, thumbnail, BackGround, viewerCount, follower }) => {
+
   return (
     <article className='streamer'>
       <div
         className='imageBackground streamerImageBackground'
-        style={{ backgroundImage: `url(${sectionData.urlBackground})` }}></div>
+        style={{ backgroundImage: `url(${BackGround})` }}
+      >
+        <div className="opacityDiv"></div>
+      </div>
       <div className='streamerInfo'>
         <img
           className='streamerAvatar'
-          src={sectionData.urlImageAvatar}
+          src={thumbnail}
+
           alt='streamer avatar'
         />
 
         <div className='streamerDetails'>
-          <div className='streamerName'>{sectionData.name}</div>
-          <div className='streamerFollowers'>
-            {sectionData.nbOfFollowers} followers
-          </div>
+
+          <div className='streamerName'>{login}</div>
+          <div className='streamerFollowers'>{follower} Followers</div>
+
         </div>
       </div>
       <div className='spectators'>
         <div className='spectatorsContent'>
           <div className='point'></div>
-          <p className='spectatorsContentText'>
-            {sectionData.nbOfViewers} spectateurs
-          </p>
+          <p className='spectatorsContentText'>{viewerCount} Spectateurs</p>
+
         </div>
       </div>
     </article>
