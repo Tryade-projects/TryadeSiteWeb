@@ -20,7 +20,6 @@ div.update {
     @include large {
       height: 259px;
     }
-
   }
 
   div.updateInfos {
@@ -32,9 +31,8 @@ div.update {
     align-items: center;
 
     @include large {
-      height: calc(100% - 259px);
+      height: 245px;
     }
-
 
     div.titleUpdateContainer {
       display: flex;

@@ -12,6 +12,7 @@
 @import '../pages/UpdatesPage/updatesPage';
 @import '../pages/LoginPage/loginPage';
 @import '../pages/PanelPage/panelPage';
+@import '../pages/UpdateDetailsPage/updateDetailsPage';
 
 @import '../components/Button/button';
 @import '../components/Arguments/arguments';
@@ -26,7 +27,7 @@
 @import '../components/SectionContent/sectionContent';
 @import '../components/ButtonAside/buttonAside';
 @import '../components/Gameplay/gameplay';
-@import '../components/ControlledAccordion/controlledAccordion';
-@import '../components/StreamersForm/streamersForm';
 @import '../components/NetworkContainer/networkContainer';
 @import '../components/PanelFormContainer/panelFormContainer';
+@import '../components/SaveAndCancelFormButtonsContainer/saveAndCancelFormButtonsContainer';
+@import '../components/Accordion/accordion';

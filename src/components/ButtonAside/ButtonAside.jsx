@@ -4,34 +4,33 @@ import React from 'react';
  *
  * @param {object} props
  * @param {string} props.text - text of the button
- * @param {boolean=} props.activeCategories - if the button is active or not
- * @param {import('react').MouseEventHandler<HTMLButtonElement>=} props.setActiveCategories - function to set the button active
+ * @param {boolean=} props.activeCategory - if the button is active or not
+ * @param {import('react').MouseEventHandler<HTMLButtonElement>=} props.setActiveCategory - function to set the button active
  * @param {string=} props.userName - name of the user - optional
  * @returns {JSX.Element}
  */
 const ButtonAside = ({
   text,
-  activeCategories = false,
-  setActiveCategories,
+  activeCategory = false,
+  setActiveCategory,
   userName,
 }) => {
   /**
    *  Return the path of the image corresponding to the text and the active state
    * @param {string} text - text of the button
-   * @param {boolean} activeCategories - if the button is active or not
+   * @param {boolean} activeCategory - if the button is active or not
    * @returns {string} - path of the image
    */
-  const displayIcon = (text, activeCategories) => {
+  const displayIcon = (text, activeCategory) => {
     // Mapping des chemins d'images pour chaque état (active ou non)
-    console.log(activeCategories);
     const imagePaths = {
-      Règlement: activeCategories
+      Règlement: activeCategory
         ? '/assets/shieldWhite.svg'
         : '/assets/shieldGrey.svg',
-      Updates: activeCategories
+      Updates: activeCategory
         ? '/assets/rulesActive.svg'
         : '/assets/rulesGrey.svg',
-      Streamers: activeCategories
+      Streamers: activeCategory
         ? '/assets/photoWhite.svg'
         : '/assets/photo.svg',
     };
@@ -44,10 +43,10 @@ const ButtonAside = ({
     <button
       className={
         (userName ? 'buttonAside buttonAsideConnected' : 'buttonAside') +
-        (activeCategories ? ' buttonAsideActive' : '')
+        (activeCategory ? ' buttonAsideActive' : '')
       }
       type='button'
-      onClick={setActiveCategories}>
+      onClick={setActiveCategory}>
       {userName ? (
         <>
           <div className='buttonAsideConnectedCircle '>
@@ -63,7 +62,7 @@ const ButtonAside = ({
         <>
           <div className='buttonAsideNavIcon'>
             <img
-              src={displayIcon(text, activeCategories)}
+              src={displayIcon(text, activeCategory)}
               alt={text}
             />
           </div>

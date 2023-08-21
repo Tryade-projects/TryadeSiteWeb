@@ -3,7 +3,7 @@ import React from 'react';
 /**
  *
  * @param {object} props
-
+ * @param {string=} props.type - The type of the button
  * @param {string} props.title - The title of the button
  * @param {string=} props.src - The src of the button logo - optional
  * @param {string=} props.alt - The alt of the button logo - optional
@@ -11,10 +11,17 @@ import React from 'react';
  * @param {function=} props.onClick - The function to execute when the button is clicked - optional
  * @returns  {JSX.Element} - The button
  */
-const Button = ({ title, src, alt, imgClassName, onClick }) => {
+const Button = ({
+  type = 'button',
+  title,
+  src,
+  alt,
+  imgClassName,
+  onClick,
+}) => {
   return (
     <button
-      type='button'
+      type={type}
       className='button'
       onClick={
         onClick ? () => onClick() : () => console.log('No function to execute')

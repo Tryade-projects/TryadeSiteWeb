@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
@@ -12,6 +13,7 @@ import { fetchUpdatesSections } from '../../queries/fetchAPI';
 import { replaceWidthAndHeigthInUrl } from '../../utils/replaceWidthAndHeigthInUrl';
 
 const QUERY_KEY_UPDATE = ['update'];
+
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -31,6 +33,14 @@ export default function Home({ ifMobile }) {
     queryKey: QUERY_KEY_UPDATE,
     queryFn: fetchUpdatesSections,
   });
+
+  const {
+    data: updatesData,
+    status: updatesStatus,
+    error: updatesError,
+  } = useUpdatesSectionQuery();
+
+
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
       const goToRect = goTo.current.getBoundingClientRect();
@@ -214,7 +224,7 @@ export default function Home({ ifMobile }) {
       <div className='imageBackground homeBackground' />
       <main className='home'>
         <section className='homeSection screenHeightWithoutHeader page'>
-          <article className='titleArticle'>
+          <article className='article titleArticle'>
             <Title
               mainTitle='Qu’attends-tu pour nous rejoindre ?'
               shadowTitle='DISCORD'
@@ -231,7 +241,7 @@ export default function Home({ ifMobile }) {
               alt='Discord'
             />
           </article>
-          <article className='argumentsArticle'>
+          <article className='article argumentsArticle'>
             <Title
               mainTitle='Pourquoi nous?'
               shadowTitle='TRYADE'
@@ -277,13 +287,13 @@ export default function Home({ ifMobile }) {
 
         <section
           ref={nextSectionRef}
-          className='streamerSection screenHeightWithoutHeader sectionWrap page'>
+          className='streamerSection screenHeightWithoutHeader  page'>
           <div className='headerSection'>
             <Title
               mainTitle='Nos Streamers'
               shadowTitle='NETWORK'
             />
-            <Link to='/home/streamers'>
+            <Link to='/streamers'>
               <Button title='Voir tous nos streamers' />
             </Link>
           </div>
@@ -298,6 +308,7 @@ export default function Home({ ifMobile }) {
                 follower={streamerFollowersData.find(item => item.id === streamer.id)?.numberOfFollowers || 0}
               />
             ))}
+
           </div>
         </section>
 
@@ -307,29 +318,30 @@ export default function Home({ ifMobile }) {
               mainTitle='Mises à jour'
               shadowTitle='DEVBLOG'
             />
-            <Link to='/home/updates'>
+            <Link to='/updates'>
               <Button title='Voir toutes nos mises à jour' />
             </Link>
           </div>
-          <div className='articleContainer'>
-            {status === 'loading' ? (
+          <div className='sectionWrap'>
+            {updatesStatus === 'loading' ? (
               <p>Chargement en cours...</p>
-            ) : status === 'error' ? (
-              <p>Erreur : Impossible de récupérer les données.</p>
+            ) : updatesStatus === 'error' ? (
+              <p>
+                Erreur : Impossible de récupérer les données:{' '}
+                {updatesError.message}
+              </p>
             ) : (
               <>
-                {data
-                  .sort((a, b) => b.id - a.id)
-                  .slice(0, 3)
-                  .map((update) => (
-                    <Update
-                      key={update.id}
-                      updateTitle={update.sectionTitle}
-                      updateVersion={update.version}
-                      updateText={update.details[0].content}
-                      updateThumbnail={update.urlBanner}
-                    />
-                  ))}
+                {updatesData?.pages[0].map((update) => (
+                  <Update
+                    key={update.id}
+                    updateTitle={update.sectionTitle}
+                    updateVersion={update.version}
+                    updateText={update.details[0].content}
+                    updateThumbnail={update.urlBanner}
+                    updateId={update.id}
+                  />
+                ))}
               </>
             )}
           </div>
@@ -370,7 +382,7 @@ export default function Home({ ifMobile }) {
             text='Une fois FiveM installé, ouvrez le et appuyez sur jouer puis recherchez Tryade. En cas de problème contactez nous sur Discord'
             shortText='Ouvrez FiveM et recherchez “Tryade”'
             buttonIcon='assets/controller.svg'
-            buttonTitle='joeur'
+            buttonTitle='jouer'
             iconAlt="Icone d'une manette de jeu"
           />
         </section>
@@ -380,7 +392,7 @@ export default function Home({ ifMobile }) {
             mainTitle='Nos réseaux'
             shadowTitle='NETWORK'
           />
-          <div className='articleContainer'>
+          <div className='sectionWrap'>
             <NetworkContainer
               src='assets/twitter.svg'
               backgroundColorClass='backgroundColorClassSecondaryColor'

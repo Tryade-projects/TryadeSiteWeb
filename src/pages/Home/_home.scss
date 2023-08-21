@@ -14,8 +14,8 @@
   & section:first-child {
     background-color: transparent;
   }
-  
-  section:nth-child(n+2) {
+
+  section:nth-child(n + 2) {
     background-color: $tertiaryColor;
     align-items: flex-start;
     justify-content: flex-start;
@@ -32,37 +32,31 @@
         height: 100px;
       }
     }
-    div.articleContainer{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      row-gap: 40px;
-    }
   }
+
 
   article {
     // height: 30%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
   }
 
-  article.titleArticle{
+  article.titleArticle {
     height: 35%;
-    button{
+    button {
       border-color: $secondaryColor;
     }
-    @include large{
+    @include large {
       height: 70%;
       max-height: 300px;
     }
   }
 
-  article.argumentsArticle{
+  article.argumentsArticle {
     height: 100%;
-    @include large{
+    @include large {
       height: 50%;
     }
   }
@@ -89,7 +83,6 @@
     height: 35%;
     row-gap: 15px;
 
-
     .discordText {
       max-width: 500px;
       text-align: justify;
@@ -113,7 +106,7 @@
       height: 80%;
     }
 
-    .title{
+    .title {
       margin-bottom: 20px;
     }
 
@@ -184,21 +177,23 @@
     font-size: 14px;
     letter-spacing: 0.49px;
     gap: 16px;
-    display: none;
-    @include large{
-      display: flex;
-
-    }
-
+    position: absolute;
+    display: flex;
+    left: 12svw;
+    bottom: 3svh;
     img {
       width: 16px;
       height: 9px;
     }
 
     @include large {
-      position: absolute;
       left: 10svw;
       bottom: 4svh;
+      font-size: 1rem;
+      img {
+        width: 16px;
+        height: 9px;
+      }
     }
   }
 }
@@ -234,4 +229,12 @@ section.networkSection {
   }
 }
 
+.streamerSection {
+  min-height: fit-content;
+  height: fit-content;
+}
 
+.updateSection,
+.networkSection {
+  min-height: fit-content;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+// import { RequireAuth } from 'react-auth-kit';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
@@ -10,6 +11,7 @@ import ModalNav from './components/ModalNav/ModalNav';
 import { handleResize } from './utils/handleResize';
 import LoginPage from './pages/LoginPage/LoginPage';
 import PanelPage from './pages/PanelPage/PanelPage';
+import UpdateDetailsPage from './pages/UpdateDetailsPage/UpdateDetailsPage';
 
 const breakpoints = {
   small: 576,
@@ -54,10 +56,6 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<Navigate to='/home' />}
-        />
-        <Route
-          path='/home'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -67,7 +65,7 @@ function App() {
           }
         />
         <Route
-          path='/home/streamers'
+          path='/streamers'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -77,7 +75,7 @@ function App() {
           }
         />
         <Route
-          path='/home/updates'
+          path='/updates'
           element={
             modalIsOpen ? (
               <ModalNav setModalIsOpen={setModalIsOpen} />
@@ -87,11 +85,15 @@ function App() {
           }
         />
         <Route
-          path='/home/login'
+          path='/updates/:id'
+          element={<UpdateDetailsPage />}
+        />
+        <Route
+          path='/login'
           element={<LoginPage />}
         />
         <Route
-          path='/home/panel'
+          path='/panel'
           element={<PanelPage />}
         />
 
@@ -117,10 +119,10 @@ function App() {
           path='/discord'
           element={<h1>Discord</h1>}
         />
-        <Route
+        {/* <Route
           path='*'
           element={<h1>404</h1>}
-        />
+        /> */}
       </Routes>
       {/* If the modal is open, the footer is display in the modal  */}
       {!modalIsOpen && <Footer ifMobile={ifMobile} />}
