@@ -117,7 +117,7 @@ const Accordion = ({
         config = {
           entityName,
           mutationFn: (newData) =>
-            axios.put(`${baseUrl}${url}/${newData._id}`, newData),
+            axios.put(`${baseUrl}${url}/${newData.id}`, newData),
           onError: (error) =>
             console.error(`Error updating ${entityName}:`, error),
         };
@@ -125,7 +125,7 @@ const Accordion = ({
       case 'delete':
         config = {
           entityName,
-          mutationFn: (_id) => axios.delete(`${baseUrl}${url}/${_id}`),
+          mutationFn: (id) => axios.delete(`${baseUrl}${url}/${id}`),
           onError: (error) =>
             console.error(`Error deleting ${entityName}:`, error),
         };
@@ -294,7 +294,7 @@ const Accordion = ({
                     )
                   ) {
                     const deleteMutation = mutationDeleteSection;
-                    deleteMutation.mutate(dataElm._id);
+                    deleteMutation.mutate(dataElm.id);
                   }
                 }}>
                 <img
