@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
@@ -11,9 +10,9 @@ import Streamer from '../../components/Streamer/Streamer';
 import { Link } from 'react-router-dom';
 import { fetchUpdatesSections } from '../../queries/fetchAPI';
 import { replaceWidthAndHeigthInUrl } from '../../utils/replaceWidthAndHeigthInUrl';
+import useUpdatesSectionQuery from '../../hooks/useUpdatesSectionQuery';
 
 const QUERY_KEY_UPDATE = ['update'];
-
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -40,7 +39,6 @@ export default function Home({ ifMobile }) {
     error: updatesError,
   } = useUpdatesSectionQuery();
 
-
   const handleButtonClick = (goTo) => {
     if (goTo.current) {
       const goToRect = goTo.current.getBoundingClientRect();
@@ -56,9 +54,6 @@ export default function Home({ ifMobile }) {
   const [streamersViewerData, setStreamersViewerData] = useState([]);
   const [streamerFollowersData, setStreamerFollowersData] = useState([]);
 
-
-
-
   /****************** */
 
   /*Get the token*/
@@ -68,13 +63,13 @@ export default function Home({ ifMobile }) {
         const response = await fetch('https://id.twitch.tv/oauth2/token', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: new URLSearchParams({
             client_id: 'me7uty9lt3c4rxuw35in9bk6sbj0wk',
             client_secret: '1kw5m42db7kprxhkihnbta83hrzcch',
-            grant_type: 'client_credentials'
-          }).toString()
+            grant_type: 'client_credentials',
+          }).toString(),
         });
 
         const data = await response.json();
@@ -90,19 +85,21 @@ export default function Home({ ifMobile }) {
   /*Get the streamer*/
   useEffect(() => {
     const fetchStreamersData = async () => {
-
       if (!accessToken) {
         return '';
       }
 
       try {
-        const response = await fetch('https://api.twitch.tv/helix/users?login=sebjdg&login=gobgg&login=avamind&login=otplol_&login=sixentv&login=thecamstutz', {
-          method: 'GET',
-          headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk'
+        const response = await fetch(
+          'https://api.twitch.tv/helix/users?login=sebjdg&login=gobgg&login=avamind&login=otplol_&login=sixentv&login=thecamstutz',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: 'Bearer ' + accessToken,
+              'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk',
+            },
           }
-        });
+        );
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -113,12 +110,14 @@ export default function Home({ ifMobile }) {
       }
     };
     fetchStreamersData();
-  }, [accessToken])
+  }, [accessToken]);
 
   //Create a array streamerValidData with the id and login
   useEffect(() => {
     if (streamerData) {
-      const streamersId = streamerData.data.map(streamer => ({ id: streamer.id }));
+      const streamersId = streamerData.data.map((streamer) => ({
+        id: streamer.id,
+      }));
       setStreamersId(streamersId);
     }
   }, [streamerData]);
@@ -129,41 +128,44 @@ export default function Home({ ifMobile }) {
       if (!accessToken || !streamersId.length) {
         return;
       }
-  
-      const followersPromises = streamersId.map(async streamer => {
+
+      const followersPromises = streamersId.map(async (streamer) => {
         try {
-          const response = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${streamer.id}`, {
-            method: 'GET',
-            headers: {
-              'Authorization': 'Bearer ' + accessToken,
-              'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk'
+          const response = await fetch(
+            `https://api.twitch.tv/helix/users/follows?to_id=${streamer.id}`,
+            {
+              method: 'GET',
+              headers: {
+                Authorization: 'Bearer ' + accessToken,
+                'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk',
+              },
             }
-          });
-  
+          );
+
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-  
+
           const data = await response.json();
           const numberOfFollowers = data.total;
-  
+
           return {
             id: streamer.id,
-            numberOfFollowers: numberOfFollowers
+            numberOfFollowers: numberOfFollowers,
           };
         } catch (error) {
           console.error('Error fetching Twitch follower data:', error);
           return {
             id: streamer.id,
-            numberOfFollowers: 0
+            numberOfFollowers: 0,
           };
         }
       });
-  
+
       const followersData = await Promise.all(followersPromises);
       setStreamerFollowersData(followersData);
     };
-  
+
     fetchAndGetFollower();
   }, [accessToken, streamersId]);
 
@@ -173,32 +175,47 @@ export default function Home({ ifMobile }) {
       if (!accessToken) {
         return;
       }
+      console.log({ streamersId });
 
-      const userIDs = streamersId.map(streamer => streamer.id).join('&user_id=');
+      const userIDs = streamersId
+        .map((streamer) => streamer.id)
+        .join('&user_id=');
       try {
-        const response = await fetch(`https://api.twitch.tv/helix/streams?user_id=${userIDs}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk'
+        const response = await fetch(
+          `https://api.twitch.tv/helix/streams?user_id=${userIDs}`,
+          {
+            method: 'GET',
+            headers: {
+              Authorization: 'Bearer ' + accessToken,
+              'Client-Id': 'me7uty9lt3c4rxuw35in9bk6sbj0wk',
+            },
           }
-        });
+        );
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
-        const updatedStreamersData = streamersId.map(streamer => {
-          const detailsStreamer = data.data.find(item => item.user_id === streamer.id);
-          const viewerCount = detailsStreamer ? detailsStreamer.viewer_count : 0;
-          const onlineBackground = detailsStreamer ? replaceWidthAndHeigthInUrl(detailsStreamer.thumbnail_url, '700', '500') : '';
-
+        const updatedStreamersData = streamersId.map((streamer) => {
+          const detailsStreamer = data.data.find(
+            (item) => item.user_id === streamer.id
+          );
+          const viewerCount = detailsStreamer
+            ? detailsStreamer.viewer_count
+            : 0;
+          const onlineBackground = detailsStreamer
+            ? replaceWidthAndHeigthInUrl(
+                detailsStreamer.thumbnail_url,
+                '700',
+                '500'
+              )
+            : '';
 
           return {
             ...streamer,
             viewer_count: viewerCount,
-            onlineBackground: onlineBackground
+            onlineBackground: onlineBackground,
           };
         });
 
@@ -211,13 +228,7 @@ export default function Home({ ifMobile }) {
     fetchAndGetDetailsStreamer();
   }, [accessToken, streamersId]);
 
-
   /****************** */
-
-
-
-
-
 
   return (
     <>
@@ -298,17 +309,27 @@ export default function Home({ ifMobile }) {
             </Link>
           </div>
           <div className='streamercontainer'>
-            {streamerData && streamerData.data.map(streamer => (
-              <Streamer
-                key={streamer.id}
-                login={streamer.display_name}
-                thumbnail={streamer.profile_image_url}
-                BackGround={streamersViewerData.find(item => item.id === streamer.id)?.onlineBackground || streamer.offline_image_url}
-                viewerCount={streamersViewerData.find(item => item.id === streamer.id)?.viewer_count || 0}
-                follower={streamerFollowersData.find(item => item.id === streamer.id)?.numberOfFollowers || 0}
-              />
-            ))}
-
+            {streamerData &&
+              streamerData.data.map((streamer) => (
+                <Streamer
+                  key={streamer.id}
+                  login={streamer.display_name}
+                  thumbnail={streamer.profile_image_url}
+                  BackGround={
+                    streamersViewerData.find((item) => item.id === streamer.id)
+                      ?.onlineBackground || streamer.offline_image_url
+                  }
+                  viewerCount={
+                    streamersViewerData.find((item) => item.id === streamer.id)
+                      ?.viewer_count || 0
+                  }
+                  follower={
+                    streamerFollowersData.find(
+                      (item) => item.id === streamer.id
+                    )?.numberOfFollowers || 0
+                  }
+                />
+              ))}
           </div>
         </section>
 

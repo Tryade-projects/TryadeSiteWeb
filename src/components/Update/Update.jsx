@@ -19,7 +19,6 @@ const Update = ({
   updateThumbnail,
   updateId,
 }) => {
-  console.log({ updateId });
   const isMobile = window.innerWidth < 992;
 
   return (
