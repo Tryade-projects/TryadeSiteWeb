@@ -51,7 +51,7 @@ const RulesPage = () => {
             </React.Fragment>
           ))}
           <div ref={ref}></div>
-          {isFetching && !isFetchingNextPage && <div>Chargement...</div>}
+          {isFetching && <div>Chargement...</div>}
         </>
       )}
     </main>
