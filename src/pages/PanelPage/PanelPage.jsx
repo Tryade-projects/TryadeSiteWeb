@@ -159,7 +159,7 @@ const PanelPage = () => {
     setExpanded(newSection.id);
   }
   if (!isAuthenticated()) {
-    return <Navigate to='/home' />;
+    return <Navigate to='/' />;
   }
   console.log(sectionsStatus);
   return (
