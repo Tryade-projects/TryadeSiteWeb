@@ -172,7 +172,7 @@ export default function Home({ ifMobile }) {
   //Get more informations about each streamer (viewer watching)
   useEffect(() => {
     const fetchAndGetDetailsStreamer = async () => {
-      if (!accessToken) {
+      if (!accessToken || !streamersId.length) {
         return;
       }
       console.log({ streamersId });
