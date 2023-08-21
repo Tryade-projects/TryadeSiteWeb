@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/Button";
 
-const Gameplay = ({ gameplayImage, numberShadow, title, text, buttonTitle,shortText, buttonIcon, iconAlt }) => {
+const Gameplay = ({ gameplayImage, numberShadow, title, text, buttonTitle,shortText, buttonIcon, iconAlt, link }) => {
   return (
     <div
       className="gameplay"
@@ -11,7 +11,7 @@ const Gameplay = ({ gameplayImage, numberShadow, title, text, buttonTitle,shortT
       <div className="gameplayContent">
         <div className="gameplayInfo">
           <h2 className="gameplayTitle">{title}</h2>
-          <p className="gameplayTexteLaptop">{text}</p>
+          <p className="gameplayTexteLaptop">{text}<a href="google.com">{link}</a></p>
           <p className="gameplayTexteMobile">{shortText}</p>
         </div>
         <Button

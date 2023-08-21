@@ -1,49 +1,60 @@
 import React, { useEffect } from 'react';
 import Title from '../../components/Title/Title';
-import Streamer from '../../components/Streamer/Streamer';
 import Button from '../../components/Button/Button';
-import useStreamersSectionQuery from '../../hooks/useStreamersSectionQuery';
 import { useInView } from 'react-intersection-observer';
+import StreamerContainer from '../../components/StreamerContainer/StreamerContainer';
+import { Link } from 'react-router-dom';
+
 
 const StreamersPage = () => {
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useStreamersSectionQuery();
-  console.log({
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  });
+  // const {
+  //   data,
+  //   error,
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   status,
+  // } = useStreamersSectionQuery();
+  // console.log({
+  //   data,
+  //   error,
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   status,
+  // });
 
   const { ref, inView } = useInView({
     threshold: 0,
   });
 
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  // useEffect(() => {
+  //   if (inView && hasNextPage && !isFetchingNextPage) {
+  //     fetchNextPage();
+  //   }
+  // }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   return (
-    <main className='page'>
-      <div className='titleButtonContainer'>
-        <Title
-          mainTitle='Nos Streamers'
-          shadowTitle='NETWORK'
-        />
-        <Button title='Devenir Streamer ?' />
-      </div>
+    <main className='streamersPage'>
       <section
+        // ref={nextSectionRef}
+        className='streamerSection screenHeightWithoutHeader page'>
+        <div className='headerSection'>
+          <Title
+            mainTitle='Nos Streamers'
+            shadowTitle='NETWORK'
+          />
+          <Link to='/streamers'>
+            <Button title='Devenir Streamer ?' />
+          </Link>
+        </div>
+        <StreamerContainer />
+      </section>
+      
+      
+      {/* <section
         id='streamers'
         className='sectionWrap'>
         {status === 'loading' ? (
@@ -64,9 +75,9 @@ const StreamersPage = () => {
             ))}
           </>
         )}
-      </section>
-      <div ref={ref}></div>
-      {isFetching && !isFetchingNextPage && <div>Chargement...</div>}
+      </section> */}
+      {/* <div ref={ref}></div>
+      {isFetching && !isFetchingNextPage && <div>Chargement...</div>} */}
     </main>
   );
 };

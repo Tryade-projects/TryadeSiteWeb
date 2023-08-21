@@ -1,1 +1,12 @@
-
+.streamersPage{
+    .headerSection{
+        // background-color: red;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+        @include large{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}
