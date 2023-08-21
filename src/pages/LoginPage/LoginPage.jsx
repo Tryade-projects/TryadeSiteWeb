@@ -13,6 +13,7 @@ const LoginPage = () => {
     username: '',
     password: '',
   });
+  const [error, setError] = useState(null);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +21,6 @@ const LoginPage = () => {
       .post('https://tryade-site-web-server.vercel.app/admins', formData)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
           if (
             signIn({
               token: res.data.token,
@@ -31,6 +31,7 @@ const LoginPage = () => {
               // refreshTokenExpireIn: res.data.refreshTokenExpireIn, // Only if you are using refreshToken feature
             })
           ) {
+            setError(null);
             // Redirect if sign-in is successful
             navigate('/panel');
           } else {
@@ -45,6 +46,7 @@ const LoginPage = () => {
       .catch((error) => {
         // Handle API errors here
         console.error('Error during API call', error);
+        setError(error.response?.data.message || error.message);
       });
   };
   return (
@@ -99,6 +101,7 @@ const LoginPage = () => {
               })
             }
           />
+          {error && <p className='error'>{error}</p>}
           <Button
             title='CONNEXION'
             type='submit'
