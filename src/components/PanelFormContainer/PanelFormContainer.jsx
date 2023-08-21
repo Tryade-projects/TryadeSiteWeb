@@ -1,5 +1,5 @@
 import React from 'react';
-import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
+// import ControlledAccordion from '../ControlledAccordion/ControlledAccordion';
 
 /**
  *
