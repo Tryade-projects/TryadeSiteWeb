@@ -6,14 +6,8 @@ import SectionContent from '../../components/SectionContent/SectionContent';
 import useRulesSectionQuery from '../../hooks/useRulesSectionQuery';
 
 const RulesPage = () => {
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-    status,
-  } = useRulesSectionQuery();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
+    useRulesSectionQuery();
 
   const { ref, inView } = useInView({
     threshold: 0,

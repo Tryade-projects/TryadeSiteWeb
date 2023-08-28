@@ -7,6 +7,7 @@ const QUERY_KEY_RULES_SECTION = ['rulesSectionsPages'];
 const useRulesSectionQuery = () => {
   const {
     data,
+    error,
     fetchNextPage,
     hasNextPage,
     isFetching,
@@ -21,6 +22,7 @@ const useRulesSectionQuery = () => {
 
   return {
     data,
+    error,
     fetchNextPage,
     hasNextPage,
     isFetching,

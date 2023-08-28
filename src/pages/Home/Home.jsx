@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import NetworkContainer from '../../components/NetworkContainer/NetworkContainer';
 import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
-import StreamerContainer from '../../components/StreamerContainer/StreamerContainer';
+// import StreamerContainer from '../../components/StreamerContainer/StreamerContainer';
 import { Link } from 'react-router-dom';
 import useUpdatesSectionQuery from '../../hooks/useUpdatesSectionQuery';
 
@@ -116,7 +116,6 @@ export default function Home({ ifMobile }) {
               <Button title='Voir tous nos streamers' />
             </Link>
           </div>
-          <StreamerContainer />
         </section>
 
         <section className='updateSection page'>
