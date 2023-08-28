@@ -4,14 +4,23 @@ import Streamer from '../../components/Streamer/Streamer';
 import useStreamersSectionQuery from '../../hooks/useStreamersSectionQuery';
 
 const StreamerContainer = () => {
-
-  const { data: mongoDBData, status: mongoDBStatus } = useStreamersSectionQuery();
+  const { data: mongoDBData, status: mongoDBStatus } =
+    useStreamersSectionQuery();
+  console.log({ mongoDBData, mongoDBStatus });
   const streamerNamesFromMongoDB =
     mongoDBStatus === 'success' && mongoDBData
-      ? mongoDBData.pages.flatMap(page => page).map(streamer => streamer.name.toLowerCase())
+      ? mongoDBData.pages
+          .flatMap((page) => page)
+          .map((streamer) => streamer.name.toLowerCase())
       : [];
 
-  const twitchAPIPart = streamerNamesFromMongoDB.map(name => `login=${name}`).join('&');
+  console.log({ streamerNamesFromMongoDB });
+
+  const twitchAPIPart = streamerNamesFromMongoDB
+    .map((name) => `login=${name}`)
+    .join('&');
+
+  console.log({ twitchAPIPart });
 
   //Const for Twitch
   const [accessToken, setAccessToken] = useState('');
@@ -78,6 +87,8 @@ const StreamerContainer = () => {
     fetchStreamersData();
   }, [accessToken]);
 
+  console.log({ streamerData });
+
   //Create a array streamerValidData with the id and login
   useEffect(() => {
     if (streamerData) {
@@ -87,6 +98,8 @@ const StreamerContainer = () => {
       setStreamersId(streamersId);
     }
   }, [streamerData]);
+
+  console.log({ streamersId });
 
   //Get the number of followers for each streamer
   useEffect(() => {
@@ -171,10 +184,10 @@ const StreamerContainer = () => {
             : 0;
           const onlineBackground = detailsStreamer
             ? replaceWidthAndHeigthInUrl(
-              detailsStreamer.thumbnail_url,
-              '700',
-              '500'
-            )
+                detailsStreamer.thumbnail_url,
+                '700',
+                '500'
+              )
             : '';
 
           return {
@@ -195,10 +208,9 @@ const StreamerContainer = () => {
 
   /*******************/
 
-
+  console.log(streamerData);
   return (
-    <div className='streamerContainer'>
-
+    <div className='sectionWrap'>
       {streamerData &&
         streamerData.data.map((streamer) => (
           <Streamer
@@ -214,9 +226,8 @@ const StreamerContainer = () => {
                 ?.viewer_count || 0
             }
             follower={
-              streamerFollowersData.find(
-                (item) => item.id === streamer.id
-              )?.numberOfFollowers || 0
+              streamerFollowersData.find((item) => item.id === streamer.id)
+                ?.numberOfFollowers || 0
             }
             link={streamer.display_name.toLowerCase()}
           />
