@@ -80,12 +80,7 @@ const PanelPage = () => {
     const newSection = {
       id: uuidv4(),
       urlImageAvatar: '/images/avatar.png',
-      name: 'Cristiano_CR7',
-      nbOfFollowers: 257,
-      nbOfViewers: 257,
       urlTwitch: 'urlTwitch',
-      urlBackground: '/images/streamer.jpg',
-      channelLink: 'channelLink',
       newSection: true,
     };
     queryClient.setQueryData([STREAMERS_QUERY_KEY], (oldData) => [
