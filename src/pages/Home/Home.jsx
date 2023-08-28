@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
@@ -8,10 +7,7 @@ import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import StreamerContainer from '../../components/StreamerContainer/StreamerContainer';
 import { Link } from 'react-router-dom';
-import { fetchUpdatesSections } from '../../queries/fetchAPI';
 import useUpdatesSectionQuery from '../../hooks/useUpdatesSectionQuery';
-
-const QUERY_KEY_UPDATE = ['update'];
 
 /**
  * @typedef {React.RefObject<HTMLDivElement>} RefType
@@ -27,10 +23,6 @@ export default function Home({ ifMobile }) {
   /** @type {RefType} */
   const nextSectionRef = useRef(null);
   const howToPlaySectionRef = useRef(null);
-  const { data, status } = useQuery({
-    queryKey: QUERY_KEY_UPDATE,
-    queryFn: fetchUpdatesSections,
-  });
 
   const {
     data: updatesData,
@@ -45,8 +37,6 @@ export default function Home({ ifMobile }) {
       window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   };
-
-  
 
   return (
     <>
