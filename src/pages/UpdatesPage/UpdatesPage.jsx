@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import Update from '../../components/Update/Update';
@@ -24,10 +25,24 @@ const UpdatesPage = () => {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
-  console.log({ data });
 
   return (
     <main className='page'>
+      <Helmet>
+        <title>TRYADE - Mise à jours</title>
+        <meta
+          name='description'
+          content="Restez informés des dernières mises à jour sur le serveur Tryade. Découvrez les nouvelles fonctionnalités, améliorations et événements passionnants pour une expérience de jeu exceptionnelle."
+        />
+        <meta
+          name='keywords'
+          content='mises à jour, nouveautés, fonctionnalités, améliorations, événements, Tryade'
+        />
+        <meta
+          name='author'
+          content='Tryade'
+        />
+      </Helmet>
       <div className='titleButtonContainer'>
         <Title
           mainTitle='Mises à jour'
