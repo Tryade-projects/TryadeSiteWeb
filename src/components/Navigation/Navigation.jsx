@@ -39,7 +39,7 @@ const Navigation = ({ setModalIsOpen, mobile }) => {
         <div className='logoLink storeIcon'></div>
         Boutique
       </NavLink>
-      <NavLink to='/discord'>
+      <NavLink to='https://discord.gg/tryade'>
         <div className='line'></div>
         <div className='logoLink discordIcon'></div>
         Discord
@@ -51,7 +51,7 @@ const Navigation = ({ setModalIsOpen, mobile }) => {
       <NavLink to='/rules'>Règlement</NavLink>
       <NavLink to='/wiki'>Wiki</NavLink>
       <NavLink to='/shop'>Boutique</NavLink>
-      <NavLink to='/discord'>Discord</NavLink>
+      <NavLink to='https://discord.gg/tryade'>Discord</NavLink>
     </nav>
   );
 };
