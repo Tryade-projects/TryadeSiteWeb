@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Title from '../../components/Title/Title';
@@ -14,9 +15,23 @@ const UpdateDetailsPage = () => {
     queryKey: ['updateDetails'],
     queryFn: () => fetchUpdateSection(id),
   });
-  console.log(data);
   return (
     <main className='page'>
+      <Helmet>
+        <title>{data && data.sectionTitle ? data.sectionTitle : 'Mise à jour'}</title>
+        <meta
+          name='description'
+          content={`Restez informés sur la dernière mise à jour du serveur Tryade, ${data && data.sectionTitle ? data.sectionTitle : ''}. Découvrez les nouvelles fonctionnalités, améliorations et événements passionnants pour une expérience de jeu exceptionnelle.`}
+        />
+        <meta
+          name='keywords'
+          content={`mises à jour, nouveautés, fonctionnalités, améliorations, événements, Tryade, ${data && data.sectionTitle ? data.sectionTitle : ''}`}
+        />
+        <meta
+          name='author'
+          content='Tryade'
+        />
+      </Helmet>
       <div className='titleButtonContainer'>
         <Title
           mainTitle='Mises à jour'

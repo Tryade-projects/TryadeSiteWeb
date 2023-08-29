@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import { useInView } from 'react-intersection-observer';
@@ -38,6 +39,21 @@ const StreamersPage = () => {
 
   return (
     <main className='streamersPage'>
+      <Helmet>
+        <title>TRYADE - Nos streamers</title>
+        <meta
+          name='description'
+          content="Découvrez nos incroyables streamers et rejoignez le serveur Tryade pour des moments de divertissement exceptionnels."
+        />
+        <meta
+          name='keywords'
+          content='streamers, Tryade, divertissement, jeux vidéo, streaming, communauté'
+        />
+        <meta
+          name='author'
+          content='Tryade'
+        />
+      </Helmet>
       <section
         // ref={nextSectionRef}
         className='streamerSection screenHeightWithoutHeader page'>
@@ -52,8 +68,8 @@ const StreamersPage = () => {
         </div>
         <StreamerContainer />
       </section>
-      
-      
+
+
       {/* <section
         id='streamers'
         className='sectionWrap'>

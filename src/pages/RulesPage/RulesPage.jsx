@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useInView } from 'react-intersection-observer';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
@@ -27,6 +28,21 @@ const RulesPage = () => {
 
   return (
     <main className='page'>
+      <Helmet>
+        <title>TRYADE - Règlements</title>
+        <meta
+          name='description'
+          content="Consultez nos règlements détaillés pour profiter pleinement de l'expérience de jeu. Assurez-vous de respecter nos directives pour un environnement de jeu agréable et respectueux."
+        />
+        <meta
+          name='keywords'
+          content='règlements, guidelines, règles du jeu, respect, expérience de jeu'
+        />
+        <meta
+          name='author'
+          content='Tryade'
+        />
+      </Helmet>
       <div className='titleButtonContainer'>
         <Title
           mainTitle='Règlement'

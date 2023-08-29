@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
@@ -40,6 +41,21 @@ export default function Home({ ifMobile }) {
 
   return (
     <>
+      <Helmet>
+        <title>TRYADE - ROLEPLAY</title>
+        <meta
+          name='description'
+          content={`Explorez l'univers captivant du jeu de rôle GTA V sur Tryade. Une expérience immersive pour les passionnés de jeux de rôle, avec des interfaces soignées. Rejoignez-nous pour des aventures uniques.`}
+        />
+        <meta
+          name='keywords'
+          content={`Tryade, GTA V, jeu de rôle, Role Play, interfaces utilisateurs, expérience immersive`}
+        />
+        <meta
+          name='author'
+          content='Tryade'
+        />
+      </Helmet>
       <div className='imageBackground homeBackground' />
       <main className='home'>
         <section className='homeSection screenHeightWithoutHeader page'>
