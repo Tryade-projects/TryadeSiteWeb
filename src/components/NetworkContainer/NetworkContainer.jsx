@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RoundLogo from '../RoundLogo/RoundLogo';
 import Button from '../Button/Button';
 
@@ -11,6 +12,7 @@ import Button from '../Button/Button';
  * @param {string} props.alternatifText - The "alt" of the SVg
  * @param {string} props.networkTitle - The title of the container
  * @param {string} props.networkLink - The text under the title
+ * @param {string} props.link - The extern url
  *
  * @returns {JSX.Element} - Rendered NetworkContainer component
  */
@@ -21,6 +23,7 @@ const NetworkContainer = ({
   alternatifText,
   networkTitle,
   networkLink,
+  link
 }) => {
   return (
     <article className='networkContainer'>
@@ -32,7 +35,11 @@ const NetworkContainer = ({
       <div className='networkInfos'>
         <h3 className='networkTitle'>{networkTitle}</h3>
         <h3 className='networkLink'>{networkLink}</h3>
-        <Button title='Visiter' />
+        <Link to={link}>
+          <Button
+            title='Visiter'
+          />
+        </Link>
       </div>
     </article>
   );

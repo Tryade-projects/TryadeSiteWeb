@@ -207,6 +207,7 @@ export default function Home({ ifMobile }) {
               alternatifText='Icone de Twitter'
               networkTitle='Twitter'
               networkLink='@TryadeRP'
+              link='https://twitter.com/TryadeRP'
             />
             <NetworkContainer
               src='assets/tiktok.svg'
@@ -214,6 +215,7 @@ export default function Home({ ifMobile }) {
               alternatifText='Icone de Tiktok'
               networkTitle='Tiktok'
               networkLink='@tryaderp'
+              link='https://www.tiktok.com/@tryaderp'
             />
             <NetworkContainer
               src='assets/youtube.svg'
@@ -221,6 +223,7 @@ export default function Home({ ifMobile }) {
               alternatifText='Icone de Youtube'
               networkTitle='Youtube'
               networkLink='@TryadeRP'
+              link='https://www.youtube.com/channel/UCavjs6xWlHVpre1FOvg2wGg'
             />
             <NetworkContainer
               src='assets/discordBlack.svg'
@@ -228,6 +231,7 @@ export default function Home({ ifMobile }) {
               alternatifText='Icone de Discord'
               networkTitle='Discord'
               networkLink='Tryade - RolePlay'
+              link='https://discord.gg/tryade'
             />
           </div>
         </section>
