@@ -7,6 +7,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { AuthProvider } from 'react-auth-kit';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+
 
 // Create a client
 const queryClient = new QueryClient();
@@ -22,7 +24,9 @@ ReactDOM.createRoot(
           authName={'_auth'}
           cookieDomain={window.location.hostname}
           cookieSecure={window.location.protocol === 'https:'}>
-          <App />
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
         </AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </DndProvider>

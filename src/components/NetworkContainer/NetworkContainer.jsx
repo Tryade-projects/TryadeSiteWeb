@@ -35,7 +35,7 @@ const NetworkContainer = ({
       <div className='networkInfos'>
         <h3 className='networkTitle'>{networkTitle}</h3>
         <h3 className='networkLink'>{networkLink}</h3>
-        <Link to={link}>
+        <Link to={link} target="_blank">
           <Button
             title='Visiter'
           />

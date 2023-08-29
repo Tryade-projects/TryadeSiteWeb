@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { Helmet } from 'react-helmet';
 import Arguments from '../../components/Arguments/Arguments';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
@@ -8,6 +7,7 @@ import Update from '../../components/Update/Update';
 import Gameplay from '../../components/Gameplay/Gameplay';
 import StreamerContainer from '../../components/StreamerContainer/StreamerContainer';
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
 import useUpdatesSectionQuery from '../../hooks/useUpdatesSectionQuery';
 
 /**
@@ -65,16 +65,17 @@ export default function Home({ ifMobile }) {
               shadowTitle='DISCORD'
               big
             />
-
             <p className='discordText'>
               Rejoins notre discord afin de bénéficier de toutes les
               informations importantes et commence ton aventure dès maintenant !
             </p>
-            <Button
-              title='DISCORD'
-              src={'./assets/discord.svg'}
-              alt='Discord'
-            />
+            <Link to="https://discord.gg/tryade" target="_blank">
+              <Button
+                title='DISCORD'
+                src={'./assets/discord.svg'}
+                alt='Discord'
+              />
+            </Link>
           </article>
           <article className='article argumentsArticle'>
             <Title
